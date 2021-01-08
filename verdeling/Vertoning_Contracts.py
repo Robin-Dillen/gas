@@ -47,16 +47,6 @@ class Vertoning:
         """
         return self.id_
 
-    def getZaalnummer(self):
-        """
-        Een functie die de zaalnummer teruggeeft.
-
-        preconditie: geen
-
-        postconditie: De gebruiker is niet veranderd.
-        """
-        return self.zaalnummer
-
     def getSlot(self):
         """
         Een functie die de slot teruggeeft.
@@ -97,6 +87,14 @@ class Vertoning:
         postconditie: De waarde van id is geüpdatet naar de gegeven value.
         """
         self.id = value
+
+    def getZaalnummer(self):
+        """
+        Een functie die de zaalnummer teruggeeft.
+        preconditie: geen
+        postconditie: De gebruiker is niet veranderd.
+        """
+        return self.zaalnummer
 
     def setZaalnummer(self, value):
         """
