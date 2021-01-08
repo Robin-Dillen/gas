@@ -150,7 +150,7 @@ class Vertoning:
         """
         self.filmid = value
 
-    def setAantal_vrij(self, value):
+    def setAantalVrij(self, value):
         """
         Een functie die de aantal_vrij update naar de gegeven waarde.
         :param value: het nieuwe aantal vrije plaatsen in de zaal van de vertoning
