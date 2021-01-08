@@ -77,17 +77,7 @@ class Vertoning:
         """
         return self.datum
 
-    def getFilmid(self):
-        """
-        Een functie die de filmid teruggeeft.
-
-        preconditie: geen
-
-        postconditie: De gebruiker is niet veranderd.
-        """
-        return self.filmid
-
-    def getAantal_vrij(self):
+    def getAantalVrij(self):
         """
         Een functie die de aantal_vrij teruggeeft.
 
@@ -141,7 +131,15 @@ class Vertoning:
         """
         self.datum = value
 
-    def setFilmid(self, value):
+    def getFilmId(self):
+        """
+        Een functie die de filmid teruggeeft.
+        preconditie: geen
+        postconditie: De gebruiker is niet veranderd.
+        """
+        return self.filmid
+
+    def setFilmId(self, value):
         """
         Een functie die de filmid update naar de gegeven waarde.
         :param value: de nieuwe filmid

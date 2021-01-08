@@ -106,7 +106,7 @@ class Reservatiesysteem:
         vertoning, succes = self.vertoningen.tableRetrieve(vertoning_id)
         if succes:
             vertoning.setAantalMensenBinnen(vertoning.setAantalMensenBinnen() - ticketten)
-            if vertoning.setAantalMensenBinnen():
+            if vertoning.setAantalMensenBinnen() :
                 vertoning.start()
             return True
         return False
