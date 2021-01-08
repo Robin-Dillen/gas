@@ -18,7 +18,6 @@ class Gebruiker:
         self.email_ = email
         self.status_ = False
 
-
     def getId(self):
         """
         :return: id
