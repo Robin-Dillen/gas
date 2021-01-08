@@ -96,6 +96,14 @@ class Reservatiesysteem:
         self.vertoningen.tableInsert(self.vertoningen.tableLength(), vertoning)
         return True
 
+    def updateTicketten(self, vertoning_id, ticketten):
+        """
+        Als mensen binnenkomen bij de vertoning worden de ticketten
+        :param vertoning_id:
+        :param ticketten:
+        :return:
+        """
+
     def addZaal(self, id_, plaatsen) -> bool:  # maker Robin, tester Khemin
         """
         Een functie die voor de gegeven titel en rating een nieuwe zaal aanmaakt en deze toevoegd aan het ADT van zalen van het reservatiesysteem

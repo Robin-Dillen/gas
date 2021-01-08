@@ -34,6 +34,7 @@ class Vertoning:
         self.datum = datum
         self.filmid = filmid
         self.aantal_vrij = aantal_vrij
+        self.aantal_mensen_binnen = 0
         self.playing = False
 
     def getId(self):
@@ -191,3 +192,11 @@ class Vertoning:
         postconditie: geen
         """
         pass
+
+    def getAantalMensenBinnen(self):
+        """geeft terug hoeveel mensen in de zaal zitten"""
+        return self.aantal_mensen_binnen
+
+    def setAantalMensenBinnen(self, new_aantal):
+        """update de waarde van self.aantal_mensen_binnen naar new_aantal"""
+        self.aantal_mensen_binnen = new_aantal

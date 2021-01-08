@@ -7,13 +7,12 @@ from time import sleep
 # vertaling van parser naar functie
 cmds = {
     'zaal': 'addZaal',
-    'film': 'add_movie',
-    'vertoning': 'add_vertoning',
-    'gebruiker': 'create_account',
-    'reserveer': 'place_reservation',
+    'film': 'addFilm',
+    'vertoning': 'addVertoning',
+    'gebruiker': 'maakAccount',
+    'reserveer': 'addReservatie',
     'ticket': 'update_vertoning',
 }
-
 
 class Execute:
     def __init__(self, filename: str):
