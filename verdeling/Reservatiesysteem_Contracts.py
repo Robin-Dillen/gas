@@ -9,20 +9,13 @@ from Reservatie_Contracts import Reservatie
 from Vertoning_Contracts import Vertoning
 from Zaal_Contracts import Zaal
 
-class LinkedChain:
-    pass
-
-class Queue:
-    pass
-
-class BST:
-    pass
+from DataStructures import BSTTable, LinkedChainTable, RedBlackTreeTable, Queue
 
 
 class Reservatiesysteem:
-    def __init__(self, films=LinkedChain(), gebruikers=LinkedChain(),
-                 reservaties=Queue(), vertoningen=BST(),
-                 zalen=LinkedChain()):
+    def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
+                 reservaties=Queue(), vertoningen=BSTTable(),
+                 zalen=LinkedChainTable()):
 
         self.films = films
         self.gebruikers = gebruikers
