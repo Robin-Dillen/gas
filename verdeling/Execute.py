@@ -11,8 +11,9 @@ cmds = {
     'vertoning': 'addVertoning',
     'gebruiker': 'maakAccount',
     'reserveer': 'addReservatie',
-    'ticket': 'update_vertoning',
+    'ticket': 'updateTicketten',
 }
+
 
 class Execute:
     def __init__(self, filename: str):
