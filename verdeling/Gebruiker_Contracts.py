@@ -2,6 +2,7 @@
 Een gebruiker wordt gedefineerd door een unieke id (zoeksleutel).
 Verder heeft een gebruiker nog een voornaam, een achternaam en een e-mailadres."""
 
+
 class Gebruiker:
     def __init__(self, id = 0, voornaam = "", achternaam = "", email = ""):
         """
@@ -17,16 +18,15 @@ class Gebruiker:
         self.email_ = email
         self.status_ = False
 
-    @property
-    def id(self):
+
+    def getId(self):
         """
         :return: id
         post: De gebruiker is niet veranderd.
         """
         return self.id_
 
-    @id.setter
-    def id(self, id_):
+    def setId(self, id_):
         """
         Een functie die de id update naar de gegeven waarde.
         :param id: is een positieve integer
@@ -35,16 +35,14 @@ class Gebruiker:
         """
         self.id_ = id_
 
-    @property
-    def voornaam(self):
+    def getVoornaam(self):
         """
         :return: voornaam
         post: De gebruiker is niet veranderd.
         """
         return self.voornaam_
 
-    @voornaam.setter
-    def voornaam(self, voornaam):
+    def setVoornaam(self, voornaam):
         """
         Een functie die de voornaam update naar de gegeven waarde.
         :param voornaam: is een string
@@ -53,16 +51,14 @@ class Gebruiker:
         """
         self.voornaam_ = voornaam
 
-    @property
-    def achternaam(self):
+    def getAchternaam(self):
         """
         :return: achternaam
         post: De gebruiker is niet veranderd.
         """
         return self.achternaam_
 
-    @achternaam.setter
-    def achternaam(self, achternaam):
+    def setAchternaam(self, achternaam):
         """
         Een functie die de achternaam update naar de gegeven waarde.
         :param achternaam: is een string
@@ -71,16 +67,14 @@ class Gebruiker:
         """
         self.achternaam_ = achternaam
 
-    @property
-    def email(self):
+    def getEmail(self):
         """
         :return: email
         post: De gebruiker is niet veranderd.
         """
         return self.email_
 
-    @email.setter
-    def email(self, email):
+    def setEmail(self, email):
         """
         Een functie die de email update naar de gegeven waarde.
         :param email: is een string
@@ -89,16 +83,14 @@ class Gebruiker:
         """
         self.email_ = email
 
-    @property
-    def status(self):
+    def getStatus(self):
         """
         :return: status
         post: De gebruiker is niet veranderd.
         """
         return self.status_
 
-    @status.setter
-    def status(self, status):
+    def setStatus(self, status):
         """
         Een functie die de status update naar de gegeven waarde.
         :param status: is een bool
