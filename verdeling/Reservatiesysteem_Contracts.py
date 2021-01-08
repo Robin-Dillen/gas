@@ -43,7 +43,9 @@ class Reservatiesysteem:
         :param email: het e-mailadres van de nieuwe gebruiker, is een string.
         :return: Het id van de nieuwe gebruiker wordt teruggegeven.
         """
-        pass
+        gebruiker = Gebruiker(voornaam, achternaam, email)
+        self.gebruikers.tableInsert(self.gebruikers.tableLength(), gebruiker)
+        return True
 
     def addFilm(self, titel="", rating=0.0):  # maker Robin, tester Khemin
         """
@@ -90,7 +92,9 @@ class Reservatiesysteem:
         :param aantal_vrij: het aantal vrije plaatsen in de zaal van de vertoning, is een positieve integer.
         :return: Het id van de nieuwe vertoning wordt teruggegeven.
         """
-        pass
+        vertoning = Vertoning(zaalnummer, slot, datum, filmid, aantal_vrij)
+        self.vertoningen.tableInsert(self.vertoningen.tableLength(), vertoning)
+        return True
 
     def addZaal(self, id_, plaatsen) -> bool:  # maker Robin, tester Khemin
         """
