@@ -32,7 +32,7 @@ class Reservatiesysteem:
         :return:  Object
         post: De gegeven lst is niet van inhoud en/of lengte veranderd.
         """
-        pass
+        return self.vertoningen.tableRetrieve(id)
 
     def maakAccount(self, voornaam="", achternaam="", email=""):  # maker Niels, tester Robin
         """
@@ -43,7 +43,9 @@ class Reservatiesysteem:
         :param email: het e-mailadres van de nieuwe gebruiker, is een string.
         :return: Het id van de nieuwe gebruiker wordt teruggegeven.
         """
-        pass
+        gebruiker = Gebruiker(voornaam, achternaam, email)
+        self.gebruikers.tableInsert(self.gebruikers.tableLength(), gebruiker)
+        return True
 
     def addFilm(self, id, titel, rating):  # maker Robin, tester Khemin
         """
@@ -76,7 +78,7 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        pass
+        self.reservaties.enqueue(Reservatie(userid, timestamp, vertoningid, plaatsen))
 
     def addVertoning(self, zaalnummer=0, slot=object, datum=object, filmid=0,
                      aantal_vrij=0):  # maker Niels, tester Robin
@@ -90,7 +92,9 @@ class Reservatiesysteem:
         :param aantal_vrij: het aantal vrije plaatsen in de zaal van de vertoning, is een positieve integer.
         :return: Het id van de nieuwe vertoning wordt teruggegeven.
         """
-        pass
+        vertoning = Vertoning(zaalnummer, slot, datum, filmid, aantal_vrij)
+        self.vertoningen.tableInsert(self.vertoningen.tableLength(), vertoning)
+        return True
 
     def addZaal(self, id_, plaatsen) -> bool:  # maker Robin, tester Khemin
         """
@@ -113,7 +117,7 @@ class Reservatiesysteem:
     #     :return: None
     #     post: De status van de gebruiker met het gegeven id is aangepast naar True.
     #     """
-    #     pass
+    #     self.gebruikers.tableRetrieve(id)[0].setStatus(True)
     #
     # def meldAf(self, id):  # maker Niels, tester Robin
     #     """
