@@ -47,7 +47,7 @@ class Reservatiesysteem:
         self.gebruikers.tableInsert(self.gebruikers.tableLength(), gebruiker)
         return True
 
-    def addFilm(self, titel="", rating=0.0):  # maker Robin, tester Khemin
+    def addFilm(self, id, titel, rating):  # maker Robin, tester Khemin
         """
         Een functie die voor de gegeven titel en rating een
         nieuw film aanmaakt en deze toevoegd aan het ADT van films van het reservatiesysteem.

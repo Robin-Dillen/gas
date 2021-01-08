@@ -24,12 +24,12 @@ def parse(filename: str) -> list:
     slots = {1: datetime.time(14, 30), 2: datetime.time(17, 0), 3: datetime.time(20, 0), 4: datetime.time(22, 30)}
     for line in splitted:  # itereert over de commandos
         pop = -1
-        for i, arg in enumerate(line['args']):
-            if arg == '':
+        for i, arg in enumerate(line['args']):  # itereert over de argumenten van het commando
+            if arg == '':  # als het argument leeg is
                 line['args'].pop(i)
                 continue
 
-            if re.match(r"^(\d\d\d\d-\d\d-\d\d)", arg):
+            if re.match(r"^(\d\d\d\d-\d\d-\d\d)", arg):  #
                 line['args'][i] = datetime.datetime.fromisoformat(arg)
                 continue
 
