@@ -113,40 +113,29 @@ class Reservatiesysteem:
         self.zalen.tableInsert(self.zalen.tableLength(), zaal)
         return True
 
-    # def user_exists(self, id):
+    # def meldAan(self, id):  # maker Khemin, tester Niels
     #     """
-    #     Een functie die nakijkt of er reeds een gebruiker bestaat met het gegeven id. Geeft True terug als er een gebruiker bestaat met dit id. Anders wordt er False teruggegeven.
-    #     :param id: het id waarvan bepaald moet wordt of er een gebruiker bestaat met dit id.
-    #
-    #     preconditie:  Het gegeven id is een positieve integer.
-    #
-    #     postconditie: self.gebruikers is niet van inhoud en/of lengte veranderd.
+    #     Een functie die de gebruiker aanmeldt (door zijn status op True te zetten).
+    #     :param id: Het id van de gebruiker die zich afmeldt; positieve integer
+    #     :return: None
+    #     post: De status van de gebruiker met het gegeven id is aangepast naar True.
     #     """
     #     pass
-
-    def meldAan(self, id):  # maker Khemin, tester Niels
-        """
-        Een functie die de gebruiker aanmeldt (door zijn status op True te zetten).
-        :param id: Het id van de gebruiker die zich afmeldt; positieve integer
-        :return: None
-        post: De status van de gebruiker met het gegeven id is aangepast naar True.
-        """
-        pass
-
-    def meldAf(self, id):  # maker Niels, tester Robin
-        """
-        Een functie die de gebruiker afmeldt (door zijn status op False te zetten).
-        :param id: Het id van de gebruiker die zich afmeldt; positieve integer
-        :return: None
-        post: De status van de gebruiker met het gegeven id is aangepast naar False.
-        """
-        pass
-
-    def film_available(self, filmid):  # maker Robin, tester Khemin
-        """
-        vraagt alle vertoningen met beschikbare plaatsen op, voor de gegeven film.
-        :param filmid: Het id van de film waarvoor de evaluatie gemaakt moet worden. Dit is een positieve integer.
-        :return: True als de film nog bekeken kan worden, anders False.
-        post: self.vertoningen is niet van inhoud en/of lengte veranderd.
-        """
-        pass
+    #
+    # def meldAf(self, id):  # maker Niels, tester Robin
+    #     """
+    #     Een functie die de gebruiker afmeldt (door zijn status op False te zetten).
+    #     :param id: Het id van de gebruiker die zich afmeldt; positieve integer
+    #     :return: None
+    #     post: De status van de gebruiker met het gegeven id is aangepast naar False.
+    #     """
+    #     pass
+    #
+    # def film_available(self, filmid):  # maker Robin, tester Khemin
+    #     """
+    #     vraagt alle vertoningen met beschikbare plaatsen op, voor de gegeven film.
+    #     :param filmid: Het id van de film waarvoor de evaluatie gemaakt moet worden. Dit is een positieve integer.
+    #     :return: True als de film nog bekeken kan worden, anders False.
+    #     post: self.vertoningen is niet van inhoud en/of lengte veranderd.
+    #     """
+    #     pass
