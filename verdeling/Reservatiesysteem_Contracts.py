@@ -98,11 +98,16 @@ class Reservatiesysteem:
 
     def updateTicketten(self, vertoning_id, ticketten):
         """
-        Als mensen binnenkomen bij de vertoning worden de ticketten
-        :param vertoning_id:
-        :param ticketten:
-        :return:
+        Als mensen binnenkomen bij de vertoning worden de ticketten afgetrokken 
+        :param vertoning_id: id van de vertoning
+        :param ticketten: aantal mensen dat binnenkomt
+        :return: true als succes
         """
+        vertoning, succes = self.vertoningen.tableRetrieve(vertoning_id)
+        if succes:
+            vertoning.setAantalMensenBinnen(vertoning.setAantalMensenBinnen() - ticketten)
+            return True
+        return False
 
     def addZaal(self, id_, plaatsen) -> bool:  # maker Robin, tester Khemin
         """
