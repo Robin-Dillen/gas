@@ -57,7 +57,7 @@ class Film:
         """
         return self.rating_
 
-    def getRating(self, rating):
+    def setRating(self, rating):
         """
         Een functie die de rating update naar de gegeven waarde.
         :param rating: de nieuwe waarde van rating; float tussen 0-10

@@ -4,10 +4,13 @@ import datetime
 
 
 def parse(filename: str) -> list:
-    deleted = delete_comments(filename)
-    splitted = [dict]*len(deleted)
-    for i, line in enumerate(deleted):
-        line = line.split(' ')
+    """
+    parsed de files in een handiger formaat om uit te voeren
+    """
+    deleted = delete_comments(filename)  # leest de file in, splitst de lijnen in een lijst en verwijdert de comments
+    splitted = [dict]*len(deleted)  # maakt een lege lijst van dicts
+    for i, line in enumerate(deleted):  # itereert over de lijnen
+        line = line.split(' ')  # splitst de lijnen
         if re.fullmatch(r"^(\d\d\d\d-\d\d-\d\d)", line[0]):
             merged_time = datetime.datetime.fromisoformat(line[0] + ' ' + line[1])
             newline = {'cmd': line[2], 'args': line[3:], 'time': merged_time}
