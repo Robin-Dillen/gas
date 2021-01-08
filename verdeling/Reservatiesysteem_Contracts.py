@@ -78,7 +78,10 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        self.reservaties.enqueue(Reservatie(userid, timestamp, vertoningid, plaatsen))
+        if self.retrieve_vertoningen(vertoningid).getAantal_vrij() >= plaatsen:
+            aantal_vrij = self.retrieve_vertoningen(vertoningid).getAantal_vrij() - plaatsen
+            self.retrieve_vertoningen(vertoningid).setAantal_vrij(aantal_vrij)
+            self.reservaties.enqueue(Reservatie(0, userid, timestamp, vertoningid, plaatsen)) # nog een id genereren
 
     def addVertoning(self, zaalnummer=0, slot=object, datum=object, filmid=0,
                      aantal_vrij=0):  # maker Niels, tester Robin
