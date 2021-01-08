@@ -36,8 +36,7 @@ class Vertoning:
         self.aantal_vrij = aantal_vrij
         self.playing = False
 
-    @property
-    def id(self):
+    def getId(self):
         """
         Een functie die de waarde van id teruggeeft.
 
@@ -47,8 +46,7 @@ class Vertoning:
         """
         return self.id_
 
-    @property
-    def get_zaalnummer(self):
+    def getZaalnummer(self):
         """
         Een functie die de zaalnummer teruggeeft.
 
@@ -58,8 +56,7 @@ class Vertoning:
         """
         return self.zaalnummer
 
-    @property
-    def get_slot(self):
+    def getSlot(self):
         """
         Een functie die de slot teruggeeft.
 
@@ -69,8 +66,7 @@ class Vertoning:
         """
         return self.slot
 
-    @property
-    def get_datum(self):
+    def getDatum(self):
         """
         Een functie die de datum teruggeeft.
 
@@ -80,8 +76,7 @@ class Vertoning:
         """
         return self.datum
 
-    @property
-    def get_filmid(self):
+    def getFilmid(self):
         """
         Een functie die de filmid teruggeeft.
 
@@ -91,8 +86,7 @@ class Vertoning:
         """
         return self.filmid
 
-    @property
-    def get_aantal_vrij(self):
+    def getAantal_vrij(self):
         """
         Een functie die de aantal_vrij teruggeeft.
 
@@ -103,7 +97,7 @@ class Vertoning:
         return self.aantal_vrij
 
 
-    def set_id(self, value):
+    def setId(self, value):
         """
         Een functie die de id update naar de gegeven waarde.
         :param value: de nieuwe waarde van id
@@ -115,7 +109,7 @@ class Vertoning:
         self.id = value
 
 
-    def set_zaalnummer(self, value):
+    def setZaalnummer(self, value):
         """
         Een functie die de zaalnummer update naar de gegeven waarde.
         :param value: de nieuwe zaalnummer
@@ -127,7 +121,7 @@ class Vertoning:
         self.zaalnummer = value
 
 
-    def set_slot(self, value):
+    def setSlot(self, value):
         """
         Een functie die de slot update naar de gegeven waarde.
         :param value: het nieuwe slot
@@ -139,7 +133,7 @@ class Vertoning:
         self.slot = value
 
 
-    def set_datum(self, value):
+    def setDatum(self, value):
         """
         Een functie die de datum update naar de gegeven waarde.
         :param value: de nieuwe datum
@@ -151,7 +145,7 @@ class Vertoning:
         self.datum = value
 
 
-    def set_filmid(self, value):
+    def setFilmid(self, value):
         """
         Een functie die de filmid update naar de gegeven waarde.
         :param value: de nieuwe filmid
@@ -163,7 +157,7 @@ class Vertoning:
         self.filmid = value
 
 
-    def set_aantal_vrij(self, value):
+    def setAantal_vrij(self, value):
         """
         Een functie die de aantal_vrij update naar de gegeven waarde.
         :param value: het nieuwe aantal vrije plaatsen in de zaal van de vertoning

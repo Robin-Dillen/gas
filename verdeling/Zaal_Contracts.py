@@ -12,8 +12,7 @@ class Zaal:
         self.zaalnummer_ = zaalnummer
         self.plaatsen_ = plaatsen
 
-    @property
-    def zaalnummer(self):
+    def getZaalnummer(self):
         """
         Een functie die het zaalnummer teruggeeft.
         :return: zaalnummer
@@ -21,8 +20,7 @@ class Zaal:
         """
         return self.zaalnummer_
 
-    @zaalnummer.setter
-    def zaalnummer(self, zaalnummer):
+    def setZaalnummer(self, zaalnummer):
         """
         Een functie die het zaalnummer update naar de gegeven waarde.
         :param zaalnummer: het nieuwe zaalnummer, is een positieve integer.
@@ -31,8 +29,7 @@ class Zaal:
         """
         self.zaalnummer_ = zaalnummer
 
-    @property
-    def plaatsen(self):
+    def getPlaatsen(self):
         """
         Een functie die het plaatsen teruggeeft.
         :return: plaatsen
@@ -40,8 +37,7 @@ class Zaal:
         """
         return self.plaatsen_
 
-    @plaatsen.setter
-    def plaatsen(self, plaatsen):
+    def setPlaatsen(self, plaatsen):
         """
         Een functie die het plaatsen update naar de gegeven waarde.
         :param plaatsen: het nieuwe plaatsen, is een positieve integer.

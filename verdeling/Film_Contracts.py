@@ -16,16 +16,14 @@ class Film:
         self.titel_ = titel
         self.rating_ = rating
 
-    @property
-    def id(self):
+    def getId(self):
         """
         :return: id
         post: De film is niet veranderd.
         """
         return self.id_
 
-    @id.setter
-    def id(self, id):
+    def setId(self, id):
         """
         Een functie die de id update naar de gegeven waarde.
         :param id: de nieuwe waarde van id, is een positieve integer
@@ -35,16 +33,14 @@ class Film:
         """
         self.id_ = id
 
-    @property
-    def titel(self):
+    def getTitel(self):
         """
         :return: titel
         post: De film is niet veranderd.
         """
         return self.titel_
 
-    @titel.setter
-    def titel(self, titel):
+    def setTitel(self, titel):
         """
         Een functie die de titel update naar de gegeven waarde.
         :param titel: de nieuwe waarde van titel; string
@@ -54,16 +50,14 @@ class Film:
         """
         self.titel_ = titel
 
-    @property
-    def rating(self):
+    def getRating(self):
         """
         :return: rating
         post: De film is niet veranderd.
         """
         return self.rating_
 
-    @rating.setter
-    def rating(self, rating):
+    def getRating(self, rating):
         """
         Een functie die de rating update naar de gegeven waarde.
         :param rating: de nieuwe waarde van rating; float tussen 0-10

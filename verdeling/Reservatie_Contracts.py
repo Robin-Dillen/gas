@@ -27,16 +27,14 @@ class Reservatie:
         self.vertoningid_ = vertoningid
         self.plaatsen_ = plaatsen
 
-    @property
-    def id(self):
+    def getId(self):
         """
         :return: De waarde van id
         post: De gebruiker is niet veranderd.
         """
         return self.id
 
-    @id.setter
-    def id(self, id_):
+    def setId(self, id_):
         """
         Een functie die de id update naar de gegeven waarde.
         :param id: De nieuwe waarde van id; positieve integer
@@ -45,16 +43,14 @@ class Reservatie:
         """
         self.id_ = id_
 
-    @property
-    def userid(self):
+    def getUserid(self):
         """
         :return: De waarde van userid
         post: De gebruiker is niet veranderd.
         """
         return self.userid
 
-    @userid.setter
-    def userid(self, userid):
+    def setUserid(self, userid):
         """
         Een functie die de userid update naar de gegeven waarde.
         :param userid: De nieuwe waarde van userid; positieve integer
@@ -63,16 +59,14 @@ class Reservatie:
         """
         self.userid_ = userid
 
-    @property
-    def timestamp(self):
+    def getTimestamp(self):
         """
         :return: De waarde van timestamp
         post: De gebruiker is niet veranderd.
         """
         return self.timestamp
 
-    @timestamp.setter
-    def timestamp(self, timestamp):
+    def setTimestamp(self, timestamp):
         """
         Een functie die de timestamp update naar de gegeven waarde.
         :param timestamp: De nieuwe waarde van timestamp, een tuple met 2 string elementen.
@@ -81,16 +75,14 @@ class Reservatie:
         """
         self.timestamp_ = timestamp
 
-    @property
-    def vertoningsid(self):
+    def getVertoningsid(self):
         """
         :return: De waarde van vertoningsid
         post: De gebruiker is niet veranderd.
         """
         return self.vertoningsid
 
-    @vertoningsid.setter
-    def vertoningsid(self, vertoningsid):
+    def setVertoningsid(self, vertoningsid):
         """
         Een functie die de vertoningsid update naar de gegeven waarde.
         :param vertoningsid: De nieuwe waarde van vertoningsid; positieve integer
@@ -99,16 +91,14 @@ class Reservatie:
         """
         self.vertoningsid_ = vertoningsid
 
-    @property
-    def plaatsen(self):
+    def getPlaatsen(self):
         """
         :return: De waarde van plaatsen
         post: De gebruiker is niet veranderd.
         """
         return self.plaatsen
 
-    @plaatsen.setter
-    def plaatsen(self, plaatsen):
+    def setPlaatsen(self, plaatsen):
         """
         Een functie die de plaatsen update naar de gegeven waarde.
         :param plaatsen: De nieuwe waarde van plaatsen; positieve integer
