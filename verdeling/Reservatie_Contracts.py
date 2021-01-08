@@ -8,7 +8,7 @@ en een aantal plaatsen.
 
 class Reservatie:
 
-    def __init__(self, id_=0, userid=0, timestamp=("",""), vertoningid=0, plaatsen=0):
+    def __init__(self, id_, userid, timestamp, vertoningid, plaatsen):
         """
         Initialiseert een nieuwe reservatie met de opgegeven id, userid, timestamp, vertoningid
         en plaatsen.
