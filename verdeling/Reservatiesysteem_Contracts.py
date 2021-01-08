@@ -32,7 +32,7 @@ class Reservatiesysteem:
         :return:  Object
         post: De gegeven lst is niet van inhoud en/of lengte veranderd.
         """
-        pass
+        return self.vertoningen.tableRetrieve(id)
 
     def maakAccount(self, voornaam="", achternaam="", email=""):  # maker Niels, tester Robin
         """
@@ -78,7 +78,7 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        pass
+        self.reservaties.enqueue(Reservatie(userid, timestamp, vertoningid, plaatsen))
 
     def addVertoning(self, zaalnummer=0, slot=object, datum=object, filmid=0,
                      aantal_vrij=0):  # maker Niels, tester Robin
@@ -117,7 +117,7 @@ class Reservatiesysteem:
     #     :return: None
     #     post: De status van de gebruiker met het gegeven id is aangepast naar True.
     #     """
-    #     pass
+    #     self.gebruikers.tableRetrieve(id)[0].setStatus(True)
     #
     # def meldAf(self, id):  # maker Niels, tester Robin
     #     """
