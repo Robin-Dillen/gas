@@ -97,7 +97,6 @@ class Vertoning:
         """
         return self.aantal_vrij
 
-
     def setId(self, value):
         """
         Een functie die de id update naar de gegeven waarde.
@@ -108,7 +107,6 @@ class Vertoning:
         postconditie: De waarde van id is geüpdatet naar de gegeven value.
         """
         self.id = value
-
 
     def setZaalnummer(self, value):
         """
@@ -121,7 +119,6 @@ class Vertoning:
         """
         self.zaalnummer = value
 
-
     def setSlot(self, value):
         """
         Een functie die de slot update naar de gegeven waarde.
@@ -132,7 +129,6 @@ class Vertoning:
         postconditie: De slot is geüpdatet naar de gegeven value.
         """
         self.slot = value
-
 
     def setDatum(self, value):
         """
@@ -145,7 +141,6 @@ class Vertoning:
         """
         self.datum = value
 
-
     def setFilmid(self, value):
         """
         Een functie die de filmid update naar de gegeven waarde.
@@ -156,7 +151,6 @@ class Vertoning:
         postconditie: De filmid is geüpdatet naar de gegeven value.
         """
         self.filmid = value
-
 
     def setAantal_vrij(self, value):
         """
@@ -169,7 +163,6 @@ class Vertoning:
         """
         self.aantal_vrij = value
 
-
     def start(self):
         """
         Een methode die een vertoning start door het playing attribuut op True te zetten.
@@ -179,8 +172,7 @@ class Vertoning:
 
         postconditie: geen
         """
-        pass
-
+        self.playing = True
 
     def stop(self):
         """
@@ -191,7 +183,7 @@ class Vertoning:
 
         postconditie: geen
         """
-        pass
+        self.playing = False
 
     def getAantalMensenBinnen(self):
         """geeft terug hoeveel mensen in de zaal zitten"""
