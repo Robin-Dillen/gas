@@ -99,7 +99,7 @@ class Reservatiesysteem:
         """
         pass
 
-    def addZaal(self, plaatsen=0):  # maker Robin, tester Khemin
+    def addZaal(self, id_, plaatsen) -> bool:  # maker Robin, tester Khemin
         """
         Een functie die voor de gegeven titel en rating een nieuwe zaal aanmaakt en deze toevoegd aan het ADT van zalen van het reservatiesysteem
         :param plaatsen: het aantal plaatsen in de zaal
@@ -109,7 +109,9 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        pass
+        zaal = Zaal(plaatsen, id_)
+        self.zalen.tableInsert(self.zalen.tableLength(), zaal)
+        return True
 
     # def user_exists(self, id):
     #     """
