@@ -11,18 +11,18 @@ def parse(filename: str) -> list:
     splitted = [dict]*len(deleted)  # maakt een lege lijst van dicts
     for i, line in enumerate(deleted):  # itereert over de lijnen
         line = line.split(' ')  # splitst de lijnen
-        if re.fullmatch(r"^(\d\d\d\d-\d\d-\d\d)", line[0]):
-            merged_time = datetime.datetime.fromisoformat(line[0] + ' ' + line[1])
-            newline = {'cmd': line[2], 'args': line[3:], 'time': merged_time}
+        if re.fullmatch(r"^(\d\d\d\d-\d\d-\d\d)", line[0]):  # checkt of het eerste element een datum is
+            merged_time = datetime.datetime.fromisoformat(line[0] + ' ' + line[1])  # zet de datum om naar een datetime object
+            newline = {'cmd': line[2], 'args': line[3:], 'time': merged_time}  # maakt een nieuw commando aan
         else:
-            newline = {'cmd': line[0], 'args': line[1:]}
+            newline = {'cmd': line[0], 'args': line[1:]}  # maakt een nieuw commando aan
 
         splitted[i] = newline
 
     open = 0
     close = 0
     slots = {1: datetime.time(14, 30), 2: datetime.time(17, 0), 3: datetime.time(20, 0), 4: datetime.time(22, 30)}
-    for line in splitted:
+    for line in splitted:  # itereert over de commandos
         pop = -1
         for i, arg in enumerate(line['args']):
             if arg == '':
