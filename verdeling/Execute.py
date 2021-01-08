@@ -1,8 +1,8 @@
-import Cinema
 from Cinema import clock
 from Parser import parse
 import datetime
 from time import sleep
+from Reservatiesysteem_Contracts import Reservatiesysteem
 
 # vertaling van parser naar functie
 cmds = {
@@ -40,7 +40,7 @@ class Execute:
 
     def init(self):
         print('init')
-        self.r = Cinema.ReservatieSysteem()
+        self.r = Reservatiesysteem()
 
     def start(self):
         # setup the clock
@@ -58,4 +58,4 @@ class Execute:
             pass
 
 
-e = Execute('system.txt')
+e = Execute('../system.txt')
