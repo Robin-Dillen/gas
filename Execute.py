@@ -5,7 +5,7 @@ import datetime
 from time import sleep
 
 cmds = {
-    'zaal': 'add_zaal',
+    'zaal': 'addZaal',
     'film': 'add_movie',
     'vertoning': 'add_vertoning',
     'gebruiker': 'create_account',
