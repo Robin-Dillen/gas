@@ -3,13 +3,27 @@ Deze ADT stelt het beheer van het volledige reservatiesysteem voor.
 Het bevat verschillende functies om de kleiner ADT's (Film, Gebruiker,
 Reservatie, Vertoning, Zaal) samen te brengen in een groter geheel.
 """
+from Film_Contracts import Film
+from Gebruiker_Contracts import Gebruiker
+from Reservatie_Contracts import Reservatie
+from Vertoning_Contracts import Vertoning
+from Zaal_Contracts import Zaal
+
+class LinkedChain:
+    pass
+
+class Queue:
+    pass
+
+class BST:
+    pass
 
 
 class Reservatiesysteem:
+    def __init__(self, films=LinkedChain(), gebruikers=LinkedChain(),
+                 reservaties=Queue(), vertoningen=BST(),
+                 zalen=LinkedChain()):
 
-    def __init__(self, films=Double_linked_chain(), gebruikers=Double_linked_chain(),
-                 reservaties=ADTQueue(), vertoningen=BinarySearchTree(),
-                 zalen=Double_linked_chain()):
         self.films = films
         self.gebruikers = gebruikers
         self.reservaties = reservaties
@@ -46,7 +60,10 @@ class Reservatiesysteem:
         :param rating: de rating van de film, is een float tussen 1-10.
         :return: Het id van de nieuwe film wordt teruggegeven.
         """
-        pass
+        film = Film(id, titel, rating)
+        self.films.tableInsert(self.films.tableLength(), film)
+        print(f"The movie {titel} has been created!")
+        return True
 
     def addReservatie(self, userid=0, timestamp=object, vertoningid=0, plaatsen=0):  # maker Khemin, tester Niels
         """
