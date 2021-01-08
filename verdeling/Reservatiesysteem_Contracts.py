@@ -34,7 +34,7 @@ class Reservatiesysteem:
         """
         return self.vertoningen.tableRetrieve(id)
 
-    def maakAccount(self, voornaam="", achternaam="", email=""):  # maker Niels, tester Robin
+    def maakAccount(self, voornaam, achternaam, email):  # maker Niels, tester Robin
         """
         Een functie die voor de gegeven voornaam,achternaam en e-mailadres een
         nieuw gebruiker aanmaakt en deze toevoegd aan het ADT van gebruiker van het reservatiesysteem.
@@ -60,7 +60,7 @@ class Reservatiesysteem:
         print(f"The movie {titel} has been created!")
         return True
 
-    def addReservatie(self, userid=0, timestamp=object, vertoningid=0, plaatsen=0):  # maker Khemin, tester Niels
+    def addReservatie(self, userid, timestamp, vertoningid, plaatsen):  # maker Khemin, tester Niels
         """
         Een functie die voor de gegeven userid, timestamp, vertoninging en plaatsen een nieuw reservatie aanmaakt en deze toevoegd aan het ADT van reservaties van het reservatiesysteem.
         :param userid : de userid van de gebruiker die de reservatie aangemaakt heeft.
@@ -80,8 +80,7 @@ class Reservatiesysteem:
         """
         self.reservaties.enqueue(Reservatie(userid, timestamp, vertoningid, plaatsen))
 
-    def addVertoning(self, zaalnummer=0, slot=object, datum=object, filmid=0,
-                     aantal_vrij=0):  # maker Niels, tester Robin
+    def addVertoning(self, zaalnummer, slot, datum, filmid, aantal_vrij):  # maker Niels, tester Robin
         """
         Een functie die voor de gegeven zaalnummer, slot, datum, filmid en aantal_vrij een
         nieuw vertoning aanmaakt en deze toevoegd aan het ADT van vertoningen van het reservatiesysteem.
