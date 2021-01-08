@@ -103,10 +103,13 @@ class Reservatiesysteem:
         :param ticketten: aantal mensen dat binnenkomt
         :return: true als succes
         """
+        vertoning : Vertoning
         vertoning, succes = self.vertoningen.tableRetrieve(vertoning_id)
         if succes:
-            vertoning.setAantalMensenBinnen(vertoning.setAantalMensenBinnen() - ticketten)
-            if vertoning.setAantalMensenBinnen() :
+            vertoning.setAantalMensenBinnen(vertoning.getAantalMensenBinnen() - ticketten)
+            zaal : Zaal
+            zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())
+            if succes and vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij() == zaal.getPlaatsen():
                 vertoning.start()
             return True
         return False
