@@ -24,7 +24,7 @@ class Reservatiesysteem:
         self.zalen = zalen
         self.tijd = 0
 
-    def retrieve_vertoningen(self, id):  # maker Khemin, tester Niels
+    def retrieveVertoningen(self, id):  # maker Khemin, tester Niels
         """
         Een functie die uit een datastructuur van objecten het object haalt met het opgegeven id.
         Het object wordt teruggegeven indien het gevonden wordt in het ADT. Als het niet in de ADT zit wordt er None teruggegeven.
@@ -78,7 +78,7 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        vertoning, succes = self.retrieve_vertoningen(vertoningid)
+        vertoning, succes = self.retrieveVertoningen(vertoningid)
         if not succes:
             return False
         vertoning : Vertoning
