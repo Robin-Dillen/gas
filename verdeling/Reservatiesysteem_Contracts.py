@@ -24,12 +24,12 @@ class Reservatiesysteem:
         self.zalen = zalen
         self.tijd = 0
 
-    def retrieveVertoningen(self, id):  # maker Khemin, tester Niels
+    def retrieveVertoningen(self, id) -> (object, bool):  # maker Khemin, tester Niels
         """
         Een functie die uit een datastructuur van objecten het object haalt met het opgegeven id.
         Het object wordt teruggegeven indien het gevonden wordt in het ADT. Als het niet in de ADT zit wordt er None teruggegeven.
         :param id: id van het object, is een positieve integer.
-        :return:  Object
+        :return:  Object, succes
         post: De gegeven lst is niet van inhoud en/of lengte veranderd.
         """
         return self.vertoningen.tableRetrieve(id)
