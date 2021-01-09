@@ -83,7 +83,7 @@ class Reservatiesysteem:
             self.retrieve_vertoningen(vertoningid).setAantal_vrij(aantal_vrij)
             self.reservaties.enqueue(Reservatie(0, userid, timestamp, vertoningid, plaatsen)) # nog een id genereren
 
-    def addVertoning(self, zaalnummer, slot, datum, filmid, aantal_vrij):  # maker Niels, tester Robin
+    def addVertoning(self, id, zaalnummer, slot, datum, filmid, aantal_vrij):  # maker Niels, tester Robin
         """
         Een functie die voor de gegeven zaalnummer, slot, datum, filmid en aantal_vrij een
         nieuw vertoning aanmaakt en deze toevoegd aan het ADT van vertoningen van het reservatiesysteem.
@@ -94,7 +94,7 @@ class Reservatiesysteem:
         :param aantal_vrij: het aantal vrije plaatsen in de zaal van de vertoning, is een positieve integer.
         :return: Geeft True terug als de vertoning succesvol is toegevoegd
         """
-        vertoning = Vertoning(zaalnummer, slot, datum, filmid, aantal_vrij)
+        vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
         self.vertoningen.tableInsert(self.vertoningen.tableLength(), vertoning)
         return True
 

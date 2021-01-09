@@ -7,7 +7,7 @@ en een aantal vrije plaatsen.
 
 class Vertoning:
 
-    def __init__(self, id=0, zaalnummer=0, slot="", datum="", filmid=0, aantal_vrij=0):
+    def __init__(self, id, zaalnummer, slot, datum, filmid, aantal_vrij):
         """
         Initialiseert een nieuwe vertoning met de opgegeven id, zaalnummer, slot, datum, filmid en aantal_vrij.
         :param id : de unieke id van de vertoning

@@ -74,5 +74,3 @@ def delete_comments(filename: str) -> List[str]:
                 lines.pop(i)
 
     return lines
-
-
