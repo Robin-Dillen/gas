@@ -2,7 +2,7 @@ from Cinema import clock
 from Parser import parse
 import datetime
 from time import sleep
-from .Reservatiesysteem_Contracts import Reservatiesysteem
+from Reservatiesysteem_Contracts import Reservatiesysteem
 
 # vertaling van parser naar functie
 cmds = {

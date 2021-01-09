@@ -6,7 +6,7 @@ class BSTTable:
     def __init__(self):
         self.__bst = BST()  # private
 
-    def tableInsert(self, newItem: _TreeItemType) -> bool:
+    def tableInsert(self, searchKey: int, newItem: _TreeItemType) -> bool:
         """
         voegt een object toe aan de tabel
         :param searchKey: toegevoegt om consistent te blijven met de andere tabel implementaties
