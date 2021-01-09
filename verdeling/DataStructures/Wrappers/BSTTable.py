@@ -53,6 +53,10 @@ class BSTTable:
         """
         return self.__bst.isEmpty()
 
+    def tableLength(self):
+        """geeft de grootte van de boom terug"""
+        return self.__bst.getSize()
+
     def save(self):
         """
         slaagt het object op in een dict in de vorm {root:root, children:[child1, child2]}

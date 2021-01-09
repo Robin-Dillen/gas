@@ -15,6 +15,7 @@ class BST:
         self.left: Optional['BST'] = None
         self.right: Optional['BST'] = None
         self.parent: Optional['BST'] = None
+        self.size = 0
 
     def searchTreeInsert(self, newItem: _TreeItemType) -> bool:
         """
@@ -25,6 +26,7 @@ class BST:
         :post newItem zit in de BST, de grootte van de BST is met 1 verhoogt.
         """
         if self.root is None:
+            self.size += 1
             self.root = newItem
             return True
 
@@ -33,6 +35,7 @@ class BST:
                 node = BST(newItem)
                 node.parent = self
                 self.left = node
+                self.size += 1
                 return True
             else:
                 return self.left.searchTreeInsert(newItem)
@@ -42,6 +45,7 @@ class BST:
                 node = BST(newItem)
                 node.parent = self
                 self.right = node
+                self.size += 1
                 return True
             else:
                 return self.right.searchTreeInsert(newItem)
@@ -182,6 +186,10 @@ class BST:
         :return: geeft terug of de BST leeg is (bool)
         """
         return self.root is None
+
+    def getSize(self) -> int:
+        """geeft de grootte van de boom terug"""
+        return self.size
 
     def save(self) -> _BSTSave:
         """
