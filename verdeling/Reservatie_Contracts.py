@@ -43,14 +43,14 @@ class Reservatie:
         """
         self.id_ = id_
 
-    def getUserid(self):
+    def getUserId(self):
         """
         :return: De waarde van userid
         post: De gebruiker is niet veranderd.
         """
         return self.userid_
 
-    def setUserid(self, userid):
+    def setUserId(self, userid):
         """
         Een functie die de userid update naar de gegeven waarde.
         :param userid: De nieuwe waarde van userid; positieve integer
@@ -75,14 +75,14 @@ class Reservatie:
         """
         self.timestamp_ = timestamp
 
-    def getVertoningsid(self):
+    def getVertoningsId(self):
         """
         :return: De waarde van vertoningsid
         post: De gebruiker is niet veranderd.
         """
         return self.vertoningsid_
 
-    def setVertoningsid(self, vertoningsid):
+    def setVertoningsId(self, vertoningsid):
         """
         Een functie die de vertoningsid update naar de gegeven waarde.
         :param vertoningsid: De nieuwe waarde van vertoningsid; positieve integer
