@@ -41,7 +41,7 @@ class Reservatiesysteem:
         :param voornaam: de voornaam van de nieuwe gebruiker, is een string.
         :param achternaam: de achternaam van de nieuwe gebruiker, is een string.
         :param email: het e-mailadres van de nieuwe gebruiker, is een string.
-        :return: Het id van de nieuwe gebruiker wordt teruggegeven.
+        :return: Geeft True terug als het account succesvol is toegevoegd
         """
         gebruiker = Gebruiker(voornaam, achternaam, email)
         self.gebruikers.tableInsert(self.gebruikers.tableLength(), gebruiker)
@@ -53,7 +53,7 @@ class Reservatiesysteem:
         nieuw film aanmaakt en deze toevoegd aan het ADT van films van het reservatiesysteem.
         :param titel: de titel van de film, is een string.
         :param rating: de rating van de film, is een float tussen 1-10.
-        :return: Het id van de nieuwe film wordt teruggegeven.
+        :return: Geeft True terug als de film succesvol is toegevoegd
         """
         film = Film(id, titel, rating)
         self.films.tableInsert(self.films.tableLength(), film)
@@ -67,7 +67,7 @@ class Reservatiesysteem:
         :param timestamp : Het tijdstip waarop de reserveerde vertoning gespeeld wordt.
         :param vertoningid : het id van de vertoning die gereserveerd werd.
         :param plaatsen : het aantal plaatsen dat gereserveerd wordt
-        :return: Het id van de nieuwe reservatie wordt teruggegeven.
+        :return: Geeft True terug als de reservatie succesvol is toegevoegd
 
         preconditie:
             De meegegeven titel is een string.
@@ -92,7 +92,7 @@ class Reservatiesysteem:
         :param datum: het datum waarop de vertoning gespeeld wordt, is een datetime.datime object.
         :param filmid: het id van de film die gespeeld zal worden tijdens de vertonging, is een positieve integer.
         :param aantal_vrij: het aantal vrije plaatsen in de zaal van de vertoning, is een positieve integer.
-        :return: Het id van de nieuwe vertoning wordt teruggegeven.
+        :return: Geeft True terug als de vertoning succesvol is toegevoegd
         """
         vertoning = Vertoning(zaalnummer, slot, datum, filmid, aantal_vrij)
         self.vertoningen.tableInsert(self.vertoningen.tableLength(), vertoning)
@@ -120,7 +120,7 @@ class Reservatiesysteem:
         """
         Een functie die voor de gegeven titel en rating een nieuwe zaal aanmaakt en deze toevoegd aan het ADT van zalen van het reservatiesysteem
         :param plaatsen: het aantal plaatsen in de zaal
-        :return: Het id van de nieuwe zaal wordt teruggegeven.
+        :return: Geeft True terug als de zaal succesvol is toegevoegd
 
         preconditie: Het meegegeven aantal plaatsen is een positieve integer.
 
