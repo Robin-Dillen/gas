@@ -34,7 +34,7 @@ class Reservatiesysteem:
         """
         return self.vertoningen.tableRetrieve(id)
 
-    def maakAccount(self, id, voornaam, achternaam, email):  # maker Niels, tester Robin
+    def maakAccount(self, id, voornaam, achternaam, email) -> bool:  # maker Niels, tester Robin
         """
         Een functie die voor de gegeven voornaam,achternaam en e-mailadres een
         nieuw gebruiker aanmaakt en deze toevoegd aan het ADT van gebruiker van het reservatiesysteem.
@@ -47,7 +47,7 @@ class Reservatiesysteem:
         self.gebruikers.tableInsert(self.gebruikers.tableLength(), gebruiker)
         return True
 
-    def addFilm(self, id, titel, rating):  # maker Robin, tester Khemin
+    def addFilm(self, id, titel, rating) -> bool:  # maker Robin, tester Khemin
         """
         Een functie die voor de gegeven titel en rating een
         nieuw film aanmaakt en deze toevoegd aan het ADT van films van het reservatiesysteem.
@@ -60,7 +60,7 @@ class Reservatiesysteem:
         print(f"The movie {titel} has been created!")
         return True
 
-    def addReservatie(self, userid, timestamp, vertoningid, plaatsen):  # maker Khemin, tester Niels
+    def addReservatie(self, userid, timestamp, vertoningid, plaatsen) -> bool:  # maker Khemin, tester Niels
         """
         Een functie die voor de gegeven userid, timestamp, vertoninging en plaatsen een nieuw reservatie aanmaakt en deze toevoegd aan het ADT van reservaties van het reservatiesysteem.
         :param userid : de userid van de gebruiker die de reservatie aangemaakt heeft.
@@ -87,7 +87,7 @@ class Reservatiesysteem:
             vertoning.setAantalVrij(aantal_vrij)
             self.reservaties.enqueue(Reservatie(0, userid, timestamp, vertoningid, plaatsen))  # nog een id genereren
 
-    def addVertoning(self, id, zaalnummer, slot, datum, filmid, aantal_vrij):  # maker Niels, tester Robin
+    def addVertoning(self, id, zaalnummer, slot, datum, filmid, aantal_vrij) -> bool:  # maker Niels, tester Robin
         """
         Een functie die voor de gegeven zaalnummer, slot, datum, filmid en aantal_vrij een
         nieuw vertoning aanmaakt en deze toevoegd aan het ADT van vertoningen van het reservatiesysteem.
@@ -102,7 +102,7 @@ class Reservatiesysteem:
         self.vertoningen.tableInsert(self.vertoningen.tableLength(), vertoning)
         return True
 
-    def updateTicketten(self, vertoning_id, ticketten):
+    def updateTicketten(self, vertoning_id, ticketten) -> bool:
         """
         Als mensen binnenkomen bij de vertoning worden de ticketten afgetrokken
         :param vertoning_id: id van de vertoning
