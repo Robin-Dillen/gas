@@ -9,7 +9,7 @@ from Reservatie_Contracts import Reservatie
 from Vertoning_Contracts import Vertoning
 from Zaal_Contracts import Zaal
 
-from DataStructures import BSTTable, LinkedChainTable, RedBlackTreeTable, Queue
+from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 
 
 class Reservatiesysteem:

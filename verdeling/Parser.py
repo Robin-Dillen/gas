@@ -26,7 +26,7 @@ def parse(filename: str) -> list:
         pop = -1
         for i, arg in enumerate(line['args']):  # itereert over de argumenten van het commando
             if arg == '':  # als het argument leeg is, verwijder het argument
-                line['args'].pop(i)
+                line['args'].pop(i)  #  mag want laatste element
                 continue
 
             if re.match(r"^(\d\d\d\d-\d\d-\d\d)", arg):  # als argument datum is, convert naar datetime object
