@@ -21,7 +21,7 @@ class RedBlackTree:
     def insertItem(self, newItem: _TreeItemType) -> bool:
         """
         voegt een item toe aan de RBT
-        :param newItem: object met getSearchKey() als functie, de searchKey is een getal.
+        :param newItem: object met getId() als functie, de searchKey is een getal.
         :return: Succes, geeft aan of de operatie geslaagd is.
         :pre newItem, of een item met hetzelfde SearchKey, zit nog niet in de RBT
         :post newItem zit in de RBT, de grootte van de RBT is met 1 verhoogt.
@@ -43,7 +43,7 @@ class RedBlackTree:
             self.color = True
             return self
 
-        if newItem.getSearchKey() < self.root.getSearchKey():
+        if newItem.getId() < self.root.getId():
             if self.left is None:
                 child: RedBlackTree = RedBlackTree(newItem)
                 child.parent = self
@@ -52,7 +52,7 @@ class RedBlackTree:
 
             return self.left.insertRecurse(newItem)
 
-        if newItem.getSearchKey() > self.root.getSearchKey():
+        if newItem.getId() > self.root.getId():
             if self.right is None:
                 child: RedBlackTree = RedBlackTree(newItem)
                 child.parent = self
@@ -140,10 +140,10 @@ class RedBlackTree:
         :pre geen
         :post De RBT is niet veranderd
         """
-        if searchKey == self.root.getSearchKey():
-            return self.root.getSearchKey(), True
+        if searchKey == self.root.getId():
+            return self.root.getId(), True
 
-        elif searchKey < self.root.getSearchKey():
+        elif searchKey < self.root.getId():
             if self.left is None:
                 return None, False
             return self.left.retrieveItem(searchKey)
@@ -160,10 +160,10 @@ class RedBlackTree:
         :pre geen
         :post De RBT is niet veranderd
         """
-        if searchKey == self.root.getSearchKey():
+        if searchKey == self.root.getId():
             return self
 
-        elif searchKey < self.root.getSearchKey():
+        elif searchKey < self.root.getId():
             if self.left is None:
                 return None
             return self.left.__retrieveItem(searchKey)
@@ -306,12 +306,12 @@ class RedBlackTree:
         :post de RBT is onverandert
         """
         if not (self.left or self.right):
-            visit(self.root.getSearchKey())
+            visit(self.root.getId())
             return
 
         if self.left:
             self.left.inorderTraverse(visit)
-        visit(self.root.getSearchKey())
+        visit(self.root.getId())
         if self.right:
             self.right.inorderTraverse(visit)
 
@@ -322,7 +322,7 @@ class RedBlackTree:
         return self.root is None
 
     def save(self) -> _BSTSave:
-        save = {'root': self.root.getSearchKey(), 'color': 'red' if self.color else 'black'}
+        save = {'root': self.root.getId(), 'color': 'red' if self.color else 'black'}
         if bool(self.left or self.right):
             save['children'] = [self.left.save() if self.left else None, self.right.save() if self.right else None]
 
