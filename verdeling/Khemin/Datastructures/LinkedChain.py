@@ -71,13 +71,13 @@ class LinkedChain:
         if self.head is None:
             return None,False
 
-        orig = self.head.id
-        if orig == id:
+        orig = self.head
+        if orig.value.getId() == id:
             return self.head.value, True
 
         start = self.head.next
-        while start.id != orig:
-            if start.id == id:
+        while start.id != orig.id:
+            if start.value.id == id:
                 return start.value, True
             start = start.next
 
@@ -125,7 +125,7 @@ class LinkedChain:
     # return: True in dien het inserten gelukt is, anders False.
     def insert(self, place, value):
 
-        if place > self.getLength() + 1:
+        if place > self.getLength():
             return False
 
         if self.isEmpty():
@@ -133,7 +133,7 @@ class LinkedChain:
             return True
 
         else:
-            if place <= self.getLength():
+            if place < self.getLength():
                 start = self.head
                 while start.id != place:
                     start = start.next
