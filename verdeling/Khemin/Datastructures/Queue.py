@@ -1,7 +1,7 @@
 ### Deze ADT stelt een Queue voor. Items worden vooraan verwijderd en achteraan toegevoegd.
 # De naam is hier niet gewoonweg Queue omdat dit een klasse die de debugger gebruikt overschrijft waardoor de debugger niet meer runt.
 
-class ADTQueue:
+class Queue:
 
     # Creërt een nieuwe lege queue.
     # self.items wordt geïnitialiseerd op een lege lijst, self.front en self.back zijn None.

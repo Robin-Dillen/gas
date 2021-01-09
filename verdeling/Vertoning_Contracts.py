@@ -28,7 +28,7 @@ class Vertoning:
 
         postconditie: geen
         """
-        self.id = id
+        self.id_ = id
         self.zaalnummer = zaalnummer
         self.slot = slot
         self.datum = datum

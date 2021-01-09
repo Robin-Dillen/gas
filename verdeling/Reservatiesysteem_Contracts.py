@@ -9,7 +9,11 @@ from Reservatie_Contracts import Reservatie
 from Vertoning_Contracts import Vertoning
 from Zaal_Contracts import Zaal
 
-from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
+# from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
+
+from verdeling.Khemin.Datastructures.BST import *
+from verdeling.Khemin.Datastructures.LinkedChain import *
+from verdeling.Khemin.Datastructures.Queue import *
 
 
 class Reservatiesysteem:
@@ -99,7 +103,7 @@ class Reservatiesysteem:
         :return: Geeft True terug als de vertoning succesvol is toegevoegd
         """
         vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
-        self.vertoningen.tableInsert(self.vertoningen.tableLength(), vertoning)
+        self.vertoningen.tableInsert(vertoning.getId(), vertoning)
         return True
 
     def updateTicketten(self, vertoning_id, ticketten) -> bool:
