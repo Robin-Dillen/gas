@@ -13,7 +13,7 @@ class Zaal:
         self.zaalnummer_ = zaalnummer
         self.plaatsen_ = plaatsen
 
-    def getZaalnummer(self):
+    def getId(self):
         """
         Een functie die het zaalnummer teruggeeft.
         :return: zaalnummer
@@ -21,7 +21,7 @@ class Zaal:
         """
         return self.zaalnummer_
 
-    def setZaalnummer(self, zaalnummer):
+    def setId(self, zaalnummer):
         """
         Een functie die het zaalnummer update naar de gegeven waarde.
         :param zaalnummer: het nieuwe zaalnummer, is een positieve integer.
