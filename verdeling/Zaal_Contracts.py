@@ -2,8 +2,9 @@
 Een zaal wordt gedefineerd door een nummer (zoeksleutel).
 Verder heeft een zaal nog een aantal plaatsen."""
 
+
 class Zaal:
-    def __init__(self, zaalnummer = 0, plaatsen = 0):
+    def __init__(self, zaalnummer, plaatsen):
         """
         Initialiseert een nieuwe film met de opgegeven zaalnummer en plaatsen.
         :param zaalnummer: het zaalnummer van de zaal, is een positieve integer
