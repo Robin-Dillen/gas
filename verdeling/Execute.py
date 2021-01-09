@@ -34,7 +34,7 @@ class Execute:
                 continue
 
             print(cmds[line['cmd']] + str(tuple(line['args'])))
-            eval('self.r.' + cmds[line['cmd']] + str(tuple(line['args'])))
+            eval('self.r.' + cmds[line['cmd']] + str(tuple(line['args'])))  # self.r.func(args)
 
             clock.toggle()  # zet de clock terug aan
 
