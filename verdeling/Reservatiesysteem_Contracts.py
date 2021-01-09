@@ -34,7 +34,7 @@ class Reservatiesysteem:
         """
         return self.vertoningen.tableRetrieve(id)
 
-    def maakAccount(self, voornaam, achternaam, email):  # maker Niels, tester Robin
+    def maakAccount(self, id, voornaam, achternaam, email):  # maker Niels, tester Robin
         """
         Een functie die voor de gegeven voornaam,achternaam en e-mailadres een
         nieuw gebruiker aanmaakt en deze toevoegd aan het ADT van gebruiker van het reservatiesysteem.
@@ -43,7 +43,7 @@ class Reservatiesysteem:
         :param email: het e-mailadres van de nieuwe gebruiker, is een string.
         :return: Geeft True terug als het account succesvol is toegevoegd
         """
-        gebruiker = Gebruiker(voornaam, achternaam, email)
+        gebruiker = Gebruiker(id, voornaam, achternaam, email)
         self.gebruikers.tableInsert(self.gebruikers.tableLength(), gebruiker)
         return True
 

@@ -4,7 +4,7 @@ Verder heeft een gebruiker nog een voornaam, een achternaam en een e-mailadres."
 
 
 class Gebruiker:
-    def __init__(self, id = 0, voornaam = "", achternaam = "", email = ""):
+    def __init__(self, id, voornaam, achternaam, email):
         """
         Initialiseert een nieuwe gebruiker met de opgegeven id, voornaam, achternaam en e-mailadres.
         :param id: de unieke id van de gebruiker, is een positieve integer.
