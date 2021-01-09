@@ -8,7 +8,7 @@ en een aantal plaatsen.
 
 class Reservatie:
 
-    def __init__(self, id_=0, userid=0, timestamp=("",""), vertoningid=0, plaatsen=0):
+    def __init__(self, id_, userid, timestamp, vertoningid, plaatsen):
         """
         Initialiseert een nieuwe reservatie met de opgegeven id, userid, timestamp, vertoningid
         en plaatsen.
@@ -32,7 +32,7 @@ class Reservatie:
         :return: De waarde van id
         post: De gebruiker is niet veranderd.
         """
-        return self.id
+        return self.id_
 
     def setId(self, id_):
         """
@@ -48,7 +48,7 @@ class Reservatie:
         :return: De waarde van userid
         post: De gebruiker is niet veranderd.
         """
-        return self.userid
+        return self.userid_
 
     def setUserid(self, userid):
         """
@@ -64,7 +64,7 @@ class Reservatie:
         :return: De waarde van timestamp
         post: De gebruiker is niet veranderd.
         """
-        return self.timestamp
+        return self.timestamp_
 
     def setTimestamp(self, timestamp):
         """
@@ -80,7 +80,7 @@ class Reservatie:
         :return: De waarde van vertoningsid
         post: De gebruiker is niet veranderd.
         """
-        return self.vertoningsid
+        return self.vertoningsid_
 
     def setVertoningsid(self, vertoningsid):
         """
@@ -96,7 +96,7 @@ class Reservatie:
         :return: De waarde van plaatsen
         post: De gebruiker is niet veranderd.
         """
-        return self.plaatsen
+        return self.plaatsen_
 
     def setPlaatsen(self, plaatsen):
         """

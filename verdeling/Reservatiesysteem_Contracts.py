@@ -32,9 +32,9 @@ class Reservatiesysteem:
         :return:  Object
         post: De gegeven lst is niet van inhoud en/of lengte veranderd.
         """
-        pass
+        return self.vertoningen.tableRetrieve(id)
 
-    def maakAccount(self, voornaam="", achternaam="", email=""):  # maker Niels, tester Robin
+    def maakAccount(self, voornaam, achternaam, email):  # maker Niels, tester Robin
         """
         Een functie die voor de gegeven voornaam,achternaam en e-mailadres een
         nieuw gebruiker aanmaakt en deze toevoegd aan het ADT van gebruiker van het reservatiesysteem.
@@ -60,7 +60,7 @@ class Reservatiesysteem:
         print(f"The movie {titel} has been created!")
         return True
 
-    def addReservatie(self, userid=0, timestamp=object, vertoningid=0, plaatsen=0):  # maker Khemin, tester Niels
+    def addReservatie(self, userid, timestamp, vertoningid, plaatsen):  # maker Khemin, tester Niels
         """
         Een functie die voor de gegeven userid, timestamp, vertoninging en plaatsen een nieuw reservatie aanmaakt en deze toevoegd aan het ADT van reservaties van het reservatiesysteem.
         :param userid : de userid van de gebruiker die de reservatie aangemaakt heeft.
@@ -78,10 +78,12 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        pass
+        if self.retrieve_vertoningen(vertoningid).getAantal_vrij() >= plaatsen:
+            aantal_vrij = self.retrieve_vertoningen(vertoningid).getAantal_vrij() - plaatsen
+            self.retrieve_vertoningen(vertoningid).setAantal_vrij(aantal_vrij)
+            self.reservaties.enqueue(Reservatie(0, userid, timestamp, vertoningid, plaatsen)) # nog een id genereren
 
-    def addVertoning(self, zaalnummer=0, slot=object, datum=object, filmid=0,
-                     aantal_vrij=0):  # maker Niels, tester Robin
+    def addVertoning(self, zaalnummer, slot, datum, filmid, aantal_vrij):  # maker Niels, tester Robin
         """
         Een functie die voor de gegeven zaalnummer, slot, datum, filmid en aantal_vrij een
         nieuw vertoning aanmaakt en deze toevoegd aan het ADT van vertoningen van het reservatiesysteem.
@@ -95,6 +97,24 @@ class Reservatiesysteem:
         vertoning = Vertoning(zaalnummer, slot, datum, filmid, aantal_vrij)
         self.vertoningen.tableInsert(self.vertoningen.tableLength(), vertoning)
         return True
+
+    def updateTicketten(self, vertoning_id, ticketten):
+        """
+        Als mensen binnenkomen bij de vertoning worden de ticketten afgetrokken
+        :param vertoning_id: id van de vertoning
+        :param ticketten: aantal mensen dat binnenkomt
+        :return: true als succes
+        """
+        vertoning : Vertoning
+        vertoning, succes = self.vertoningen.tableRetrieve(vertoning_id)
+        if succes:
+            vertoning.setAantalMensenBinnen(vertoning.getAantalMensenBinnen() - ticketten)
+            zaal : Zaal
+            zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())
+            if succes and vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij() == zaal.getPlaatsen():
+                vertoning.start()
+            return True
+        return False
 
     def addZaal(self, id_, plaatsen) -> bool:  # maker Robin, tester Khemin
         """
@@ -117,7 +137,7 @@ class Reservatiesysteem:
     #     :return: None
     #     post: De status van de gebruiker met het gegeven id is aangepast naar True.
     #     """
-    #     pass
+    #     self.gebruikers.tableRetrieve(id)[0].setStatus(True)
     #
     # def meldAf(self, id):  # maker Niels, tester Robin
     #     """

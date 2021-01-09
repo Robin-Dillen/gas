@@ -25,11 +25,11 @@ def parse(filename: str) -> list:
     for line in splitted:  # itereert over de commandos
         pop = -1
         for i, arg in enumerate(line['args']):  # itereert over de argumenten van het commando
-            if arg == '':  # als het argument leeg is
+            if arg == '':  # als het argument leeg is, verwijder het argument
                 line['args'].pop(i)
                 continue
 
-            if re.match(r"^(\d\d\d\d-\d\d-\d\d)", arg):  #
+            if re.match(r"^(\d\d\d\d-\d\d-\d\d)", arg):  # als argument datum is, convert naar datetime object
                 line['args'][i] = datetime.datetime.fromisoformat(arg)
                 continue
 
@@ -41,7 +41,7 @@ def parse(filename: str) -> list:
                 close = i
                 continue
 
-            if re.match(r"\d", arg):
+            if re.match(r"\d", arg):  # checkt of er een digit in het argument zit
                 if i == 2 and line['cmd'] == "vertoning":
                     line['args'][i] = slots[int(arg)]
                     continue
@@ -52,7 +52,7 @@ def parse(filename: str) -> list:
                 line['args'][i] = float(arg)
                 continue
 
-        if open != close:
+        if open != close:  # als dubbele quotes niet correct gesloten zijn, merge de argumenten
             line['args'][open] += " " + line['args'][close]
             line['args'].pop(close)
             line['args'][open] = line['args'][open][1:-1]

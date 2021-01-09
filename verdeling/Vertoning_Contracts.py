@@ -34,6 +34,7 @@ class Vertoning:
         self.datum = datum
         self.filmid = filmid
         self.aantal_vrij = aantal_vrij
+        self.aantal_mensen_binnen = 0
         self.playing = False
 
     def getId(self):
@@ -45,16 +46,6 @@ class Vertoning:
         postconditie: De gebruiker is niet veranderd.
         """
         return self.id_
-
-    def getZaalnummer(self):
-        """
-        Een functie die de zaalnummer teruggeeft.
-
-        preconditie: geen
-
-        postconditie: De gebruiker is niet veranderd.
-        """
-        return self.zaalnummer
 
     def getSlot(self):
         """
@@ -76,17 +67,7 @@ class Vertoning:
         """
         return self.datum
 
-    def getFilmid(self):
-        """
-        Een functie die de filmid teruggeeft.
-
-        preconditie: geen
-
-        postconditie: De gebruiker is niet veranderd.
-        """
-        return self.filmid
-
-    def getAantal_vrij(self):
+    def getAantalVrij(self):
         """
         Een functie die de aantal_vrij teruggeeft.
 
@@ -95,7 +76,6 @@ class Vertoning:
         postconditie: De gebruiker is niet veranderd.
         """
         return self.aantal_vrij
-
 
     def setId(self, value):
         """
@@ -108,6 +88,13 @@ class Vertoning:
         """
         self.id = value
 
+    def getZaalnummer(self):
+        """
+        Een functie die de zaalnummer teruggeeft.
+        preconditie: geen
+        postconditie: De gebruiker is niet veranderd.
+        """
+        return self.zaalnummer
 
     def setZaalnummer(self, value):
         """
@@ -120,7 +107,6 @@ class Vertoning:
         """
         self.zaalnummer = value
 
-
     def setSlot(self, value):
         """
         Een functie die de slot update naar de gegeven waarde.
@@ -131,7 +117,6 @@ class Vertoning:
         postconditie: De slot is geüpdatet naar de gegeven value.
         """
         self.slot = value
-
 
     def setDatum(self, value):
         """
@@ -144,8 +129,15 @@ class Vertoning:
         """
         self.datum = value
 
+    def getFilmId(self):
+        """
+        Een functie die de filmid teruggeeft.
+        preconditie: geen
+        postconditie: De gebruiker is niet veranderd.
+        """
+        return self.filmid
 
-    def setFilmid(self, value):
+    def setFilmId(self, value):
         """
         Een functie die de filmid update naar de gegeven waarde.
         :param value: de nieuwe filmid
@@ -156,8 +148,7 @@ class Vertoning:
         """
         self.filmid = value
 
-
-    def setAantal_vrij(self, value):
+    def setAantalVrij(self, value):
         """
         Een functie die de aantal_vrij update naar de gegeven waarde.
         :param value: het nieuwe aantal vrije plaatsen in de zaal van de vertoning
@@ -168,7 +159,6 @@ class Vertoning:
         """
         self.aantal_vrij = value
 
-
     def start(self):
         """
         Een methode die een vertoning start door het playing attribuut op True te zetten.
@@ -178,8 +168,7 @@ class Vertoning:
 
         postconditie: geen
         """
-        pass
-
+        self.playing = True
 
     def stop(self):
         """
@@ -190,4 +179,12 @@ class Vertoning:
 
         postconditie: geen
         """
-        pass
+        self.playing = False
+
+    def getAantalMensenBinnen(self):
+        """geeft terug hoeveel mensen in de zaal zitten"""
+        return self.aantal_mensen_binnen
+
+    def setAantalMensenBinnen(self, new_aantal):
+        """update de waarde van self.aantal_mensen_binnen naar new_aantal"""
+        self.aantal_mensen_binnen = new_aantal
