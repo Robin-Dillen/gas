@@ -3,13 +3,13 @@ Deze ADT stelt het beheer van het volledige reservatiesysteem voor.
 Het bevat verschillende functies om de kleiner ADT's (Film, Gebruiker,
 Reservatie, Vertoning, Zaal) samen te brengen in een groter geheel.
 """
-from Film_Contracts import Film
-from Gebruiker_Contracts import Gebruiker
-from Reservatie_Contracts import Reservatie
-from Vertoning_Contracts import Vertoning
-from Zaal_Contracts import Zaal
+from .Film_Contracts import Film
+from .Gebruiker_Contracts import Gebruiker
+from .Reservatie_Contracts import Reservatie
+from .Vertoning_Contracts import Vertoning
+from .Zaal_Contracts import Zaal
 
-from DataStructures import BSTTable, LinkedChainTable, RedBlackTreeTable, Queue
+from .DataStructures import BSTTable, LinkedChainTable, RedBlackTreeTable, Queue
 
 
 class Reservatiesysteem:
