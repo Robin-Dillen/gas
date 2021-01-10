@@ -39,7 +39,7 @@ class LinkedChainTable:
         """
         return self.__linked_chain.retrieve(index)
 
-    def traverseTable(self) -> tuple:
+    def traverseTable(self, visit) -> tuple:
         """
         overloopt elk element van de tabel, in volgorde van toevoeging.
         :return: een tuple met de elementen in

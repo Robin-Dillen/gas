@@ -95,6 +95,19 @@ class LinkedChain:
         self.size -= 1
         return True
 
+    def traverse(self, visit, next=None):
+        """
+        bezoekt elke node
+        :param visit: func
+        :return: None
+        """
+        if next.getNext() == self.head:
+            return
+        if not next:
+            next = self.head
+        visit(next.getNext())
+        self.traverse(visit, next.getNext())
+
     def save(self) -> list:
         """
         slaagt de gelinkte ketting op als een lijst

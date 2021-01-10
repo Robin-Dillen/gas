@@ -139,8 +139,8 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        zaal = Zaal(plaatsen, id_)
-        self.zalen.tableInsert(self.zalen.tableLength(), zaal)
+        zaal = Zaal(id_, plaatsen)
+        self.zalen.tableInsert(self.zalen.tableLength() + 1, zaal)
         return True
 
     def makeLog(self, time):
@@ -150,50 +150,51 @@ class Reservatiesysteem:
         :return: None
         """
         pass
-#         BOF = """
-#         <html>
-# 	<head>
-# 	<style>
-# 		table {
-# 		    border-collapse: collapse;
-# 		}
-#
-# 		table, td, th {
-# 		    border: 1px solid #000000;
-# 		}
-# 	</style>
-# </head>
-# 	<body>
-# 		<h1>Log op 2020-10-10 18:00</h1>
-# 		<table>
-# 			<thead>
-# 				<td>Datum</td>
-# 				<td>Film</td>
-# 				<td>14:30</td>
-# 				<td>17:00</td>
-# 				<td>20:00</td>
-# 				<td>22:30</td>
-# 			</thead>
-# 			<tbody>
-#         """
-#         body = ""
-#         EOF = "</tbody></table></body></html>"
-#         with open("log.html", "w") as f:
-#             f.write(BOF)
-#             vertoningen_dict = self.__getAllVertoningen()
-#             for titel, vertoningen in vertoningen_dict.items():
-#                 if vertoningen[0] and vertoningen[0].:
-#                 body += f"""
-#                         <tr>
-#                             <td>{vertoningen[0].getDate()}</td>
-#                             <td>{titel}</td>
-#                             <td>F:10</td>
-#                             <td>W:2</td>
-#                             <td>G:0</td>
-#                             <td></td>
-#                         </tr>
-#                 """
-#             f.write(EOF)
+        BOF = """
+        <html>
+	<head>
+	<style>
+		table {
+		    border-collapse: collapse;
+		}
+
+		table, td, th {
+		    border: 1px solid #000000;
+		}
+	</style>
+</head>
+	<body>
+		<h1>Log op 2020-10-10 18:00</h1>
+		<table>
+			<thead>
+				<td>Datum</td>
+				<td>Film</td>
+				<td>14:30</td>
+				<td>17:00</td>
+				<td>20:00</td>
+				<td>22:30</td>
+			</thead>
+			<tbody>
+        """
+        body = ""
+        EOF = "</tbody></table></body></html>"
+        with open("log.html", "w") as f:
+            f.write(BOF)
+            vertoningen_dict = self.__getAllVertoningen()
+            for titel, vertoningen in vertoningen_dict.items():
+
+
+                body += f"""
+                        <tr>
+                            <td>{vertoningen[0].getDate()}</td>
+                            <td>{titel}</td>
+                            <td>F:10</td>
+                            <td>W:2</td>
+                            <td>G:0</td>
+                            <td></td>
+                        </tr>
+                """
+            f.write(EOF)
 
     def __getAllVertoningen(self):
         """
@@ -207,13 +208,17 @@ class Reservatiesysteem:
         films = [film.getTitel() for film in films]  # zet de objecten om naar titels
         vertoningen_dict = dict.fromkeys(films, [])
         for vertoning in vertoningen:
-            vertoningen_dict[self.films.tableRetrieve(vertoning.getFilmId()).getTitel()].append(vertoning)
+            vertoning : Vertoning
+            titel = self.films.tableRetrieve(vertoning.getFilmId()).getTitel()
+            if vertoning.getDatum() not in vertoningen_dict[self.films.tableRetrieve(vertoning.getFilmId()).getTitel()]:
+                vertoningen_dict[titel][vertoning.getDatum()] = {vertoning.getSlot(): vertoning}
+            else:
+                vertoningen_dict[titel][vertoning.getDatum()][vertoning.getSlot()] = vertoning
 
         del vertoningen
 
         for vertoningen in vertoningen_dict.values():
-            vertoningen.sort(
-                key=lambda x: datetime.datetime.combine(x.getDate(), x.getSlot()))  # sort items based on datetime
+            vertoningen.sort(key=lambda x: datetime.datetime.combine(x.getDate(), x.getSlot()))  # sort items based on datetime
 
         return vertoningen_dict
 
