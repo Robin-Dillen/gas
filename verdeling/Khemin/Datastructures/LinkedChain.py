@@ -71,13 +71,13 @@ class LinkedChain:
         if self.head is None:
             return None,False
 
-        orig = self.head
-        if orig.value.getId() == id:
+        orig = self.head.id
+        if orig == id:
             return self.head.value, True
 
         start = self.head.next
-        while start.id != orig.id:
-            if start.value.id == id:
+        while start.id != orig:
+            if start.id == id:
                 return start.value, True
             start = start.next
 
