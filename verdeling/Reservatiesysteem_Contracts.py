@@ -138,6 +138,18 @@ class Reservatiesysteem:
         self.zalen.tableInsert(self.zalen.tableLength(), zaal)
         return True
 
+    def makeLog(self, time):
+        """
+        maakt een html file aan met alle films, hun speeltijden en het aantal reservaties/
+        aantal mensen waarop gewacht word/ aantal mensen dat in de zaal was
+        :return: None
+        """
+        buffer = "<html><head><style>table {border-collapse: collapse;}table, td, th {border: 1px solid #000000;}</style></head><body><h1>Log op " + time + "</h1>"
+        EOF = "	</body></html>"
+        with open("log.html", "w") as f:
+            f.write(buffer)
+            f.write(EOF)
+
     # def meldAan(self, id):  # maker Khemin, tester Niels
     #     """
     #     Een functie die de gebruiker aanmeldt (door zijn status op True te zetten).

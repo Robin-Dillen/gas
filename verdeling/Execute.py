@@ -1,4 +1,4 @@
-from Cinema import clock
+from Clock import clock
 from Parser import parse
 import datetime
 from time import sleep
@@ -50,7 +50,7 @@ class Execute:
         clock.start()
 
     def log(self):
-        self.r.log(str(clock))
+        self.r.makeLog(str(clock))
         exit()
 
     def await_(self, time):
