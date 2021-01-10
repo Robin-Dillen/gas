@@ -3,8 +3,8 @@ def createTreeItem(key, val):
 
 
 class BST:
-    def __init__(self, root=None, parent=None, value=None):
-        self.root = root
+    def __init__(self, key=None, parent=None, value=None):
+        self.root = key
         self.LeftTree = None
         self.RightTree = None
         self.parent = parent
@@ -49,6 +49,7 @@ class BST:
         """
         if (self.root == None):
             self.root = object[0]
+            self.value = object[1]
         elif (self.LeftTree == None and object[0] < self.root):
             nieuwe_knoop = BST(object[0], None, object[1])
             nieuwe_knoop.parent = self
@@ -152,7 +153,6 @@ class BST:
         if (key):
             if (self.LeftTree != None):
                 self.LeftTree.inorderTraverse(print)
-            print(self.value)
             if (self.RightTree != None):
                 self.RightTree.inorderTraverse(print)
             return True
@@ -224,11 +224,11 @@ class BST:
         postcondition: None
         """
         if (self.root == key):
-            return self,True
+            return self.value,True
         elif (self.root > key and self.LeftTree != None):
-            return self.LeftTree.checkIfInTree(key)
+            return self.LeftTree.__checkIfInTree(key)
         elif (self.root < key and self.RightTree != None):
-            return self.RightTree.checkIfInTree(key)
+            return self.RightTree.__checkIfInTree(key)
         else:
             return False
 
@@ -277,7 +277,7 @@ class BSTTable:
     def tableDelete(self, key):
         return self.a.searchTreeDelete(key)
 
-    def traverseTable(self, key):
+    def traverseTable(self, key = None):
         return self.a.inorderTraverse(key)
 
     def tableIsEmpty(self):
