@@ -20,7 +20,7 @@ class _Clock:
                     print(end='\r')
                     t = time.time()
                     self.clock += datetime.timedelta(minutes=5)
-                    print(self, end="")
+                    print(self, end="\t")
 
     def toggle(self):
         self.pause = not self.pause

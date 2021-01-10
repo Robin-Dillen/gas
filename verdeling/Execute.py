@@ -54,8 +54,9 @@ class Execute:
         exit()
 
     def await_(self, time):
-        while clock.getTime() < time:
-            pass
+        clock.setTime(datetime.datetime.fromisoformat(time))
+        # while clock.getTime() < time:
+        #     pass
 
 
 e = Execute('../system.txt')
