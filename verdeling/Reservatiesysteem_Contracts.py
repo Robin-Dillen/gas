@@ -65,7 +65,7 @@ class Reservatiesysteem:
         :return: Geeft True terug als de film succesvol is toegevoegd
         """
         film = Film(id, titel, rating)
-        self.films.tableInsert(self.films.tableLength(), film)
+        self.films.tableInsert(self.films.tableLength() + 1, film)
         print(f"The movie {titel} has been created!")
         return True
 
@@ -149,7 +149,6 @@ class Reservatiesysteem:
         aantal mensen waarop gewacht word/ aantal mensen dat in de zaal was
         :return: None
         """
-        pass
         BOF = """
         <html>
 	<head>
@@ -178,22 +177,23 @@ class Reservatiesysteem:
         """
         body = ""
         EOF = "</tbody></table></body></html>"
+        slots = [datetime.time(14, 30), datetime.time(17, 0), 3, datetime.time(20, 0),datetime.time(22, 30)]
         with open("log.html", "w") as f:
             f.write(BOF)
             vertoningen_dict = self.__getAllVertoningen()
             for titel, vertoningen in vertoningen_dict.items():
+                for date, vertoningen2 in vertoningen:
+                    body += f"<tr><td>{date}</td><td>{titel}</td>"
+                    for slot, vertoning in vertoningen2:
+                        zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())
+                        if vertoning.isStarted():
+                             f"<td>F:{vertoning.getAantalMensenBinnen()}</td>"
+                        elif vertoning.isWaiting():
+                            body += f"<td>W:{zaal.getPlaatsen() - vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij()}</td>"
 
-
-                body += f"""
-                        <tr>
-                            <td>{vertoningen[0].getDate()}</td>
-                            <td>{titel}</td>
-                            <td>F:10</td>
-                            <td>W:2</td>
-                            <td>G:0</td>
-                            <td></td>
-                        </tr>
-                """
+                        else:
+                            body += f"<td>G:{zaal.getPlaatsen() - vertoning.getAantalVrij}</td>"
+                    body += "</tr>"
             f.write(EOF)
 
     def __getAllVertoningen(self):
@@ -209,7 +209,8 @@ class Reservatiesysteem:
         vertoningen_dict = dict.fromkeys(films, [])
         for vertoning in vertoningen:
             vertoning : Vertoning
-            titel = self.films.tableRetrieve(vertoning.getFilmId()).getTitel()
+            titel, succes = self.films.tableRetrieve(vertoning.getFilmId())
+            titel = titel.getTitel()
             if vertoning.getDatum() not in vertoningen_dict[self.films.tableRetrieve(vertoning.getFilmId()).getTitel()]:
                 vertoningen_dict[titel][vertoning.getDatum()] = {vertoning.getSlot(): vertoning}
             else:

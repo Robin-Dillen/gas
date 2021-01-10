@@ -171,7 +171,7 @@ class Vertoning:
 
         postconditie: geen
         """
-        self.playing = clock.getTime()
+        self.playing = True
 
     def stop(self):
         """
@@ -182,14 +182,19 @@ class Vertoning:
 
         postconditie: geen
         """
-        self.playing = clock.getTime()
+        self.playing = False
 
     def isStarted(self):
         """
         geetf terug of de film aan het spelen is
         :return: True als de film aan het spelen is ander False
         """
-        if self.playing <= clock.getTime():
+        if self.playing:
+            return True
+
+    def isWaiting(self):
+        """geeft True terug als de vertoning aan het wachten is op mensen"""
+        if datetime.combine(self.datum, self.slot) >= clock.getTime() and not self.isStarted():
             return True
 
     def getAantalMensenBinnen(self):

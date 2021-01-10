@@ -172,12 +172,12 @@ class BST:
         :post de BST is onverandert
         """
         if not(self.left or self.right):
-            visit(self.root.getId())
+            visit(self.root)
             return
 
         if self.left:
             self.left.inorderTraverse(visit)
-        visit(self.root.getId())
+        visit(self.root)
         if self.right:
             self.right.inorderTraverse(visit)
 
