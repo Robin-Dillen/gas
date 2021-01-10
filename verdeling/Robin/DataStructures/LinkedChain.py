@@ -1,7 +1,4 @@
 from typing import NoReturn, Optional, Tuple, TypeVar
-from Cinema.BuildingBlocks import _Foundation
-
-_ItemType = TypeVar("_ItemType", bound=_Foundation)
 
 
 class LinkedChain:
@@ -25,7 +22,7 @@ class LinkedChain:
         """
         return self.size
 
-    def retrieve(self, index: int) -> Tuple[Optional[_ItemType], bool]:
+    def retrieve(self, index: int) -> Tuple[Optional[object], bool]:
         """
         geeft het object op plaats index terug
         :param index: positieve int < de lengte van de linked chain
@@ -95,6 +92,20 @@ class LinkedChain:
         self.size -= 1
         return True
 
+    def search(self, id: int):
+        """
+        zoekt het element met gegeven id, en geeft het object terug
+        :param id: int
+        :return: object
+        """
+        node: 'Node' = self.head
+        for _ in range(self.size + 1):
+            node = node.getNext()
+            if node.getData().getId() == id:
+                return node.getData()
+
+        return None
+
     def save(self) -> list:
         """
         slaagt de gelinkte ketting op als een lijst
@@ -131,8 +142,8 @@ class LinkedChain:
 
 
 class Node:
-    def __init__(self, obj: Optional[_ItemType] = None):
-        self.__data: Optional[_ItemType] = obj  # private
+    def __init__(self, obj: Optional[object] = None):
+        self.__data: Optional[object] = obj  # private
         self.__previous: Optional['Node'] = None  # private
         self.__next: Optional['Node'] = None  # private
 
@@ -176,7 +187,7 @@ class Node:
         """
         return self.__previous
 
-    def getData(self) -> Optional[_ItemType]:
+    def getData(self) -> Optional[object]:
         """
         geeft de data van de node terug
         :return: data

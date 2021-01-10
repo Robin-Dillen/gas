@@ -1,15 +1,12 @@
-from Cinema.DataStructures.LinkedChain import LinkedChain
-from Cinema.BuildingBlocks import _Foundation
+from ..LinkedChain import LinkedChain
 from typing import TypeVar, Union, Tuple, Optional
-
-_ItemType = TypeVar("_ItemType", bound=_Foundation)
 
 
 class LinkedChainTable:
     def __init__(self):
         self.__linked_chain = LinkedChain()  # private
 
-    def tableInsert(self, index: int, newItem: _ItemType):
+    def tableInsert(self, index: int, newItem):
         """
         voegt een object toe aan de tabel
         :param newItem: object met getSearchKey() als functie, de searchKey is een getal.
@@ -29,7 +26,7 @@ class LinkedChainTable:
         """
         return self.__linked_chain.delete(index)
 
-    def tableRetrieve(self, index: int) -> Tuple[Optional[_ItemType], bool]:
+    def tableRetrieve(self, index: int) -> Tuple[Optional[object], bool]:
         """
         haalt het object met gegeven index op uit de tabel
         :param index: een getal

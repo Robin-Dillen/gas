@@ -1,7 +1,4 @@
 from typing import Callable, Optional, Tuple, TypedDict
-from Cinema.Types import _BuildingBlock
-
-_TreeItemType = _BuildingBlock
 
 
 class _BSTSave(TypedDict):
@@ -10,13 +7,13 @@ class _BSTSave(TypedDict):
 
 
 class BST:
-    def __init__(self, root: Optional[_TreeItemType] = None) -> None:
-        self.root: Optional[_TreeItemType] = root
+    def __init__(self, root=None) -> None:
+        self.root = root
         self.left: Optional['BST'] = None
         self.right: Optional['BST'] = None
         self.parent: Optional['BST'] = None
 
-    def searchTreeInsert(self, newItem: _TreeItemType) -> bool:
+    def searchTreeInsert(self, newItem) -> bool:
         """
         voegt een item toe aan de BST
         :param newItem: object met getId() als functie, de searchKey is een getal.
@@ -46,7 +43,7 @@ class BST:
             else:
                 return self.right.searchTreeInsert(newItem)
 
-    def searchTreeRetrieve(self, searchKey: int) -> Tuple[Optional[_TreeItemType], bool]:
+    def searchTreeRetrieve(self, searchKey: int) -> Tuple[Optional[object], bool]:
         """
         haalt het object met gegeven searchKey op uit de BST
         :param searchKey: een getal
@@ -55,7 +52,7 @@ class BST:
         :post De BST is niet veranderd
         """
         if searchKey == self.root.getId():
-            return self.root.v, True
+            return self.root, True
 
         if searchKey < self.root.getId():
             if self.left is not None:

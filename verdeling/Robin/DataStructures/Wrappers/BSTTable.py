@@ -1,4 +1,4 @@
-from Cinema.DataStructures.BST import BST, _TreeItemType
+from ..BST import BST
 from typing import Tuple, Optional
 
 
@@ -6,7 +6,7 @@ class BSTTable:
     def __init__(self):
         self.__bst = BST()  # private
 
-    def tableInsert(self, searchKey: int, newItem: _TreeItemType) -> bool:
+    def tableInsert(self, searchKey: int, newItem) -> bool:
         """
         voegt een object toe aan de tabel
         :param searchKey: toegevoegt om consistent te blijven met de andere tabel implementaties
@@ -27,7 +27,7 @@ class BSTTable:
         """
         return self.__bst.searchTreeDelete(searchKey)
 
-    def tableRetrieve(self, searchKey: int) -> Tuple[Optional[_TreeItemType], bool]:
+    def tableRetrieve(self, searchKey: int) -> Tuple[Optional[object], bool]:
         """
         haalt het object met gegeven searchKey op uit de tabel
         :param searchKey: een getal

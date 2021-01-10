@@ -13,7 +13,6 @@ from verdeling.Zaal_Contracts import Zaal
 
 from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 
-
 #from verdeling.Khemin.Datastructures.BST import *
 #from verdeling.Khemin.Datastructures.LinkedChain import *
 #from verdeling.Khemin.Datastructures.Queue import *
@@ -21,6 +20,7 @@ from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 #from verdeling.Niels.Datastructures.BST import *
 #from verdeling.Niels.Datastructures.LinkedChain import *
 #from verdeling.Niels.Datastructures.Queue import *
+
 
 class Reservatiesysteem:
     def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
