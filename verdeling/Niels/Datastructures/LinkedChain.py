@@ -178,6 +178,9 @@ class LinkedChainTable:
     def tableIsEmpty(self):
         return self.a.isEmpty()
 
+    def tableSearch(self, id):
+        return self.a.retrieve(id)
+
     def tableRetrieve(self, index):
         return self.a.retrieve(index)
 
