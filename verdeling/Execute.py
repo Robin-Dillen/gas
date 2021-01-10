@@ -50,13 +50,12 @@ class Execute:
         clock.start()
 
     def log(self):
+        print("log")
         self.r.makeLog(str(clock))
         exit()
 
-    def await_(self, time):
-        clock.setTime(datetime.datetime.fromisoformat(time))
-        # while clock.getTime() < time:
-        #     pass
+    def await_(self, time: datetime.datetime):
+        clock.setTime(time)  # sets clock time to desired time
 
 
 e = Execute('../system.txt')
