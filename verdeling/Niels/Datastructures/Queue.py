@@ -1,5 +1,5 @@
 class Queue:
-    def __init__(self,length = 0):
+    def __init__(self, length=0):
         self.length = length
         self.list = []
 
@@ -41,8 +41,8 @@ class Queue:
 
         postcondition: lengte van de queue moet vergoten met 1
         """
-        if(self.length>len(self.list)):
-            self.list.insert(0,value)
+        if (self.length > len(self.list)):
+            self.list.insert(0, value)
             return True
         return False
 
@@ -57,11 +57,11 @@ class Queue:
 
         postcondition: lengte van de queue moet verkleinen met 1
         """
-        if(len(self.list)==0):
+        if (len(self.list) == 0):
             return False, False
-        a = self.list[len(self.list)-1]
-        del self.list[len(self.list)-1]
-        return a,True
+        a = self.list[len(self.list) - 1]
+        del self.list[len(self.list) - 1]
+        return a, True
 
     def getFront(self):
         """
@@ -73,9 +73,9 @@ class Queue:
 
         postcondition: None
         """
-        if(len(self.list)==0):
-            return False,False
-        return self.list[len(self.list)-1], True
+        if (len(self.list) == 0):
+            return False, False
+        return self.list[len(self.list) - 1], True
 
     def save(self):
         """
@@ -90,6 +90,7 @@ class Queue:
         for i in self.list:
             l.append(i)
         return l
+
 
 q = Queue(10)
 print(q.isEmpty())

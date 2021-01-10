@@ -1,5 +1,5 @@
 class Stack:
-    def __init__(self,length=0):
+    def __init__(self, length=0):
         self.length = length
         self.list = []
 
@@ -22,11 +22,12 @@ class Stack:
 
         postcondition: None
         """
-        if(len(self.list) == 0):
+        if (len(self.list) == 0):
             return True
-        else: return False
+        else:
+            return False
 
-    def push(self,value):
+    def push(self, value):
         """
         voegt een element toe aan de stack
         :param value = item dat moet worden toegevoegd
@@ -36,7 +37,7 @@ class Stack:
 
         postcondition: lengte van de stack moet vergroten met 1
         """
-        if(self.length > len(self.list)):
+        if (self.length > len(self.list)):
             self.list.append(value)
             return True
         return False
@@ -51,10 +52,10 @@ class Stack:
 
         postcondition: lengte van de stack moet verkleinen met 1
         """
-        if(len(self.list)==0):
+        if (len(self.list) == 0):
             return False, False
-        a = self.list[len(self.list)-1]
-        del self.list[len(self.list)-1]
+        a = self.list[len(self.list) - 1]
+        del self.list[len(self.list) - 1]
         return a, True
 
     def getTop(self):
@@ -67,9 +68,9 @@ class Stack:
 
         postcondition: None
         """
-        if(len(self.list)==0):
+        if (len(self.list) == 0):
             return False, False
-        return self.list[len(self.list)-1], True
+        return self.list[len(self.list) - 1], True
 
     def save(self):
         """
@@ -85,6 +86,7 @@ class Stack:
             l.append(i)
         return l
 
+
 s = Stack(2)
 print(s.isEmpty())
 print(s.getTop()[1])
@@ -97,7 +99,7 @@ print(s.pop()[0])
 s.push(5)
 print(s.save())
 
-s.load(['a','b','c'])
+s.load(['a', 'b', 'c'])
 print(s.save())
 print(s.pop()[0])
 print(s.save())
