@@ -153,7 +153,13 @@ class Reservatiesysteem:
             f.write(EOF)
 
     def __getAllVertoningen(self):
-        pass
+        """
+        geeft alle vertoningen terug, gegroepeerd in film type en gesorteerd op speeltijd
+        :return: {filmnaam: [vertoningen], ...}
+        """
+        vertoningen = []
+        self.vertoningen.traverseTable(vertoningen.append)
+        self.films.traverseTable()
 
     # def meldAan(self, id):  # maker Khemin, tester Niels
     #     """

@@ -93,9 +93,12 @@ class LinkedChain:
         for i in range(1, self.getLength() + 1):
             lst.append(self.retrieve(i))
 
-        if prt == print:
-            for e in lst:
-                print(e)
+        # if prt == print:
+        #     for e in lst:
+        #         print(e)
+
+        for e in lst:
+            prt(e)
 
         return lst
 
