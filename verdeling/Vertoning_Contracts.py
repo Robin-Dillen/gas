@@ -189,13 +189,11 @@ class Vertoning:
         geetf terug of de film aan het spelen is
         :return: True als de film aan het spelen is ander False
         """
-        if self.playing:
-            return True
+        return self.playing
 
     def isWaiting(self):
         """geeft True terug als de vertoning aan het wachten is op mensen"""
-        if datetime.combine(self.datum, self.slot) >= clock.getTime() and not self.isStarted():
-            return True
+        return datetime.combine(self.datum, self.slot) <= clock.getTime() and not self.isStarted()
 
     def getAantalMensenBinnen(self):
         """geeft terug hoeveel mensen in de zaal zitten"""

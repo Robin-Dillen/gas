@@ -86,9 +86,9 @@ class Film:
         slot = vertoning.getSlot()
         for t in self.vertoningen:
             if datum == t[0]:
-                t[1].append((slot, vertoning.getId()))
+                t[1].append((slot, vertoning))
                 t[1].sort(key=lambda x: x[0])
                 return
 
-        self.vertoningen.append((datum, [slot, vertoning.getId()]))
+        self.vertoningen.append((datum, [(slot, vertoning)]))
         self.vertoningen.sort(key=lambda x: x[0])
