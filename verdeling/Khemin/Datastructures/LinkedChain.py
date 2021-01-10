@@ -52,7 +52,7 @@ class LinkedChain:
 
         orig = self.head
         if orig.value.getId() == id:
-            return orig, True
+            return orig.value, True
 
         start = self.head.next
         while start != orig:
@@ -128,7 +128,7 @@ class LinkedChain:
     # return: True in dien het inserten gelukt is, anders False.
     def insert(self, place, value):
 
-        if place > self.getLength():
+        if place > self.getLength() + 1:
             return False
 
         if self.isEmpty():
