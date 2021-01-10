@@ -20,7 +20,7 @@ class BST:
     def searchTreeInsert(self, newItem: _TreeItemType) -> bool:
         """
         voegt een item toe aan de BST
-        :param newItem: object met getSearchKey() als functie, de searchKey is een getal.
+        :param newItem: object met getId() als functie, de searchKey is een getal.
         :return: Succes, geeft aan of de operatie geslaagd is.
         :pre newItem, of een item met hetzelfde SearchKey, zit nog niet in de BST
         :post newItem zit in de BST, de grootte van de BST is met 1 verhoogt.
@@ -30,7 +30,7 @@ class BST:
             self.root = newItem
             return True
 
-        if newItem.getSearchKey() < self.root.getSearchKey():
+        if newItem.getId() < self.root.getId():
             if self.left is None:
                 node = BST(newItem)
                 node.parent = self
@@ -40,7 +40,7 @@ class BST:
             else:
                 return self.left.searchTreeInsert(newItem)
 
-        if newItem.getSearchKey() > self.root.getSearchKey():
+        if newItem.getId() > self.root.getId():
             if self.right is None:
                 node = BST(newItem)
                 node.parent = self
@@ -58,10 +58,10 @@ class BST:
         :pre geen
         :post De BST is niet veranderd
         """
-        if searchKey == self.root.getSearchKey():
+        if searchKey == self.root.getId():
             return self.root.v, True
 
-        if searchKey < self.root.getSearchKey():
+        if searchKey < self.root.getId():
             if self.left is not None:
                 return self.left.searchTreeRetrieve(searchKey)
             else:
@@ -81,10 +81,10 @@ class BST:
         :pre geen
         :post De BST is niet veranderd
         """
-        if searchKey == self.root.getSearchKey():
+        if searchKey == self.root.getId():
             return self, True
 
-        if searchKey < self.root.getSearchKey():
+        if searchKey < self.root.getId():
             if self.left is not None:
                 return self.left.searchTreeRetrieve(searchKey)
             else:
@@ -172,12 +172,12 @@ class BST:
         :post de BST is onverandert
         """
         if not(self.left or self.right):
-            visit(self.root.getSearchKey())
+            visit(self.root.getId())
             return
 
         if self.left:
             self.left.inorderTraverse(visit)
-        visit(self.root.getSearchKey())
+        visit(self.root.getId())
         if self.right:
             self.right.inorderTraverse(visit)
 
@@ -196,7 +196,7 @@ class BST:
         slaagt de binaire zoekboom op in de vorm {root:root, children:[child1, child2]}
         :return: dict
         """
-        save = {'root': self.root.getSearchKey()}
+        save = {'root': self.root.getId()}
         if bool(self.left or self.right):
             save['children'] = [self.left.save() if self.left else None, self.right.save() if self.right else None]
 
@@ -227,7 +227,7 @@ class TreeItem:
         self.sk = key
         self.v = val
 
-    def getSearchKey(self):
+    def getId(self):
         return self.sk
 
 

@@ -11,11 +11,11 @@ from Reservatie_Contracts import Reservatie
 from Vertoning_Contracts import Vertoning
 from Zaal_Contracts import Zaal
 
-# from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
+from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 
-from verdeling.Khemin.Datastructures.BST import *
-from verdeling.Khemin.Datastructures.LinkedChain import *
-from verdeling.Khemin.Datastructures.Queue import *
+# from verdeling.Khemin.Datastructures.BST import *
+# from verdeling.Khemin.Datastructures.LinkedChain import *
+# from verdeling.Khemin.Datastructures.Queue import *
 
 
 class Reservatiesysteem:
@@ -118,7 +118,7 @@ class Reservatiesysteem:
         vertoning: Vertoning
         vertoning, succes = self.vertoningen.tableRetrieve(vertoning_id)
         if succes:
-            vertoning.setAantalMensenBinnen(vertoning.getAantalMensenBinnen() - ticketten)
+            vertoning.setAantalMensenBinnen(vertoning.getAantalMensenBinnen() + ticketten)
             zaal: Zaal
             zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())
             if succes and vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij() == zaal.getPlaatsen():
