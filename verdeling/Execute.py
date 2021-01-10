@@ -1,8 +1,8 @@
-from Clock import clock
-from Parser import parse
+from verdeling.Clock import clock
+from verdeling.Parser import parse
 import datetime
 from time import sleep
-from Reservatiesysteem_Contracts import Reservatiesysteem
+from verdeling.Reservatiesysteem_Contracts import Reservatiesysteem
 
 # vertaling van parser naar functie
 cmds = {

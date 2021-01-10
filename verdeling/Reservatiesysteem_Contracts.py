@@ -5,11 +5,11 @@ Reservatie, Vertoning, Zaal) samen te brengen in een groter geheel.
 """
 import datetime
 
-from Film_Contracts import Film
-from Gebruiker_Contracts import Gebruiker
-from Reservatie_Contracts import Reservatie
-from Vertoning_Contracts import Vertoning
-from Zaal_Contracts import Zaal
+from verdeling.Film_Contracts import Film
+from verdeling.Gebruiker_Contracts import Gebruiker
+from verdeling.Reservatie_Contracts import Reservatie
+from verdeling.Vertoning_Contracts import Vertoning
+from verdeling.Zaal_Contracts import Zaal
 
 from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 

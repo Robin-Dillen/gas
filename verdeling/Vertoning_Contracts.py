@@ -5,7 +5,7 @@ en een aantal vrije plaatsen.
 """
 from datetime import datetime
 import threading
-from Clock import clock
+from verdeling.Clock import clock
 
 
 class Vertoning:
