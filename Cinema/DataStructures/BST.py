@@ -59,7 +59,7 @@ class BST:
         :post De BST is niet veranderd
         """
         if searchKey == self.root.getId():
-            return self.root.v, True
+            return self.root, True
 
         if searchKey < self.root.getId():
             if self.left is not None:
