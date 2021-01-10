@@ -3,6 +3,9 @@ Een vertoning wordt gedefineerd door een unieke id (zoeksleutel).
 Verder heeft een vertoning nog een zaalnummer, een slot, een datum, een filmid
 en een aantal vrije plaatsen.
 """
+from datetime import datetime
+import threading
+from Clock import clock
 
 
 class Vertoning:
@@ -47,7 +50,7 @@ class Vertoning:
         """
         return self.id_
 
-    def getSlot(self):
+    def getSlot(self) -> datetime.time:
         """
         Een functie die de slot teruggeeft.
 
@@ -57,7 +60,7 @@ class Vertoning:
         """
         return self.slot
 
-    def getDatum(self):
+    def getDatum(self) -> datetime.date:
         """
         Een functie die de datum teruggeeft.
 
@@ -168,6 +171,7 @@ class Vertoning:
 
         postconditie: geen
         """
+        print("start vertoning", clock.getTime())
         self.playing = True
 
     def stop(self):
@@ -180,6 +184,14 @@ class Vertoning:
         postconditie: geen
         """
         self.playing = False
+
+    def isPlaying(self):
+        """
+        geetf terug of de film aan het spelen is
+        :return: True als de film aan het spelen is ander False
+        """
+        pass
+
 
     def getAantalMensenBinnen(self):
         """geeft terug hoeveel mensen in de zaal zitten"""

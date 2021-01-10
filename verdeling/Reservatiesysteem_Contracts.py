@@ -3,6 +3,8 @@ Deze ADT stelt het beheer van het volledige reservatiesysteem voor.
 Het bevat verschillende functies om de kleiner ADT's (Film, Gebruiker,
 Reservatie, Vertoning, Zaal) samen te brengen in een groter geheel.
 """
+import datetime
+
 from Film_Contracts import Film
 from Gebruiker_Contracts import Gebruiker
 from Reservatie_Contracts import Reservatie
@@ -85,7 +87,7 @@ class Reservatiesysteem:
         vertoning, succes = self.retrieveVertoningen(vertoningid)
         if not succes:
             return False
-        vertoning : Vertoning
+        vertoning: Vertoning
         if vertoning.getAantalVrij() >= plaatsen:
             aantal_vrij = vertoning.getAantalVrij() - plaatsen
             vertoning.setAantalVrij(aantal_vrij)
@@ -113,11 +115,11 @@ class Reservatiesysteem:
         :param ticketten: aantal mensen dat binnenkomt
         :return: true als succes
         """
-        vertoning : Vertoning
+        vertoning: Vertoning
         vertoning, succes = self.vertoningen.tableRetrieve(vertoning_id)
         if succes:
             vertoning.setAantalMensenBinnen(vertoning.getAantalMensenBinnen() - ticketten)
-            zaal : Zaal
+            zaal: Zaal
             zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())
             if succes and vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij() == zaal.getPlaatsen():
                 vertoning.start()
@@ -144,13 +146,51 @@ class Reservatiesysteem:
         aantal mensen waarop gewacht word/ aantal mensen dat in de zaal was
         :return: None
         """
-        BOF = "<html><head><style>table {border-collapse: collapse;}table, td, th {border: 1px solid #000000;}</style></head><body><h1>Log op " + time + "</h1>"
-        body = ""
-        EOF = "	</body></html>"
-        with open("log.html", "w") as f:
-            f.write(BOF)
-
-            f.write(EOF)
+        pass
+#         BOF = """
+#         <html>
+# 	<head>
+# 	<style>
+# 		table {
+# 		    border-collapse: collapse;
+# 		}
+#
+# 		table, td, th {
+# 		    border: 1px solid #000000;
+# 		}
+# 	</style>
+# </head>
+# 	<body>
+# 		<h1>Log op 2020-10-10 18:00</h1>
+# 		<table>
+# 			<thead>
+# 				<td>Datum</td>
+# 				<td>Film</td>
+# 				<td>14:30</td>
+# 				<td>17:00</td>
+# 				<td>20:00</td>
+# 				<td>22:30</td>
+# 			</thead>
+# 			<tbody>
+#         """
+#         body = ""
+#         EOF = "</tbody></table></body></html>"
+#         with open("log.html", "w") as f:
+#             f.write(BOF)
+#             vertoningen_dict = self.__getAllVertoningen()
+#             for titel, vertoningen in vertoningen_dict.items():
+#                 if vertoningen[0] and vertoningen[0].:
+#                 body += f"""
+#                         <tr>
+#                             <td>{vertoningen[0].getDate()}</td>
+#                             <td>{titel}</td>
+#                             <td>F:10</td>
+#                             <td>W:2</td>
+#                             <td>G:0</td>
+#                             <td></td>
+#                         </tr>
+#                 """
+#             f.write(EOF)
 
     def __getAllVertoningen(self):
         """
@@ -158,8 +198,21 @@ class Reservatiesysteem:
         :return: {filmnaam: [vertoningen], ...}
         """
         vertoningen = []
-        self.vertoningen.traverseTable(vertoningen.append)
-        self.films.traverseTable()
+        films = []
+        self.vertoningen.traverseTable(vertoningen.append)  # zet alle vertoningen in vertoningen
+        self.films.traverseTable(films.append)  # zet alle films in films
+        films = [film.getTitel() for film in films]  # zet de objecten om naar titels
+        vertoningen_dict = dict.fromkeys(films, [])
+        for vertoning in vertoningen:
+            vertoningen_dict[self.films.tableRetrieve(vertoning.getFilmId()).getTitel()].append(vertoning)
+
+        del vertoningen
+
+        for vertoningen in vertoningen_dict.values():
+            vertoningen.sort(
+                key=lambda x: datetime.datetime.combine(x.getDate(), x.getSlot()))  # sort items based on datetime
+
+        return vertoningen_dict
 
     # def meldAan(self, id):  # maker Khemin, tester Niels
     #     """
