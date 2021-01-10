@@ -108,6 +108,20 @@ class LinkedChain:
         visit(next.getNext())
         self.traverse(visit, next.getNext())
 
+    def search(self, id: int) -> object:
+        """
+        zoekt het element met gegeven id, geeft het object terug
+        :param id: int
+        :return: object
+        """
+        node: 'Node' = self.head
+        for _ in range(self.size + 1):
+            node = node.getNext()
+            if node.getData().getId() == id:
+                return node.getData()
+
+        return None
+
     def save(self) -> list:
         """
         slaagt de gelinkte ketting op als een lijst

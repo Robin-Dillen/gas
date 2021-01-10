@@ -39,18 +39,17 @@ class LinkedChainTable:
         """
         return self.__linked_chain.retrieve(index)
 
-    def traverseTable(self, visit) -> tuple:
+    def traverseTable(self, visit) -> bool:
         """
         overloopt elk element van de tabel, in volgorde van toevoeging.
-        :return: een tuple met de elementen in
+        :return: bool succes
         :pre geen
         :post de tabel is onverandert
         """
-        objs = []
-        for i in range(self.__linked_chain.getLength() - 1):
-            objs.append(self.__linked_chain.retrieve(i))
+        for i in range(1, self.__linked_chain.getLength() + 1):
+            visit(self.__linked_chain.retrieve(i))
 
-        return tuple(objs)
+        return True
 
     def tableIsEmpty(self) -> bool:
         """
@@ -65,6 +64,14 @@ class LinkedChainTable:
         :return: int
         """
         return self.__linked_chain.getLength()
+
+    def tableSearch(self, id: int) -> object:
+        """
+        geeft het object met id terug
+        :param id: int
+        :return: object
+        """
+        return self.__linked_chain.search(id)
 
     def save(self) -> list:
         """

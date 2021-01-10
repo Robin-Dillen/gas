@@ -13,13 +13,14 @@ from verdeling.Zaal_Contracts import Zaal
 
 from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 
-#from verdeling.Khemin.Datastructures.BST import *
-#from verdeling.Khemin.Datastructures.LinkedChain import *
-#from verdeling.Khemin.Datastructures.Queue import *
 
-#from verdeling.Niels.Datastructures.BST import *
-#from verdeling.Niels.Datastructures.LinkedChain import *
-#from verdeling.Niels.Datastructures.Queue import *
+# from verdeling.Khemin.Datastructures.BST import *
+# from verdeling.Khemin.Datastructures.LinkedChain import *
+# from verdeling.Khemin.Datastructures.Queue import *
+
+# from verdeling.Niels.Datastructures.BST import *
+# from verdeling.Niels.Datastructures.LinkedChain import *
+# from verdeling.Niels.Datastructures.Queue import *
 
 class Reservatiesysteem:
     def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
@@ -109,6 +110,9 @@ class Reservatiesysteem:
         """
         vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
         self.vertoningen.tableInsert(vertoning.getId(), vertoning)
+        film = self.films.tableSearch(filmid)
+        if film:
+            film.addVertoning(vertoning)
         return True
 
     def updateTicketten(self, vertoning_id, ticketten) -> bool:
@@ -177,7 +181,7 @@ class Reservatiesysteem:
         """
         body = ""
         EOF = "</tbody></table></body></html>"
-        slots = [datetime.time(14, 30), datetime.time(17, 0), 3, datetime.time(20, 0),datetime.time(22, 30)]
+        slots = [datetime.time(14, 30), datetime.time(17, 0), 3, datetime.time(20, 0), datetime.time(22, 30)]
         with open("log.html", "w") as f:
             f.write(BOF)
             vertoningen_dict = self.__getAllVertoningen()
@@ -187,7 +191,7 @@ class Reservatiesysteem:
                     for slot, vertoning in vertoningen2:
                         zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())
                         if vertoning.isStarted():
-                             f"<td>F:{vertoning.getAantalMensenBinnen()}</td>"
+                            f"<td>F:{vertoning.getAantalMensenBinnen()}</td>"
                         elif vertoning.isWaiting():
                             body += f"<td>W:{zaal.getPlaatsen() - vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij()}</td>"
 
@@ -205,21 +209,18 @@ class Reservatiesysteem:
         films = []
         self.vertoningen.traverseTable(vertoningen.append)  # zet alle vertoningen in vertoningen
         self.films.traverseTable(films.append)  # zet alle films in films
-        films = [film.getTitel() for film in films]  # zet de objecten om naar titels
-        vertoningen_dict = dict.fromkeys(films, [])
+        films = [film[0].getTitel() for film in films]  # zet de objecten om naar titels
+        vertoningen_dict = dict.fromkeys(films, {})
         for vertoning in vertoningen:
-            vertoning : Vertoning
-            titel, succes = self.films.tableRetrieve(vertoning.getFilmId())
+            vertoning: Vertoning
+            titel, succes = self.films.tableRetrieve(1)
             titel = titel.getTitel()
-            if vertoning.getDatum() not in vertoningen_dict[self.films.tableRetrieve(vertoning.getFilmId()).getTitel()]:
+            if vertoning.getDatum() not in vertoningen_dict[titel]:
                 vertoningen_dict[titel][vertoning.getDatum()] = {vertoning.getSlot(): vertoning}
             else:
                 vertoningen_dict[titel][vertoning.getDatum()][vertoning.getSlot()] = vertoning
 
         del vertoningen
-
-        for vertoningen in vertoningen_dict.values():
-            vertoningen.sort(key=lambda x: datetime.datetime.combine(x.getDate(), x.getSlot()))  # sort items based on datetime
 
         return vertoningen_dict
 

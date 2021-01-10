@@ -2,9 +2,10 @@
 Een film wordt gedefineerd door een unieke id (zoeksleutel).
 Verder heeft een film nog een titel en een rating."""
 
+from verdeling.Vertoning_Contracts import Vertoning
 
 class Film:
-    def __init__(self, id_=0, titel="", rating=0.0):
+    def __init__(self, id_, titel, rating):
         """
         Initialiseert een nieuwe film met de opgegeven id, titel en rating.
 
@@ -15,6 +16,7 @@ class Film:
         self.id_ = id_
         self.titel_ = titel
         self.rating_ = rating
+        self.vertoningen = []
 
     def getId(self):
         """
@@ -66,3 +68,27 @@ class Film:
         post: De waarde van rating is geüpdatet naar de gegeven value.
         """
         self.rating_ = rating
+
+    def getVertoningen(self):
+        """
+        geeft de vertoningen die deze film spelen terug, in volgorde van speeltijd
+        :return [(datum, [(slot, vertoning_id), ...)], ...), ...]
+        """
+        return self.vertoningen
+
+    def addVertoning(self, vertoning: Vertoning):
+        """
+        voegt een vertoning toe aan de vertoningen die deze film spelen
+        :param vertoning: vertoning
+        :return: Succes
+        """
+        datum = vertoning.getDatum()
+        slot = vertoning.getSlot()
+        for t in self.vertoningen:
+            if datum == t[0]:
+                t[1].append((slot, vertoning.getId()))
+                t[1].sort(key=lambda x: x[0])
+                return
+
+        self.vertoningen.append((datum, [slot, vertoning.getId()]))
+        self.vertoningen.sort(key=lambda x: x[0])
