@@ -144,11 +144,16 @@ class Reservatiesysteem:
         aantal mensen waarop gewacht word/ aantal mensen dat in de zaal was
         :return: None
         """
-        buffer = "<html><head><style>table {border-collapse: collapse;}table, td, th {border: 1px solid #000000;}</style></head><body><h1>Log op " + time + "</h1>"
+        BOF = "<html><head><style>table {border-collapse: collapse;}table, td, th {border: 1px solid #000000;}</style></head><body><h1>Log op " + time + "</h1>"
+        body = ""
         EOF = "	</body></html>"
         with open("log.html", "w") as f:
-            f.write(buffer)
+            f.write(BOF)
+
             f.write(EOF)
+
+    def __getAllVertoningen(self):
+        pass
 
     # def meldAan(self, id):  # maker Khemin, tester Niels
     #     """

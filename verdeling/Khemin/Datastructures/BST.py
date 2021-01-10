@@ -154,9 +154,14 @@ class BST():
             lst.append(self.value)
             lst += self.rightChild.inorderTraverse()
 
-        if prt == print:
+        # if prt == print:
+        #     for e in lst:
+        #         print(e)
+
+        if prt:
             for e in lst:
-                print(e)
+                prt(e)
+
         return lst
 
     # Een methode die gegeven item (TreeItem) insert op de correcte positie in de BST.
