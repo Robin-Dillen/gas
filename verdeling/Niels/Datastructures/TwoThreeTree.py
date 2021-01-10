@@ -5,7 +5,7 @@ def createTreeItem(key, val):
     :param val: Waarde van het item
     :return: Waarde van het item
     """
-    return val
+    return key
 
 
 class TwoThreeTree:
@@ -140,7 +140,7 @@ class TwoThreeTree:
                 self.root = [self.root[0], self.root[2]]
                 self.parent.__pushUp("Middle")
 
-    def insertItem(self, value):
+    def insertItem(self, key):
         """
         Voegt een item toe aan de 2-3 boom
         :param value: waarde van item dat wordt toegevoegd
@@ -151,33 +151,33 @@ class TwoThreeTree:
         postconditie: lengte van de 2-3 boom moet vergoten met 1
         """
         if (self.root == None):
-            self.root = [value]
+            self.root = [key]
         elif (len(self.root) == 1):
             if (self.LeftTree == None and self.RightTree == None):
-                if (value < self.root[0]):
-                    self.root.insert(0, value)
+                if (key < self.root[0]):
+                    self.root.insert(0, key)
                 else:
-                    self.root.insert(1, value)
-            elif (value < self.root[0]):
-                self.LeftTree.insertItem(value)
-            elif (value > self.root[0]):
-                self.RightTree.insertItem(value)
+                    self.root.insert(1, key)
+            elif (key < self.root[0]):
+                self.LeftTree.insertItem(key)
+            elif (key > self.root[0]):
+                self.RightTree.insertItem(key)
         elif (len(self.root) == 2):
             if (self.LeftTree == None and self.MiddleTree == None and self.RightTree == None):
-                if (value < self.root[0]):
-                    self.root.insert(0, value)
-                elif (value > self.root[0] and value < self.root[1]):
-                    self.root.insert(1, value)
+                if (key < self.root[0]):
+                    self.root.insert(0, key)
+                elif (key > self.root[0] and key < self.root[1]):
+                    self.root.insert(1, key)
                 else:
-                    self.root.append(value)
+                    self.root.append(key)
                 self.__pushUp()
             else:
-                if (value < self.root[0]):
-                    self.LeftTree.insertItem(value)
-                elif (value > self.root[1]):
-                    self.RightTree.insertItem(value)
+                if (key < self.root[0]):
+                    self.LeftTree.insertItem(key)
+                elif (key > self.root[1]):
+                    self.RightTree.insertItem(key)
                 else:
-                    self.MiddleTree.insertItem(value)
+                    self.MiddleTree.insertItem(key)
         return True
 
     def __zoekinordersuccessor(self, right=True, node=1):
@@ -247,12 +247,12 @@ class TwoThreeTree:
         postconditie: /
         """
         inorder = self.__zoekinordersuccessor(node)
-        value = inorder.root[0]
+        key = inorder.root[0]
         inorder.root[0] = self.root[node - 1]
-        self.root[node - 1] = value
+        self.root[node - 1] = key
         return inorder
 
-    def deleteItem(self, value):
+    def deleteItem(self, key):
         """
         Verwijdert een item uit de 2-3 boom.
         :param value: waarde van item dat wordt toegevoegd
@@ -265,7 +265,7 @@ class TwoThreeTree:
         # 2-knoop
         if (len(self.root) == 1):
             # juiste waarde
-            if (value == self.root[0]):
+            if (key == self.root[0]):
                 # geen kinderen
                 if (self.LeftTree == None):
                     # lengte van ouder is 0
@@ -467,36 +467,36 @@ class TwoThreeTree:
                 # kinderen
                 else:
                     inorder = self.__zetinblad(1)
-                    return inorder.deleteItem(value)
+                    return inorder.deleteItem(key)
             elif (self.LeftTree != None):
-                if (value < self.root[0]):
-                    return self.LeftTree.deleteItem(value)
-                elif (value > self.root[0]):
-                    return self.RightTree.deleteItem(value)
+                if (key < self.root[0]):
+                    return self.LeftTree.deleteItem(key)
+                elif (key > self.root[0]):
+                    return self.RightTree.deleteItem(key)
             return False
         # 3-knoop
         elif (len(self.root) == 2):
-            if (value == self.root[0]):
+            if (key == self.root[0]):
                 if (self.LeftTree == None):
                     self.root = [self.root[1]]
                     return True
                 else:
                     inorder = self.__zetinblad(1)
-                    return inorder.deleteItem(value)
-            elif (value == self.root[1]):
+                    return inorder.deleteItem(key)
+            elif (key == self.root[1]):
                 if (self.LeftTree == None):
                     self.root = [self.root[0]]
                     return True
                 else:
                     inorder = self.__zetinblad(2)
-                    return inorder.deleteItem(value)
+                    return inorder.deleteItem(key)
             elif (self.LeftTree != None):
-                if (value < self.root[0]):
-                    return self.LeftTree.deleteItem(value)
-                elif (value > self.root[0] and value < self.root[1]):
-                    return self.MiddleTree.deleteItem(value)
-                elif (value > self.root[1]):
-                    return self.RightTree.deleteItem(value)
+                if (key < self.root[0]):
+                    return self.LeftTree.deleteItem(key)
+                elif (key > self.root[0] and key < self.root[1]):
+                    return self.MiddleTree.deleteItem(key)
+                elif (key > self.root[1]):
+                    return self.RightTree.deleteItem(key)
             return False
         else:
             return False
@@ -611,8 +611,8 @@ class TwoThreeTreeTable:
     def __init__(self):
         self.a = TwoThreeTree()
 
-    def load(self, value):
-        return self.a.load(value)
+    def load(self, key):
+        return self.a.load(key)
 
     def traverseTable(self, value):
         return self.a.inorderTraverse(value)
@@ -620,14 +620,14 @@ class TwoThreeTreeTable:
     def tableIsEmpty(self):
         return self.a.isEmpty()
 
-    def tableRetrieve(self, value):
-        return self.a.retrieveItem(value)
+    def tableRetrieve(self, key):
+        return self.a.retrieveItem(key)
 
-    def tableInsert(self, value):
-        return self.a.insertItem(value)
+    def tableInsert(self, key):
+        return self.a.insertItem(key)
 
-    def tableDelete(self, value):
-        return self.a.deleteItem(value)
+    def tableDelete(self, key):
+        return self.a.deleteItem(key)
 
     # def tableLength(self):
     #     return self.a.getLength()
@@ -635,19 +635,19 @@ class TwoThreeTreeTable:
     def save(self):
         return self.a.save()
 
-
-t = TwoThreeTreeTable()
-print(t.tableIsEmpty())
-print(t.tableInsert(createTreeItem(8, 8)))
-print(t.tableInsert(createTreeItem(5, 5)))
-print(t.tableIsEmpty())
-print(t.tableRetrieve(5)[0])
-print(t.tableRetrieve(5)[1])
-t.traverseTable(print)
-print(t.save())
-t.load({'root': [10], 'children': [{'root': [5]}, {'root': [11]}]})
-t.tableInsert(createTreeItem(15, 15))
-print(t.tableDelete(0))
-print(t.save())
-print(t.tableDelete(10))
-print(t.save())
+if __name__ == "__main__":
+    t = TwoThreeTreeTable()
+    print(t.tableIsEmpty())
+    print(t.tableInsert(createTreeItem(8, 8)))
+    print(t.tableInsert(createTreeItem(5, 5)))
+    print(t.tableIsEmpty())
+    print(t.tableRetrieve(5)[0])
+    print(t.tableRetrieve(5)[1])
+    t.traverseTable(print)
+    print(t.save())
+    t.load({'root': [10], 'children': [{'root': [5]}, {'root': [11]}]})
+    t.tableInsert(createTreeItem(15, 15))
+    print(t.tableDelete(0))
+    print(t.save())
+    print(t.tableDelete(10))
+    print(t.save())

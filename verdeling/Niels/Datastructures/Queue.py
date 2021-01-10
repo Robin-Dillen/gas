@@ -30,7 +30,7 @@ class Queue:
         else:
             return False
 
-    def enqueue(self, value):
+    def enqueue(self, key):
         """
         voegt een element toe aan de queue
         :param value = waarde van item dat wordt toegevoegd aan de queue
@@ -42,7 +42,7 @@ class Queue:
         postcondition: lengte van de queue moet vergoten met 1
         """
         if (self.length > len(self.list)):
-            self.list.insert(0, value)
+            self.list.insert(0, key)
             return True
         return False
 
@@ -91,21 +91,21 @@ class Queue:
             l.append(i)
         return l
 
+if __name__ == "__main__":
+    q = Queue(10)
+    print(q.isEmpty())
+    print(q.getFront()[1])
+    print(q.dequeue()[1])
+    print(q.enqueue(2))
+    print(q.enqueue(4))
+    print(q.isEmpty())
+    print(q.dequeue()[0])
+    q.enqueue(5)
+    print(q.save())
 
-q = Queue(10)
-print(q.isEmpty())
-print(q.getFront()[1])
-print(q.dequeue()[1])
-print(q.enqueue(2))
-print(q.enqueue(4))
-print(q.isEmpty())
-print(q.dequeue()[0])
-q.enqueue(5)
-print(q.save())
-
-q.load(['a', 'b', 'c'])
-print(q.save())
-print(q.dequeue()[0])
-print(q.save())
-print(q.getFront()[0])
-print(q.save())
+    q.load(['a', 'b', 'c'])
+    print(q.save())
+    print(q.dequeue()[0])
+    print(q.save())
+    print(q.getFront()[0])
+    print(q.save())

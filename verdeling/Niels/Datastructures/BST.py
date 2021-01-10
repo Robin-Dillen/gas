@@ -1,13 +1,14 @@
 def createTreeItem(key, val):
-    return val
+    return (key, val)
 
 
 class BST:
-    def __init__(self, root=None, parent=None):
+    def __init__(self, root=None, parent=None, value=None):
         self.root = root
         self.LeftTree = None
         self.RightTree = None
         self.parent = parent
+        self.value = value
 
     def load(self, tree):
         """
@@ -25,6 +26,7 @@ class BST:
         self.LeftTree = None
         self.RightTree = None
         self.parent = None
+        self.value = None
         if (len(tree) == 2):
             if (tree['children'][0] != None):
                 self.LeftTree = BST()
@@ -36,29 +38,29 @@ class BST:
                 self.RightTree.parent = self
         return
 
-    def searchTreeInsert(self, value):
+    def searchTreeInsert(self, object):
         """
         voegt een item toe aan de boom
-        :param value: waarde van het item
+        :param key: waarde van het item
         :return: none
         precondition: None
 
         postcondition: None
         """
         if (self.root == None):
-            self.root = value
-        elif (self.LeftTree == None and value < self.root):
-            nieuwe_knoop = BST(value)
+            self.root = object[0]
+        elif (self.LeftTree == None and object[0] < self.root):
+            nieuwe_knoop = BST(object[0], None, object[1])
             nieuwe_knoop.parent = self
             self.LeftTree = nieuwe_knoop
-        elif (self.RightTree == None and value > self.root):
-            nieuwe_knoop = BST(value)
+        elif (self.RightTree == None and object[0] > self.root):
+            nieuwe_knoop = BST(object[0], None, object[1])
             nieuwe_knoop.parent = self
             self.RightTree = nieuwe_knoop
-        elif (self.LeftTree != None and value < self.root):
-            self.LeftTree.searchTreeInsert(value)
-        elif (self.RightTree != None and value > self.root):
-            self.RightTree.searchTreeInsert(value)
+        elif (self.LeftTree != None and object[0] < self.root):
+            self.LeftTree.searchTreeInsert(object)
+        elif (self.RightTree != None and object[0] > self.root):
+            self.RightTree.searchTreeInsert(object)
         return True
 
     def __zoekinordersuccessor(self, right=True):
@@ -78,10 +80,10 @@ class BST:
         else:
             return (self.RightTree.zoekinordersuccessor(False))
 
-    def searchTreeDelete(self, value):
+    def searchTreeDelete(self, key):
         """
         verwijdert een item
-        :param value: waarde van het item
+        :param key: waarde van het item
         :return: none
 
         precondition: None
@@ -89,7 +91,7 @@ class BST:
         postcondition: None
         """
 
-        if (self.root == value):
+        if (self.root == key):
             if (self.parent != None):
                 if (self.LeftTree == None and self.RightTree == None):
                     if (self.parent.root < self.root):
@@ -131,26 +133,26 @@ class BST:
                     self.RightTree.parent = None
                     self.root = None
             return True
-        elif (self.root < value and self.RightTree != None):
-            self.RightTree.searchTreeDelete(value)
-        elif (self.root > value and self.LeftTree != None):
-            self.LeftTree.searchTreeDelete(value)
+        elif (self.root < key and self.RightTree != None):
+            self.RightTree.searchTreeDelete(key)
+        elif (self.root > key and self.LeftTree != None):
+            self.LeftTree.searchTreeDelete(key)
         return False
 
-    def inorderTraverse(self, value = None):
+    def inorderTraverse(self, key = None):
         """
         Doorloopt een boom en print deze uit
-        :param value: Geeft aan of het geprint moet worden of niet
+        :param key: Geeft aan of het geprint moet worden of niet
         :return: True als het gelukt is
 
         precondition: None
 
         postcondition: None
         """
-        if (value):
+        if (key):
             if (self.LeftTree != None):
                 self.LeftTree.inorderTraverse(print)
-            print(self.root)
+            print(self.value)
             if (self.RightTree != None):
                 self.RightTree.inorderTraverse(print)
             return True
@@ -222,7 +224,7 @@ class BST:
         postcondition: None
         """
         if (self.root == key):
-            return True
+            return self,True
         elif (self.root > key and self.LeftTree != None):
             return self.LeftTree.checkIfInTree(key)
         elif (self.root < key and self.RightTree != None):
@@ -239,8 +241,8 @@ class BST:
 
         postcondition: None
         """
-        if (self.__checkIfInTree(key)):
-            return key, True
+        if (self.__checkIfInTree(key)[1]):
+            return self.__checkIfInTree(key)[0], True
         else:
             return False, False
 
@@ -269,20 +271,20 @@ class BSTTable:
     def load(self, tree):
         self.a.load(tree)
 
-    def tableInsert(self, value):
-        return self.a.searchTreeInsert(value)
+    def tableInsert(self,key, value):
+        return self.a.searchTreeInsert(createTreeItem(key, value))
 
-    def tableDelete(self, value):
-        return self.a.searchTreeDelete(value)
+    def tableDelete(self, key):
+        return self.a.searchTreeDelete(key)
 
-    def traverseTable(self, value):
-        return self.a.inorderTraverse(value)
+    def traverseTable(self, key):
+        return self.a.inorderTraverse(key)
 
     def tableIsEmpty(self):
         return self.a.isEmpty()
 
-    def tableRetrieve(self, value):
-        return self.a.searchTreeRetrieve(value)
+    def tableRetrieve(self, key):
+        return self.a.searchTreeRetrieve(key)
 
     def save(self):
         return self.a.save()

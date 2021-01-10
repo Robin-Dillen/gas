@@ -27,7 +27,7 @@ class Stack:
         else:
             return False
 
-    def push(self, value):
+    def push(self, key):
         """
         voegt een element toe aan de stack
         :param value = item dat moet worden toegevoegd
@@ -38,7 +38,7 @@ class Stack:
         postcondition: lengte van de stack moet vergroten met 1
         """
         if (self.length > len(self.list)):
-            self.list.append(value)
+            self.list.append(key)
             return True
         return False
 
@@ -86,22 +86,22 @@ class Stack:
             l.append(i)
         return l
 
+if __name__ == "__main__":
+    s = Stack(2)
+    print(s.isEmpty())
+    print(s.getTop()[1])
+    print(s.pop()[1])
+    print(s.push(2))
+    print(s.push(4))
+    print(s.push(1))
+    print(s.isEmpty())
+    print(s.pop()[0])
+    s.push(5)
+    print(s.save())
 
-s = Stack(2)
-print(s.isEmpty())
-print(s.getTop()[1])
-print(s.pop()[1])
-print(s.push(2))
-print(s.push(4))
-print(s.push(1))
-print(s.isEmpty())
-print(s.pop()[0])
-s.push(5)
-print(s.save())
-
-s.load(['a', 'b', 'c'])
-print(s.save())
-print(s.pop()[0])
-print(s.save())
-print(s.getTop()[0])
-print(s.save())
+    s.load(['a', 'b', 'c'])
+    print(s.save())
+    print(s.pop()[0])
+    print(s.save())
+    print(s.getTop()[0])
+    print(s.save())
