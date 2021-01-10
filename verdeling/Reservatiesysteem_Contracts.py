@@ -167,7 +167,7 @@ class Reservatiesysteem:
 	</style>
 </head>
 	<body>
-		<h1>Log op """ + time + """</h1>
+		<h1>Log op 2020-10-10 18:00</h1>
 		<table>
 			<thead>
 				<td>Datum</td>
@@ -181,48 +181,48 @@ class Reservatiesysteem:
         """
         body = ""
         EOF = "</tbody></table></body></html>"
-        with open("log.html", "w") as f:
+        slots = [datetime.time(14, 30), datetime.time(17, 0), 3, datetime.time(20, 0), datetime.time(22, 30)]
+        with open("log.html", "w") as f: #open file for writing
             f.write(BOF)
-            films = []
-            self.films.traverseTable(films.append)  # zet alle films in films
-            films = [film[0] for film in films]  # zet de tuples om naar objecten
-            for film in films:
-                titel = film.getTitel()
-                for day in film.getVertoningen():
-                    body += self.__generateTable(titel, day)
+            vertoningen_dict = self.__getAllVertoningen()
+            for titel, vertoningen in vertoningen_dict.items():
+                for date, vertoningen2 in vertoningen:
+                    body += f"<tr><td>{date}</td><td>{titel}</td>"
+                    for slot, vertoning in vertoningen2:
+                        zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())
+                        if vertoning.isStarted():
+                            f"<td>F:{vertoning.getAantalMensenBinnen()}</td>"
+                        elif vertoning.isWaiting():
+                            body += f"<td>W:{zaal.getPlaatsen() - vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij()}</td>"
 
-            f.write(body)
+                        else:
+                            body += f"<td>G:{zaal.getPlaatsen() - vertoning.getAantalVrij}</td>"
+                    body += "</tr>"
             f.write(EOF)
 
-    def __generateTable(self, titel, day):
-        slots = [datetime.time(14, 30), datetime.time(17, 0), 3, datetime.time(20, 0), datetime.time(22, 30)]
-        slot_pos = 0
-        buffer = f"""
-                    <tr>
-                        <td>{day[0]}</td>
-                        <td>{titel}</td>
-                        """
-        for vertoning in day[0]:
-            if vertoning[0] == slots[slot_pos]:
-                zaal, succes = self.zalen.tableRetrieve(vertoning[1].getZaalnummer())
-                if vertoning[1].isStarted():
-                    buffer += f"<td>F:{vertoning[1].getAantalMensenBinnen()}</td>"
-
-                elif vertoning[1].isWaiting():
-                    buffer += f"<td>W:{zaal.getPlaatsen() - vertoning[1].getAantalMensenBinnen() + vertoning[1].getAantalVrij()}</td>"
-
-                else:
-                    buffer += f"<td>G:{zaal.getPlaatsen() - vertoning[1].getAantalVrij()}</td>"
-
+    def __getAllVertoningen(self):
+        """
+        geeft alle vertoningen terug, gegroepeerd in film type en gesorteerd op speeltijd
+        :return: {filmnaam: [vertoningen], ...}
+        """
+        vertoningen = []
+        films = []
+        self.vertoningen.traverseTable(vertoningen.append)  # zet alle vertoningen in vertoningen
+        self.films.traverseTable(films.append)  # zet alle films in films
+        films = [film[0].getTitel() for film in films]  # zet de objecten om naar titels
+        vertoningen_dict = dict.fromkeys(films, {})
+        for vertoning in vertoningen:
+            vertoning: Vertoning
+            titel, succes = self.films.tableRetrieve(1)
+            titel = titel.getTitel()
+            if vertoning.getDatum() not in vertoningen_dict[titel]:
+                vertoningen_dict[titel][vertoning.getDatum()] = {vertoning.getSlot(): vertoning}
             else:
-                buffer += f"<td></td>"
+                vertoningen_dict[titel][vertoning.getDatum()][vertoning.getSlot()] = vertoning
 
-            slot_pos += 1
+        del vertoningen
 
-        buffer += "</tr>"
-        return buffer
-
-
+        return vertoningen_dict
 
     # def meldAan(self, id):  # maker Khemin, tester Niels
     #     """
