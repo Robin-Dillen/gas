@@ -162,9 +162,9 @@ class BST:
         """
         if (prnt):
             if (self.LeftTree != None):
-                self.LeftTree.inorderTraverse(print)
+                self.LeftTree.inorderTraverse(prnt)
             if (self.RightTree != None):
-                self.RightTree.inorderTraverse(print)
+                self.RightTree.inorderTraverse(prnt)
             return True
         else:
             return False
@@ -202,7 +202,7 @@ class BST:
         postcondition: None
         """
         if (self.root == None):
-            return lengte + 1
+            return lengte
         elif (self.LeftTree == None and self.RightTree == None):
             return lengte + 1
         elif (self.LeftTree != None and self.RightTree == None):
@@ -229,9 +229,9 @@ class BST:
             if (self.value.getId() == id):
                 return self.value, True
             elif (self.value.getId() > id and self.LeftTree != None):
-                return self.LeftTree.searchForId(id)
+                return self.LeftTree.searchTreeRetrieve(id)
             elif (self.value.getId() < id and self.RightTree != None):
-                return self.RightTree.searchForId(id)
+                return self.RightTree.searchTreeRetrieve(id)
         return None, False
 
 
@@ -245,12 +245,12 @@ class BST:
         postcondition: None
         """
         if (self.LeftTree == None and self.RightTree == None):
-            return {'root': self.root}
+            return {'root': self.value.getId()}
         elif (self.LeftTree != None and self.RightTree == None):
-            return {'root': self.root, 'children': [self.LeftTree.save(), None]}
+            return {'root': self.value.getId(), 'children': [self.LeftTree.save(), None]}
         elif (self.LeftTree == None and self.RightTree != None):
-            return {'root': self.root, 'children': [None, self.RightTree.save()]}
-        return {'root': self.root, 'children': [self.LeftTree.save(), self.RightTree.save()]}
+            return {'root': self.value.getId(), 'children': [None, self.RightTree.save()]}
+        return {'root': self.value.getId(), 'children': [self.LeftTree.save(), self.RightTree.save()]}
 
 
 class BSTTable:
