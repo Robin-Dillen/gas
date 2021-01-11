@@ -123,7 +123,7 @@ class Reservatiesysteem:
         if not self.zalen.tableRetrieve(zaalnummer)[1]:
             raise Exception("Zaal bestaat niet!")
         vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
-        self.vertoningen.tableInsert(vertoning.getId() + 1, vertoning)
+        self.vertoningen.tableInsert(self.vertoningen.getLength() + 1, vertoning)
         film, succes = self.films.tableRetrieve(filmid)
         if succes:
             film.addVertoning(vertoning)

@@ -46,7 +46,7 @@ class LinkedChain:
     # Een methode die de LinkedChain doorloopt op zoek naar een item met het gegeven id.
     #
     # return: value, True als het item met gegegeven id in de LinkedChain aanwezig is, anders None, False.
-    def search(self, id):
+    def retrieve(self, id):
         if self.isEmpty():
             return None, False
 
@@ -57,27 +57,6 @@ class LinkedChain:
         start = self.head.next
         while start != orig:
             if start.value.getId() == id:
-                return start.value, True
-            start = start.next
-
-        return None, False
-
-    # Een methode die de LinkedChain doorloopt op zoek naar het gegeven item. Als het gezochte item
-    # teruggevonden wordt dan wordt value gereturnd, anders wordt er False teruggegeven.
-    #
-    # return: Als het item met gegeven id in de LinkedChain aanwezig is, wordt dit element teruggegeven.
-    # False wordt teruggegeven als het item niet aanwezig is in de LinkedChain.
-    def retrieve(self, id):
-        if self.head is None:
-            return None,False
-
-        orig = self.head.id
-        if orig == id:
-            return self.head.value, True
-
-        start = self.head.next
-        while start.id != orig:
-            if start.id == id:
                 return start.value, True
             start = start.next
 
@@ -248,9 +227,6 @@ class LinkedChainTable(LinkedChain):
 
     def tableDelete(self, key):
         return self.delete(key)
-
-    def tableSearch(self, id):
-        return self.search(id)[0]
 
     def tableRetrieve(self,id):
         return self.retrieve(id)
