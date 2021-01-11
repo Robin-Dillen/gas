@@ -161,6 +161,11 @@ class LinkedChain:
             return False, False
 
     def traverse(self,prnt):
+        """
+        Doorloopt de linkedchain
+        :param prnt: geeft aan dat er geprint moet worden
+        :return: True als het is gelukt
+        """
         for i in range(1,len(self.list)):
             prnt(self.retrieve(i))
         return True
