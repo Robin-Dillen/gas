@@ -558,10 +558,10 @@ class TwoThreeTree:
         if (prnt):
             if (self.LeftTree != None):
                 self.LeftTree.inorderTraverse(prnt)
-            prnt(self.root[0])
+            prnt(self.value[0])
             if (self.MiddleTree != None):
                 self.MiddleTree.inorderTraverse(prnt)
-                prnt(self.root[1])
+                prnt(self.value[1])
             if (self.RightTree != None):
                 self.RightTree.inorderTraverse(prnt)
             return True
@@ -616,8 +616,9 @@ class TwoThreeTree:
         return False
 
     def retrieveItem(self, id):
-        if(self.LeftTree != None):
-            self.LeftTree.retrieveItem(id)
+        if (self.root != None):
+            if(self.LeftTree != None):
+                self.LeftTree.retrieveItem(id)
             if(len(self.root) == 1):
                 if(self.value[0].getId() == id):
                     return self.value[0],True
