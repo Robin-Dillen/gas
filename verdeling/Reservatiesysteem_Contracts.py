@@ -64,7 +64,7 @@ class Reservatiesysteem:
         :return: Geeft True terug als het account succesvol is toegevoegd
         """
         gebruiker = Gebruiker(id, voornaam, achternaam, email)
-        self.gebruikers.tableInsert(self.gebruikers.tableLength(), gebruiker)
+        self.gebruikers.tableInsert(self.gebruikers.tableLength() + 1, gebruiker)
         return True
 
     def addFilm(self, id, titel, rating) -> bool:  # maker Robin, tester Khemin
@@ -123,7 +123,7 @@ class Reservatiesysteem:
         if not self.zalen.tableSearch(zaalnummer):
             raise Exception("Zaal bestaat niet!")
         vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
-        self.vertoningen.tableInsert(vertoning.getId(), vertoning)
+        self.vertoningen.tableInsert(vertoning.getId() + 1, vertoning)
         film = self.films.tableSearch(filmid)
         if film:
             film.addVertoning(vertoning)
