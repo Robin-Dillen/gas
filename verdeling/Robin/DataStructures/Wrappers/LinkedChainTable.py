@@ -44,7 +44,7 @@ class LinkedChainTable:
         :post de tabel is onverandert
         """
         for i in range(1, self.__linked_chain.getLength() + 1):
-            visit(self.__linked_chain.retrieve(i))
+            visit(self.__linked_chain.retrieve(i)[0])
 
         return True
 
