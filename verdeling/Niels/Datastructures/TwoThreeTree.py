@@ -616,6 +616,11 @@ class TwoThreeTree:
         return False
 
     def retrieveItem(self, id):
+        """
+        Functie die een item zoekt op id en teruggeeft
+        :param id: id van het item
+        :return: het gevonden item of None
+        """
         if (self.root != None):
             if(self.LeftTree != None):
                 self.LeftTree.retrieveItem(id)

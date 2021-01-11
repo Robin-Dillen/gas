@@ -12,6 +12,7 @@ from verdeling.Vertoning_Contracts import Vertoning
 from verdeling.Zaal_Contracts import Zaal
 from verdeling.Clock import clock
 
+# Keuze ADT's
 user = input("Khemin, Niels of Robin?: ")
 user = user.lower()
 
@@ -53,7 +54,7 @@ class Reservatiesysteem:
         :return:  Object, succes
         post: De gegeven lst is niet van inhoud en/of lengte veranderd.
         """
-        return self.vertoningen.tableRetrieve(id)
+        return self.vertoningen.tableRetrieve(id)  # Kijkt na of de vertoning met gegeven id bestaat
 
     def maakAccount(self, id, voornaam, achternaam, email) -> bool:  # maker Niels, tester Robin
         """
@@ -64,8 +65,8 @@ class Reservatiesysteem:
         :param email: het e-mailadres van de nieuwe gebruiker, is een string.
         :return: Geeft True terug als het account succesvol is toegevoegd
         """
-        gebruiker = Gebruiker(id, voornaam, achternaam, email)
-        self.gebruikers.tableInsert(self.gebruikers.tableLength() + 1, gebruiker)
+        gebruiker = Gebruiker(id, voornaam, achternaam, email)  # Nieuwe gebruiker aanmaken
+        self.gebruikers.tableInsert(self.gebruikers.tableLength() + 1, gebruiker)  # Toevoegen aan ADT van gebruikers
         return True
 
     def addFilm(self, id, titel, rating) -> bool:  # maker Robin, tester Khemin
@@ -76,11 +77,11 @@ class Reservatiesysteem:
         :param rating: de rating van de film, is een float tussen 0-10.
         :return: Geeft True terug als de film succesvol is toegevoegd
         """
-        if self.films.tableRetrieve(id)[1]:
+        if self.films.tableRetrieve(id)[1]:  # Kijkt na of film-id al bestaat
             print(f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
             return False
-        film = Film(id, titel, rating)
-        self.films.tableInsert(self.films.tableLength() + 1, film)
+        film = Film(id, titel, rating)  # Nieuwe film aanmaken
+        self.films.tableInsert(self.films.tableLength() + 1, film)  # Film toevoegen aan ADT van films
         print(f"The movie {titel} has been created!")
         return True
 
@@ -101,14 +102,15 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        vertoning, succes = self.retrieveVertoningen(vertoningid)
+
+        vertoning, succes = self.retrieveVertoningen(vertoningid)  # vertoning is 1ste element van de tuple, succes is het 2de element
         vertoning: Vertoning
         if not succes or vertoning.getAantalVrij() <= plaatsen:  # checkt of er de vertoning is geretrieved en of er genoeg plaatsen beschikbaar zijn
             return False
 
         aantal_vrij = vertoning.getAantalVrij() - plaatsen  # het nieuwe aantal vrije plaatsen
         vertoning.setAantalVrij(aantal_vrij)
-        self.reservaties.enqueue(Reservatie(userid, timestamp, vertoningid, plaatsen))
+        self.reservaties.enqueue(Reservatie(userid, timestamp, vertoningid, plaatsen))  # voegt de reservatie toe aan de ADT van reservaties
 
     def addVertoning(self, id, zaalnummer, slot, datum, filmid, aantal_vrij) -> bool:  # maker Niels, tester Robin
         """
@@ -121,13 +123,13 @@ class Reservatiesysteem:
         :param aantal_vrij: het aantal vrije plaatsen in de zaal van de vertoning, is een positieve integer.
         :return: Geeft True terug als de vertoning succesvol is toegevoegd
         """
-        if not self.zalen.tableRetrieve(zaalnummer)[1]:
+        if not self.zalen.tableRetrieve(zaalnummer)[1]: # Kijkt na of de gegeven zaal met zaalnummer bestaat
             raise Exception("Zaal bestaat niet!")
-        vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
-        self.vertoningen.tableInsert(self.vertoningen.tableLength() + 1, vertoning)
-        film, succes = self.films.tableRetrieve(filmid)
-        if succes:
-            film.addVertoning(vertoning)
+        vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij) # maakt een nieuwe vertoning aan
+        self.vertoningen.tableInsert(self.vertoningen.tableLength() + 1, vertoning) # voegt de vertoning toe aan de ADT van vertoningen
+        film, succes = self.films.tableRetrieve(filmid) # film is 1ste element van de tuple, succes is het 2de element
+        if succes:  # Kijkt na of de film is gevonden
+            film.addVertoning(vertoning)    # Voegt de vertoning toe aan de film
         return True
 
     def updateTicketten(self, vertoning_id, ticketten) -> bool:
@@ -138,13 +140,13 @@ class Reservatiesysteem:
         :return: true als succes
         """
         vertoning: Vertoning
-        vertoning, succes = self.vertoningen.tableRetrieve(vertoning_id)
-        if succes:
-            vertoning.setAantalMensenBinnen(vertoning.getAantalMensenBinnen() + ticketten)
+        vertoning, succes = self.vertoningen.tableRetrieve(vertoning_id)    # vertoning is 1ste element van de tuple, succes is het 2de element
+        if succes:  # kijkt na of de vertoning bestaat
+            vertoning.setAantalMensenBinnen(vertoning.getAantalMensenBinnen() + ticketten)  # past het aantal personen aan dat in de zaal zit
             zaal: Zaal
-            zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())
-            if succes and vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij() == zaal.getPlaatsen():
-                vertoning.start()
+            zaal, succes = self.zalen.tableRetrieve(vertoning.getZaalnummer())  # zaal is 1ste element van de tuple, succes is het 2de element
+            if succes and vertoning.getAantalMensenBinnen() + vertoning.getAantalVrij() == zaal.getPlaatsen(): # kijkt na of de zaal bestaat, kijkt na of alle mensen binnen zijn
+                vertoning.start()   # start de vertoning
             return True
         return False
 
@@ -158,8 +160,8 @@ class Reservatiesysteem:
 
         postconditie: geen
         """
-        zaal = Zaal(id_, plaatsen)
-        self.zalen.tableInsert(self.zalen.tableLength() + 1, zaal)
+        zaal = Zaal(id_, plaatsen)  # maakt een nieuwe zaal aan
+        self.zalen.tableInsert(self.zalen.tableLength() + 1, zaal)  # voegt de zaal toe aan de ADT van zalen
         return True
 
     def makeLog(self, time):
@@ -196,47 +198,46 @@ class Reservatiesysteem:
         """
         body = ""
         EOF = "</tbody></table></body></html>"
-        with open("log.html", "w") as f:
-            f.write(BOF)
-            films = []
+        with open("log.html", "w") as f:    # opent het output bestand om te schrijven
+            f.write(BOF)    # schrijft BOF (formaat en standaardslots) in de output file
+            films = []      # nieuwe lijst voor films
             self.films.traverseTable(films.append)  # zet alle films in films
-            for film in films:
-                titel = film.getTitel()
-                for day in film.getVertoningen():
-                    body += self.__generateTable(titel, day)
-
-            f.write(body)
-            f.write(EOF)
+            for film in films:  # loopt over films
+                titel = film.getTitel() # krijg de titel van de film
+                for day in film.getVertoningen():   # loopt over elke dag van vertoningen van deze film
+                    body += self.__generateTable(titel, day)    # voegt een nieuwe rij toe voor elke dag dat deze film wordt afgespeeld en voegt dit toe aan body
+            f.write(body)   # schrijft de body in het output bestand
+            f.write(EOF)    # schrijft EOF (einde file) in het output bestand
 
     def __generateTable(self, titel, day):
-        slots = [datetime.time(14, 30), datetime.time(17, 0), datetime.time(20, 0), datetime.time(22, 30)]
-        slot_pos = 0
+        slots = [datetime.time(14, 30), datetime.time(17, 0), datetime.time(20, 0), datetime.time(22, 30)]  # standaard slots
+        slot_pos = 0    # index slot_pos
         buffer = f"""
                     <tr>
                         <td>{day[0].date()}</td>
                         <td>{titel}</td>
                         """
-        for vertoning in day[1]:
-            while vertoning[0] != slots[slot_pos]:
-                buffer += f"<td></td>"
-                slot_pos += 1
+        for vertoning in day[1]:    # loopt over de vertoningen van de dag
+            while vertoning[0] != slots[slot_pos]:  # Zolang er geen vertoning is op dit slot, wordt <td></td> bij de buffer toegevoegd
+                buffer += f"<td></td>"  # geen vertoning
+                slot_pos += 1   # naar volgende positie gaan
 
-            zaal, succes = self.zalen.tableRetrieve(vertoning[1].getZaalnummer())
-            if not succes:
+            zaal, succes = self.zalen.tableRetrieve(vertoning[1].getZaalnummer())   # zaal is 1ste element van de tuple, succes is het 2de element
+            if not succes:  # kijkt na of zaal bestaat
                 raise Exception("Zaal niet gevonden!")
 
-            if vertoning[1].isStarted() or vertoning[1].getAantalVrij() == zaal.getPlaatsen():
-                buffer += f"<td>F:{vertoning[1].getAantalMensenBinnen()}</td>"
+            if vertoning[1].isStarted() or vertoning[1].getAantalVrij() == zaal.getPlaatsen():  # als de film gestart is
+                buffer += f"<td>F:{vertoning[1].getAantalMensenBinnen()}</td>"  # voeg "F: aantal mensen in zaal" toe aan buffer
 
-            elif vertoning[1].isWaiting():
-                buffer += f"<td>W:{zaal.getPlaatsen() - (vertoning[1].getAantalMensenBinnen() + vertoning[1].getAantalVrij())}</td>"
+            elif vertoning[1].isWaiting():  # als er gewacht moet worden op personen
+                buffer += f"<td>W:{zaal.getPlaatsen() - (vertoning[1].getAantalMensenBinnen() + vertoning[1].getAantalVrij())}</td>"   # voeg "W: aantal mensen waarop wachten" toe aan buffer
 
             else:
-                buffer += f"<td>G:{zaal.getPlaatsen() - vertoning[1].getAantalVrij()}</td>"
+                buffer += f"<td>G:{zaal.getPlaatsen() - vertoning[1].getAantalVrij()}</td>" # voeg "G: aantal verkochte tickets" toe aan buffer
 
-            slot_pos += 1
+            slot_pos += 1   # ga naar volgende slot
 
-        for _ in range(slot_pos, 4):
+        for _ in range(slot_pos, 4):    # voeg aan volgende slots <td></td> toe
             buffer += f"<td></td>"
 
         buffer += "</tr>"
