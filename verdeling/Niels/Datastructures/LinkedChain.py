@@ -146,14 +146,28 @@ class LinkedChain:
                 return self.list[i], True
         return None, False
 
+    def retrieveIndex(self, index):
+        """
+        Geeft een item terug op de gevraagde index
+        :param index: index van het gevraagde item
+        :return: Item, true als het de index geldig is, none, False als dat niet zo is
+        precondition: None
+
+        postcondition: None
+        """
+        if(1<=index<=len(self.list)):
+            return self.list[index], True
+        return None, False
+
+
     def traverse(self,prnt):
         """
         Doorloopt de linkedchain
         :param prnt: geeft aan dat er geprint moet worden
         :return: True als het is gelukt
         """
-        for i in range(1,len(self.list)):
-            prnt(self.retrieve(i)[0])
+        for i in range(1, len(self.list)):
+            prnt(self.retrieveIndex(i)[0])
         return True
 
     def save(self):
