@@ -17,7 +17,7 @@ user = user.lower()
 
 if user.lower() == "robin":
     user = "Robin"
-    from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
+    from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue, RedBlackTreeTable
 
 elif user.lower() == "khemin":
     user = "Khemin"
@@ -34,7 +34,7 @@ else:
 
 class Reservatiesysteem:
     def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
-                 reservaties=Queue(), vertoningen=BSTTable(),
+                 reservaties=Queue(), vertoningen=RedBlackTreeTable(),
                  zalen=LinkedChainTable()):
 
         self.films = films

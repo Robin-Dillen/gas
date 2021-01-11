@@ -14,6 +14,7 @@ class RedBlackTree:
         self.left: Optional[RedBlackTree] = None
         self.right: Optional[RedBlackTree] = None
         self.parent: Optional[RedBlackTree] = None
+        self.size: int = 0
 
     def insertItem(self, newItem: object) -> bool:
         """
@@ -23,6 +24,7 @@ class RedBlackTree:
         :pre newItem, of een item met hetzelfde SearchKey, zit nog niet in de RBT
         :post newItem zit in de RBT, de grootte van de RBT is met 1 verhoogt.
         """
+        self.size += 1
         newNode = self.insertRecurse(newItem)
         newNode.__insertRepairTree()
         return True
@@ -138,7 +140,7 @@ class RedBlackTree:
         :post De RBT is niet veranderd
         """
         if searchKey == self.root.getId():
-            return self.root.getId(), True
+            return self.root, True
 
         elif searchKey < self.root.getId():
             if self.left is None:
@@ -317,6 +319,10 @@ class RedBlackTree:
         :return: geeft terug of de RBT leeg is (bool)
         """
         return self.root is None
+
+    def getSize(self) -> int:
+        """geeft het aantal nodes in de boom terug"""
+        return self.size
 
     def save(self) -> _BSTSave:
         save = {'root': self.root.getId(), 'color': 'red' if self.color else 'black'}

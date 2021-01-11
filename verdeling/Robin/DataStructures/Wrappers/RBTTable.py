@@ -6,9 +6,10 @@ class RedBlackTreeTable:
     def __init__(self):
         self.__rbt = RedBlackTree()  # private
 
-    def tableInsert(self, newItem):
+    def tableInsert(self, index, newItem):
         """
         voegt een object toe aan de tabel
+        :param index: index for consistensie
         :param newItem: object met getSearchKey() als functie, de searchKey is een getal.
         :return: Succes
         :pre newItem, of een item met hetzelfde SearchKey, zit nog niet in de tabel
@@ -51,6 +52,10 @@ class RedBlackTreeTable:
         :return: bool
         """
         return self.__rbt.isEmpty()
+
+    def tableLength(self):
+        """geeft het aantal nodes in de boom terug"""
+        return self.__rbt.getSize()
 
     def save(self):
         """
