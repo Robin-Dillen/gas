@@ -10,7 +10,7 @@ from verdeling.Gebruiker_Contracts import Gebruiker
 from verdeling.Reservatie_Contracts import Reservatie
 from verdeling.Vertoning_Contracts import Vertoning
 from verdeling.Zaal_Contracts import Zaal
-from Clock import clock
+from verdeling.Clock import clock
 
 user = input("Khemin, Niels of Robin?: ")
 user = user.lower()

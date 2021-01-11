@@ -5,16 +5,17 @@ def createTreeItem(key, val):
     :param val: Waarde van het item
     :return: Waarde van het item
     """
-    return key
+    return (key, val)
 
 
 class TwoThreeTree:
-    def __init__(self):
-        self.root = None
+    def __init__(self, key=None, parent=None, value=None):
+        self.root = key
         self.LeftTree = None
         self.MiddleTree = None
-        self.RightTree = None
+        self.RightTree = parent
         self.parent = None
+        self.value = value
         pass
 
     def load(self, tree):
@@ -34,6 +35,7 @@ class TwoThreeTree:
         self.RightTree = None
         self.MiddleTree = None
         self.parent = None
+        self.value = None
 
         if (len(tree) == 2):
             if (len(self.root) == 1):
@@ -501,6 +503,19 @@ class TwoThreeTree:
         else:
             return False
 
+    def getlength(self):
+        length = 0
+        if(self.root[0] != None):
+            length += 1
+        if (self.LeftTree != None):
+            length += self.LeftTree.getLength()
+        if (self.MiddleTree != None):
+            length += 1
+            length += self.MiddleTree.getLength()
+        if (self.RightTree != None):
+            length += self.RightTree.getLength()
+        return length
+
     def inorderTraverse(self, value=None):
         """
         Doorloopt een 2-3 boom en print het uit
@@ -571,6 +586,21 @@ class TwoThreeTree:
                 return False
         return False
 
+    def searchForId(self, id):
+        if(self.LeftTree != None):
+            self.LeftTree.searchForId(id)
+        if(len(self.value) == 1):
+            if(self.value[0].getId() == id):
+                return self.value[0]
+        elif(len(self.value) == 2):
+            if(self.value[0].getId() == id):
+                return self.value[0]
+            elif(self.value[1].getId() == id):
+                return self.value[1]
+        if(self.RightTree != None):
+            self.RightTree.searchForId(id)
+        return None
+
     def retrieveItem(self, key):
         """
         Zoekt een item op in de 2-3 boom
@@ -614,23 +644,35 @@ class TwoThreeTreeTable:
     def load(self, key):
         return self.a.load(key)
 
-    def traverseTable(self, value):
-        return self.a.inorderTraverse(value)
-
-    def tableIsEmpty(self):
-        return self.a.isEmpty()
-
-    def tableRetrieve(self, key):
-        return self.a.retrieveItem(key)
-
     def tableInsert(self, key):
         return self.a.insertItem(key)
 
     def tableDelete(self, key):
         return self.a.deleteItem(key)
 
-    # def tableLength(self):
-    #     return self.a.getLength()
+    def tableLength(self):
+        return self.a.getLength()
+
+    def tableIsEmpty(self):
+        return self.a.isEmpty()
+
+    def tableSearch(self, id):
+        return self.a.searchForId(id)
+
+    def tableRetrieve(self, key):
+        return self.a.retrieveItem(key)
+
+    def traverseTable(self, value):
+        return self.a.inorderTraverse(value)
+
+    def save(self):
+        return self.a.save()
+
+
+
+
+
+
 
     def save(self):
         return self.a.save()

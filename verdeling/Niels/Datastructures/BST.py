@@ -214,23 +214,15 @@ class BST:
         else:
             return False
 
-    def __checkIfInTree(self, key):
-        """
-        Kijkt na of een gegeven item zich in de boom bevindt
-        :param key: Item om na te kijken
-        :return: True als het in de boom staat, false als dat niet zo is
-        precondition: None
-
-        postcondition: None
-        """
-        if (self.root == key):
-            return self.value,True
-        elif (self.root > key and self.LeftTree != None):
-            return self.LeftTree.__checkIfInTree(key)
-        elif (self.root < key and self.RightTree != None):
-            return self.RightTree.__checkIfInTree(key)
-        else:
-            return False
+    def searchForId(self, id):
+        if(self.LeftTree != None):
+            self.LeftTree.searchForId(id)
+        if(self.value != None):
+            if(self.value.getId() == id):
+                return self.value
+        if(self.RightTree != None):
+            self.RightTree.searchForId(id)
+        return None
 
     def searchTreeRetrieve(self, key):
         """
@@ -241,8 +233,12 @@ class BST:
 
         postcondition: None
         """
-        if (self.__checkIfInTree(key)[1]):
-            return self.__checkIfInTree(key)[0], True
+        if (self.root == key):
+            return self.value,True
+        elif (self.root > key and self.LeftTree != None):
+            return self.LeftTree.searchTreeRetrieve(key)
+        elif (self.root < key and self.RightTree != None):
+            return self.RightTree.searchTreeRetrieve(key)
         else:
             return False, False
 
@@ -277,11 +273,17 @@ class BSTTable:
     def tableDelete(self, key):
         return self.a.searchTreeDelete(key)
 
-    def traverseTable(self, key = None):
-        return self.a.inorderTraverse(key)
+    def tableLength(self):
+        return self.a.getlength()
 
     def tableIsEmpty(self):
         return self.a.isEmpty()
+
+    def traverseTable(self, key = None):
+        return self.a.inorderTraverse(key)
+
+    def tableSearch(self, id):
+        return self.a.searchForId(id)
 
     def tableRetrieve(self, key):
         return self.a.searchTreeRetrieve(key)
