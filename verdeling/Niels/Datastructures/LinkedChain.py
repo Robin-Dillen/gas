@@ -40,7 +40,7 @@ class LinkedChain:
 
         postcondition: None
         """
-        if (len(self.list) >= index):
+        if (index <= self.getLength()+1):
             self.list.insert(index, value)
             return True
         else:
@@ -130,7 +130,7 @@ class LinkedChain:
         else:
             return False
 
-    def retrieve(self, index):
+    def retrieve(self, id):
         """
         Geeft een item terug op de gevraagde id
         :param id: id van het gevraagde item
@@ -140,11 +140,11 @@ class LinkedChain:
         postcondition: None
         """
         if(self.isEmpty()):
-            return None
+            return None, False
         for i in range(1, len(self.list)):
             if(self.list[i].getId() == id):
-                return self.list[i]
-        return None
+                return self.list[i], True
+        return None, False
 
     def traverse(self,prnt):
         """
@@ -153,7 +153,7 @@ class LinkedChain:
         :return: True als het is gelukt
         """
         for i in range(1,len(self.list)):
-            prnt(self.retrieve(i))
+            prnt(self.retrieve(i)[0])
         return True
 
     def save(self):

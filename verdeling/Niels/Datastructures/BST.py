@@ -227,12 +227,12 @@ class BST:
     def searchTreeRetrieve(self, id):
         if(self.value != None):
             if (self.value.getId() == id):
-                return self.value
+                return self.value, True
             elif (self.value.getId() > id and self.LeftTree != None):
                 return self.LeftTree.searchForId(id)
             elif (self.value.getId() < id and self.RightTree != None):
                 return self.RightTree.searchForId(id)
-        return None
+        return None, False
 
 
     def save(self):
