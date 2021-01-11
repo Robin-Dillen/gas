@@ -33,7 +33,7 @@ class Execute:
                 eval('self.' + line['cmd'] + '()')
                 continue
             if clock.isInitialized():
-                print(f"{clock} Cinema$ ", cmds[line['cmd']] + str(tuple(line['args'])))
+                print(f"{clock} Cinema$", cmds[line['cmd']] + str(tuple(line['args'])))
             else:
                 print(cmds[line['cmd']] + str(tuple(line['args'])))
             eval('self.r.' + cmds[line['cmd']] + str(tuple(line['args'])))  # self.r.func(args)
