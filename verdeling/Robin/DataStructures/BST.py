@@ -55,6 +55,9 @@ class BST:
         :pre geen
         :post De BST is niet veranderd
         """
+        if self.root is None:
+            return None, False
+
         if searchKey == self.root.getId():
             return self.root, True
 
