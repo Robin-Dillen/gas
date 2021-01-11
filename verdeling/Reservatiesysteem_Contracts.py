@@ -120,7 +120,7 @@ class Reservatiesysteem:
         :param aantal_vrij: het aantal vrije plaatsen in de zaal van de vertoning, is een positieve integer.
         :return: Geeft True terug als de vertoning succesvol is toegevoegd
         """
-        if not self.zalen.tableSearch(zaalnummer)[1]:
+        if not self.zalen.tableSearch(zaalnummer):
             raise Exception("Zaal bestaat niet!")
         vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
         self.vertoningen.tableInsert(vertoning.getId(), vertoning)
