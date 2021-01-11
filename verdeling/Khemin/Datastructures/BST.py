@@ -343,9 +343,6 @@ class BSTTable(BST):
     def tableRetrieve(self,key):
         return self.searchTreeRetrieve(key)
 
-    def tableSearch(self, key):
-        return self.tableRetrieve(key)[0]
-
     def traverseTable(self, prt):
         return self.inorderTraverse(prt)
 
