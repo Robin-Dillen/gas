@@ -12,16 +12,20 @@ from verdeling.Vertoning_Contracts import Vertoning
 from verdeling.Zaal_Contracts import Zaal
 
 user = input("Khemin, Niels of Robin?: ")
+user = user.lower()
 
-if user == "Robin":
+if user.lower() == "robin":
+    user = "Robin"
     from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 
-elif user == "Khemin":
+elif user.lower() == "khemin":
+    user = "Khemin"
     from verdeling.Khemin.Datastructures.BST import *
     from verdeling.Khemin.Datastructures.LinkedChain import *
     from verdeling.Khemin.Datastructures.Queue import *
 
 else:
+    user = "Niels"
     from verdeling.Niels.Datastructures.BST import *
     from verdeling.Niels.Datastructures.LinkedChain import *
     from verdeling.Niels.Datastructures.Queue import *

@@ -58,4 +58,4 @@ class Execute:
         clock.setTime(time)  # sets clock time to desired time
 
 
-e = Execute('../system.txt')
+e = Execute('system.txt')
