@@ -199,7 +199,6 @@ class Reservatiesysteem:
             f.write(BOF)
             films = []
             self.films.traverseTable(films.append)  # zet alle films in films
-            films = [film[0] for film in films]  # zet de tuples om naar objecten
             for film in films:
                 titel = film.getTitel()
                 for day in film.getVertoningen():
