@@ -76,11 +76,11 @@ class Reservatiesysteem:
         :return: Geeft True terug als de film succesvol is toegevoegd
         """
         if self.films.tableSearch(id) is not None:
-            print(f"{clock} Cinema$ ", f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
+            print(f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
             return False
         film = Film(id, titel, rating)
         self.films.tableInsert(self.films.tableLength() + 1, film)
-        print(f"{clock} Cinema$ ", f"The movie {titel} has been created!")
+        print(f"The movie {titel} has been created!")
         return True
 
     def addReservatie(self, timestamp, userid, vertoningid, plaatsen) -> bool:  # maker Khemin, tester Niels

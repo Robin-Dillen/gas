@@ -32,18 +32,21 @@ class Execute:
             if len(line['args']) == 0:
                 eval('self.' + line['cmd'] + '()')
                 continue
-
-            print(f"{clock} Cinema$ ", cmds[line['cmd']] + str(tuple(line['args'])))
+            if clock.isInitialized():
+                print(f"{clock} Cinema$ ", cmds[line['cmd']] + str(tuple(line['args'])))
+            else:
+                print(cmds[line['cmd']] + str(tuple(line['args'])))
             eval('self.r.' + cmds[line['cmd']] + str(tuple(line['args'])))  # self.r.func(args)
 
             clock.toggle()  # zet de clock terug aan
 
     def init(self):
-        print(f"{clock} Cinema$ ",'init')
+        print(f"Initializing Reservatie systeem")
         self.r = Reservatiesysteem()
 
     def start(self):
         # setup the clock
+        print("Starting Reservatie systeem")
         dt = datetime.datetime(2020, 10, 5)
         dt = dt.replace(hour=8, minute=0, second=0, microsecond=0)
         clock.setTime(dt)
