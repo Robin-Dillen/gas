@@ -46,7 +46,7 @@ class LinkedChain:
     # Een methode die de LinkedChain doorloopt op zoek naar een item met het gegeven id.
     #
     # return: value, True als het item met gegegeven id in de LinkedChain aanwezig is, anders None, False.
-    def retrieve(self, id):
+    def search(self, id):
         if self.isEmpty():
             return None, False
 
@@ -62,6 +62,28 @@ class LinkedChain:
 
         return None, False
 
+    # Een methode die de LinkedChain doorloopt op zoek naar het gegeven item. Als het gezochte item
+    # teruggevonden wordt dan wordt value gereturnd, anders wordt er False teruggegeven.
+    #
+    # return: Als het item met gegeven id in de LinkedChain aanwezig is, wordt dit element teruggegeven.
+    # False wordt teruggegeven als het item niet aanwezig is in de LinkedChain.
+    def retrieve(self, id):
+        if self.head is None:
+            return None,False
+
+        orig = self.head.id
+        if orig == id:
+            return self.head.value, True
+
+        start = self.head.next
+        while start.id != orig:
+            if start.id == id:
+                return start.value, True
+            start = start.next
+
+        return None, False
+
+
     # Een methode die de gelinkte ketting op zoeksleutel in volgorde doorloopt en een lijst teruggeeft met de elementen
     # in de gelinkte ketting in deze gesorteerde volgorde. Indien gewenst kan de volgorde ook geprint worden per element
     # door het extra argument print mee te geven.
@@ -70,7 +92,7 @@ class LinkedChain:
     def traverse(self, prt):
         lst = []
         for i in range(1, self.getLength() + 1):
-            lst.append(self.retrieve(i))
+            lst.append(self.retrieve(i)[0])
 
         # if prt == print:
         #     for e in lst:
@@ -229,7 +251,7 @@ class LinkedChainTable(LinkedChain):
         return self.delete(key)
 
     def tableRetrieve(self,id):
-        return self.retrieve(id)
+        return self.search(id)
 
     def traverseTable(self, prt):
         return self.traverse(prt)
