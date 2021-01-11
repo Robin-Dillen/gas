@@ -99,7 +99,7 @@ class LinkedChain:
         :return: object
         """
         node: 'Node' = self.head
-        for _ in range(self.size + 1):
+        for _ in range(self.size):
             node = node.getNext()
             if node.getData().getId() == id:
                 return node.getData()

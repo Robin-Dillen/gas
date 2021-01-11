@@ -62,15 +62,18 @@ class Reservatiesysteem:
         Een functie die voor de gegeven titel en rating een
         nieuw film aanmaakt en deze toevoegd aan het ADT van films van het reservatiesysteem.
         :param titel: de titel van de film, is een string.
-        :param rating: de rating van de film, is een float tussen 1-10.
+        :param rating: de rating van de film, is een float tussen 0-10.
         :return: Geeft True terug als de film succesvol is toegevoegd
         """
+        if self.films.tableSearch(id) is not None:
+            print(f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
+            return False
         film = Film(id, titel, rating)
         self.films.tableInsert(self.films.tableLength() + 1, film)
         print(f"The movie {titel} has been created!")
         return True
 
-    def addReservatie(self, userid, timestamp, vertoningid, plaatsen) -> bool:  # maker Khemin, tester Niels
+    def addReservatie(self, timestamp, userid, vertoningid, plaatsen) -> bool:  # maker Khemin, tester Niels
         """
         Een functie die voor de gegeven userid, timestamp, vertoninging en plaatsen een nieuw reservatie aanmaakt en deze toevoegd aan het ADT van reservaties van het reservatiesysteem.
         :param userid : de userid van de gebruiker die de reservatie aangemaakt heeft.
@@ -80,7 +83,6 @@ class Reservatiesysteem:
         :return: Geeft True terug als de reservatie succesvol is toegevoegd
 
         preconditie:
-            De meegegeven titel is een string.
             De meegegeven userid is een positieve integer.
             De meegegeven timestamp is een tuple met twee strings als elementen. De eerste string geeft het tijdstip van reservatie weer, de tweede geeft de reservatiedatum weer.
             De meegegeven vertoningid is een positieve integer.
@@ -89,13 +91,13 @@ class Reservatiesysteem:
         postconditie: geen
         """
         vertoning, succes = self.retrieveVertoningen(vertoningid)
-        if not succes:
-            return False
         vertoning: Vertoning
-        if vertoning.getAantalVrij() >= plaatsen:
-            aantal_vrij = vertoning.getAantalVrij() - plaatsen
-            vertoning.setAantalVrij(aantal_vrij)
-            self.reservaties.enqueue(Reservatie(0, userid, timestamp, vertoningid, plaatsen))  # nog een id genereren
+        if not succes or vertoning.getAantalVrij() <= plaatsen:  # checkt of er de vertoning is geretrieved en of er genoeg plaatsen beschikbaar zijn
+            return False
+
+        aantal_vrij = vertoning.getAantalVrij() - plaatsen  # het nieuwe aantal vrije plaatsen
+        vertoning.setAantalVrij(aantal_vrij)
+        self.reservaties.enqueue(Reservatie(0, userid, timestamp, vertoningid, plaatsen))  # TODO nog een id genereren
 
     def addVertoning(self, id, zaalnummer, slot, datum, filmid, aantal_vrij) -> bool:  # maker Niels, tester Robin
         """
@@ -204,14 +206,16 @@ class Reservatiesysteem:
                         <td>{day[0].date()}</td>
                         <td>{titel}</td>
                         """
-        empty = False
         for vertoning in day[1]:
-            if vertoning[0] != slots[slot_pos]:
-                empty = True
+            while vertoning[0] != slots[slot_pos]:
                 buffer += f"<td></td>"
+                slot_pos += 1
 
             zaal, succes = self.zalen.tableRetrieve(vertoning[1].getZaalnummer())
-            if vertoning[1].isStarted():
+            if not succes:
+                raise Exception("Zaal niet gevonden!")
+
+            if vertoning[1].isStarted() or vertoning[1].getAantalVrij() == zaal.getPlaatsen():
                 buffer += f"<td>F:{vertoning[1].getAantalMensenBinnen()}</td>"
 
             elif vertoning[1].isWaiting():
@@ -222,7 +226,7 @@ class Reservatiesysteem:
 
             slot_pos += 1
 
-        if slot_pos == 3 and not empty:
+        for _ in range(slot_pos, 4):
             buffer += f"<td></td>"
 
         buffer += "</tr>"
