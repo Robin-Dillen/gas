@@ -160,7 +160,7 @@ class LinkedChain:
 
     def traverse(self,prnt):
         for i in range(1,len(self.list)-1):
-            prnt(self.list[i])
+            prnt(self.retrieve(i))
         return True
 
     def save(self):
