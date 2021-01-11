@@ -1,5 +1,5 @@
 def createTreeItem(key, val):
-    return (key, val)
+    return val
 
 
 class BST:
@@ -39,7 +39,7 @@ class BST:
                 self.RightTree.parent = self
         return
 
-    def searchTreeInsert(self, object):
+    def searchTreeInsert(self, value):
         """
         voegt een item toe aan de boom
         :param object: waarde van het item (tuple)
@@ -49,20 +49,20 @@ class BST:
         postcondition: None
         """
         if (self.root == None):
-            self.root = object[0]
-            self.value = object[1]
-        elif (self.LeftTree == None and object[0] < self.root):
-            nieuwe_knoop = BST(object[0], None, object[1])
+            self.root = value.getId()
+            self.value = value
+        elif (self.LeftTree == None and value.getId() < self.root):
+            nieuwe_knoop = BST(value.getId(), None, value)
             nieuwe_knoop.parent = self
             self.LeftTree = nieuwe_knoop
-        elif (self.RightTree == None and object[0] > self.root):
-            nieuwe_knoop = BST(object[0], None, object[1])
+        elif (self.RightTree == None and value.getId() > self.root):
+            nieuwe_knoop = BST(value.getId(), None, value)
             nieuwe_knoop.parent = self
             self.RightTree = nieuwe_knoop
-        elif (self.LeftTree != None and object[0] < self.root):
-            self.LeftTree.searchTreeInsert(object)
-        elif (self.RightTree != None and object[0] > self.root):
-            self.RightTree.searchTreeInsert(object)
+        elif (self.LeftTree != None and value.getId() < self.root):
+            self.LeftTree.searchTreeInsert(value)
+        elif (self.RightTree != None and value.getId() > self.root):
+            self.RightTree.searchTreeInsert(value)
         return True
 
     def __zoekinordersuccessor(self, right=True):

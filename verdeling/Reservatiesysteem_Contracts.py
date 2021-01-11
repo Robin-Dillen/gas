@@ -36,7 +36,7 @@ else:
 
 class Reservatiesysteem:
     def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
-                 reservaties=Queue(), vertoningen=TwoThreeTreeTable(),
+                 reservaties=Queue(), vertoningen=BSTTable(),
                  zalen=LinkedChainTable()):
 
         self.films = films
@@ -46,7 +46,7 @@ class Reservatiesysteem:
         self.zalen = zalen
         self.tijd = 0
 
-    def retrieveVertoningen(self, id) -> (object, bool):  # maker Khemin, tester Niels
+    def retrieveVertoningen(self, id) -> (object, bool):
         """
         Een functie die uit een datastructuur van objecten het object haalt met het opgegeven id.
         Het object wordt teruggegeven indien het gevonden wordt in het ADT. Als het niet in de ADT zit wordt er None teruggegeven.
@@ -56,7 +56,7 @@ class Reservatiesysteem:
         """
         return self.vertoningen.tableRetrieve(id)  # Kijkt na of de vertoning met gegeven id bestaat
 
-    def maakAccount(self, id, voornaam, achternaam, email) -> bool:  # maker Niels, tester Robin
+    def maakAccount(self, id, voornaam, achternaam, email) -> bool:
         """
         Een functie die voor de gegeven voornaam,achternaam en e-mailadres een
         nieuw gebruiker aanmaakt en deze toevoegd aan het ADT van gebruiker van het reservatiesysteem.
@@ -69,7 +69,7 @@ class Reservatiesysteem:
         self.gebruikers.tableInsert(self.gebruikers.tableLength() + 1, gebruiker)  # Toevoegen aan ADT van gebruikers
         return True
 
-    def addFilm(self, id, titel, rating) -> bool:  # maker Robin, tester Khemin
+    def addFilm(self, id, titel, rating) -> bool:
         """
         Een functie die voor de gegeven titel en rating een
         nieuw film aanmaakt en deze toevoegd aan het ADT van films van het reservatiesysteem.
@@ -85,7 +85,7 @@ class Reservatiesysteem:
         print(f"The movie {titel} has been created!")
         return True
 
-    def addReservatie(self, timestamp, userid, vertoningid, plaatsen) -> bool:  # maker Khemin, tester Niels
+    def addReservatie(self, timestamp, userid, vertoningid, plaatsen) -> bool:
         """
         Een functie die voor de gegeven userid, timestamp, vertoninging en plaatsen een nieuw reservatie aanmaakt en deze toevoegd aan het ADT van reservaties van het reservatiesysteem.
         :param userid : de userid van de gebruiker die de reservatie aangemaakt heeft.
@@ -106,13 +106,13 @@ class Reservatiesysteem:
         vertoning, succes = self.retrieveVertoningen(vertoningid)  # vertoning is 1ste element van de tuple, succes is het 2de element
         vertoning: Vertoning
         if not succes or vertoning.getAantalVrij() <= plaatsen:  # checkt of er de vertoning is geretrieved en of er genoeg plaatsen beschikbaar zijn
-            return False
 
+            return False
         aantal_vrij = vertoning.getAantalVrij() - plaatsen  # het nieuwe aantal vrije plaatsen
         vertoning.setAantalVrij(aantal_vrij)
         self.reservaties.enqueue(Reservatie(userid, timestamp, vertoningid, plaatsen))  # voegt de reservatie toe aan de ADT van reservaties
 
-    def addVertoning(self, id, zaalnummer, slot, datum, filmid, aantal_vrij) -> bool:  # maker Niels, tester Robin
+    def addVertoning(self, id, zaalnummer, slot, datum, filmid, aantal_vrij) -> bool:
         """
         Een functie die voor de gegeven zaalnummer, slot, datum, filmid en aantal_vrij een
         nieuw vertoning aanmaakt en deze toevoegd aan het ADT van vertoningen van het reservatiesysteem.
@@ -150,7 +150,7 @@ class Reservatiesysteem:
             return True
         return False
 
-    def addZaal(self, id_, plaatsen) -> bool:  # maker Robin, tester Khemin
+    def addZaal(self, id_, plaatsen) -> bool:
         """
         Een functie die voor de gegeven titel en rating een nieuwe zaal aanmaakt en deze toevoegd aan het ADT van zalen van het reservatiesysteem
         :param plaatsen: het aantal plaatsen in de zaal

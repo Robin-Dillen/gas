@@ -5,7 +5,7 @@ def createTreeItem(key, val):
     :param val: Waarde van het item
     :return: Waarde van het item
     """
-    return (key, val)
+    return val
 
 
 class TwoThreeTree:
@@ -164,7 +164,7 @@ class TwoThreeTree:
                 self.value = [self.value[0], self.value[2]]
                 self.parent.__pushUp("Middle")
 
-    def insertItem(self, object):
+    def insertItem(self, value):
         """
         Voegt een item toe aan de 2-3 boom
         :param value: waarde van item dat wordt toegevoegd
@@ -174,40 +174,41 @@ class TwoThreeTree:
 
         postconditie: lengte van de 2-3 boom moet vergoten met 1
         """
+        print(self.save())
         if (self.root == None):
-            self.root = [object[0]]
-            self.value = [object[1]]
+            self.root = [value.getId()]
+            self.value = [value]
         elif (len(self.root) == 1):
             if (self.LeftTree == None and self.RightTree == None):
-                if (object[0] < self.root[0]):
-                    self.root.insert(0, object[0])
-                    self.value.insert(0, object[1])
+                if (value.getId() < self.root[0]):
+                    self.root.insert(0, value.getId())
+                    self.value.insert(0, value)
                 else:
-                    self.root.insert(1, object[0])
-                    self.value.insert(1, object[1])
-            elif (object[0] < self.root[0]):
-                self.LeftTree.insertItem(object)
-            elif (object[0] > self.root[0]):
-                self.RightTree.insertItem(object)
+                    self.root.insert(1, value.getId())
+                    self.value.insert(1, value)
+            elif (value.getId() < self.root[0]):
+                self.LeftTree.insertItem(value)
+            elif (value.getId() > self.root[0]):
+                self.RightTree.insertItem(value)
         elif (len(self.root) == 2):
             if (self.LeftTree == None and self.MiddleTree == None and self.RightTree == None):
-                if (object[0] < self.root[0]):
-                    self.root.insert(0, object[0])
-                    self.value.insert(0, object[1])
-                elif (object[0] > self.root[0] and object[0] < self.root[1]):
-                    self.root.insert(1, object[0])
-                    self.value.insert(1, object[1])
+                if (value.getId() < self.root[0]):
+                    self.root.insert(0, value.getId())
+                    self.value.insert(0, value)
+                elif (value.getId() > self.root[0] and value.getId() < self.root[1]):
+                    self.root.insert(1, value.getId())
+                    self.value.insert(1, value)
                 else:
-                    self.root.append(object[0])
-                    self.value.append(object[1])
+                    self.root.append(value.getId())
+                    self.value.append(value)
                 self.__pushUp()
             else:
-                if (object[0] < self.root[0]):
-                    self.LeftTree.insertItem(object)
-                elif (object[0] > self.root[1]):
-                    self.RightTree.insertItem(object)
+                if (value.getId() < self.root[0]):
+                    self.LeftTree.insertItem(value)
+                elif (value.getId() > self.root[1]):
+                    self.RightTree.insertItem(value)
                 else:
-                    self.MiddleTree.insertItem(object)
+                    self.MiddleTree.insertItem(value)
         return True
 
     def __zoekinordersuccessor(self, right=True, node=1):
@@ -627,18 +628,20 @@ class TwoThreeTree:
         :return: het gevonden item of None
         """
         if (self.root != None):
-            if(self.LeftTree != None):
-                self.LeftTree.retrieveItem(id)
-            if(len(self.root) == 1):
-                if(self.value[0].getId() == id):
-                    return self.value[0],True
-            elif(len(self.root) == 2):
-                if(self.value[0].getId() == id):
-                    return self.value[0],True
-                elif(self.value[1].getId() == id):
-                    return self.value[1],True
-            if(self.RightTree != None):
-                self.RightTree.retrieveItem(id)
+            if(self.root[0] == id):
+                return self.value[0], True
+            elif(self.root[0] > id and self.LeftTree != None):
+                return self.LeftTree.retrieveItem(id)
+            elif(len(self.root) == 1):
+                if(self.root[0] < id and self.RightTree != None):
+                    return self.RightTree.retrieveItem(id)
+            elif(len(self.value) == 2):
+                if(self.root[1] == id):
+                    return self.value[1], True
+                elif(self.root[1] > id and self.MiddleTree != None):
+                    return self.MiddleTree.retrieveItem(id)
+                elif(self.root[1] < id and self.RightTree != None):
+                    return self.RightTree.retrieveItem(id)
         return None, False
 
     def save(self):
@@ -650,17 +653,18 @@ class TwoThreeTree:
 
         postconditie: /
         """
-        if (len(self.root) == 1):
-            if (self.LeftTree == None):
-                return {'root': [self.root[0]]}
-            else:
-                return {'root': [self.root[0]], 'children': [self.LeftTree.save(), self.RightTree.save()]}
-        elif (len(self.root) == 2):
-            if (self.LeftTree == None):
-                return {'root': self.root}
-            else:
-                return {'root': [self.root],
-                        'children': [self.LeftTree.save(), self.MiddleTree.save(), self.RightTree.save()]}
+        if(self.root != None):
+            if (len(self.root) == 1):
+                if (self.LeftTree == None):
+                    return {'root': [self.root[0]]}
+                else:
+                    return {'root': [self.root[0]], 'children': [self.LeftTree.save(), self.RightTree.save()]}
+            elif (len(self.root) == 2):
+                if (self.LeftTree == None):
+                    return {'root': self.root}
+                else:
+                    return {'root': [self.root],
+                            'children': [self.LeftTree.save(), self.MiddleTree.save(), self.RightTree.save()]}
 
 
 class TwoThreeTreeTable:
