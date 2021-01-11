@@ -11,15 +11,20 @@ from verdeling.Reservatie_Contracts import Reservatie
 from verdeling.Vertoning_Contracts import Vertoning
 from verdeling.Zaal_Contracts import Zaal
 
-#from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
+user = input("Khemin, Niels of Robin?: ")
 
-# from verdeling.Khemin.Datastructures.BST import *
-# from verdeling.Khemin.Datastructures.LinkedChain import *
-# from verdeling.Khemin.Datastructures.Queue import *
+if user == "Robin":
+    from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 
-from verdeling.Niels.Datastructures.BST import *
-from verdeling.Niels.Datastructures.LinkedChain import *
-from verdeling.Niels.Datastructures.Queue import *
+elif user == "Khemin":
+    from verdeling.Khemin.Datastructures.BST import *
+    from verdeling.Khemin.Datastructures.LinkedChain import *
+    from verdeling.Khemin.Datastructures.Queue import *
+
+else:
+    from verdeling.Niels.Datastructures.BST import *
+    from verdeling.Niels.Datastructures.LinkedChain import *
+    from verdeling.Niels.Datastructures.Queue import *
 
 
 class Reservatiesysteem:
@@ -171,7 +176,7 @@ class Reservatiesysteem:
 	</style>
 </head>
 	<body>
-		<h1>Log op """ + time + """</h1>
+		<h1>Log op """ + time + """, met de ADTS van: """ + user + """</h1>
 		<table>
 			<thead>
 				<td>Datum</td>
