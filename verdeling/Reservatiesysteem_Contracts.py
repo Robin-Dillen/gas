@@ -34,7 +34,7 @@ else:
 
 class Reservatiesysteem:
     def __init__(self, films=BSTTable(), gebruikers=LinkedChainTable(),
-                 reservaties=Queue(), vertoningen=BSTTable(),
+                 reservaties=Queue(), vertoningen=LinkedChainTable(),
                  zalen=LinkedChainTable()):
 
         self.films = films
@@ -75,7 +75,7 @@ class Reservatiesysteem:
         :param rating: de rating van de film, is een float tussen 0-10.
         :return: Geeft True terug als de film succesvol is toegevoegd
         """
-        if self.films.tableSearch(id) is not None:
+        if self.films.tableSearch(id):
             print(f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
             return False
         film = Film(id, titel, rating)

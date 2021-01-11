@@ -5,10 +5,11 @@ def createTreeItem(key, val):
 class BST:
     def __init__(self, key=None, parent=None, value=None):
         self.root = key
+        self.value = value
         self.LeftTree = None
         self.RightTree = None
         self.parent = parent
-        self.value = value
+
 
     def load(self, tree):
         """
@@ -98,13 +99,16 @@ class BST:
                     if (self.parent.root < self.root):
                         self.parent.RightTree = None
                         self.root = None
+                        self.value = None
                     elif (self.parent.root > self.root):
                         self.parent.LeftTree = None
                         self.root = None
+                        self.value = None
                 elif (self.LeftTree != None and self.RightTree != None):
                     inorder = self.__zoekinordersuccessor()
                     inorder.parent.LeftTree = None
                     self.root = inorder.root
+                    self.value = inorder.value
                     inorder.searchTreeDelete(inorder.root)
                     if (self.parent.root < self.root):
                         self.parent.RightTree = self.root
@@ -113,12 +117,15 @@ class BST:
                 elif (self.LeftTree != None and self.RightTree == None):
                     self.parent.LeftTree = self.LeftTree
                     self.root = None
+                    self.value = None
                 elif (self.LeftTree == None and self.RightTree != None):
                     self.parent.RightTree = self.RightTree
                     self.root = None
+                    self.value = None
             elif (self.parent == None):
                 if (self.LeftTree == None and self.RightTree == None):
                     self.root = None
+                    self.value = None
                 elif (self.LeftTree != None and self.RightTree != None):
                     inorder = self.__zoekinordersuccessor()
                     if (self.RightTree.LeftTree == None):
@@ -126,13 +133,16 @@ class BST:
                     else:
                         inorder.parent.LeftTree = None
                     self.root = inorder.root
+                    self.value = inorder.value
                     inorder.searchTreeDelete(inorder.root)
                 elif (self.LeftTree != None and self.RightTree == None):
                     self.LeftTree.parent = None
                     self.root = None
+                    self.value = None
                 elif (self.LeftTree == None and self.RightTree != None):
                     self.RightTree.parent = None
                     self.root = None
+                    self.value = None
             return True
         elif (self.root < key and self.RightTree != None):
             self.RightTree.searchTreeDelete(key)
@@ -140,17 +150,17 @@ class BST:
             self.LeftTree.searchTreeDelete(key)
         return False
 
-    def inorderTraverse(self, key = None):
+    def inorderTraverse(self, prnt = None):
         """
         Doorloopt een boom en print deze uit
-        :param key: Geeft aan of het geprint moet worden of niet
+        :param ptnt: Geeft aan of het geprint moet worden of niet
         :return: True als het gelukt is
 
         precondition: None
 
         postcondition: None
         """
-        if (key):
+        if (prnt):
             if (self.LeftTree != None):
                 self.LeftTree.inorderTraverse(print)
             if (self.RightTree != None):
@@ -209,19 +219,19 @@ class BST:
 
         postcondition: None
         """
-        if (self.root == None):
+        if (self.value == None):
             return True
         else:
             return False
 
     def searchForId(self, id):
-        if(self.LeftTree != None):
-            self.LeftTree.searchForId(id)
         if(self.value != None):
-            if(self.value.getId() == id):
+            if (self.value.getId() == id):
                 return self.value
-        if(self.RightTree != None):
-            self.RightTree.searchForId(id)
+            elif (self.value.getId() > id and self.LeftTree != None):
+                return self.LeftTree.searchForId(id)
+            elif (self.value.getId() < id and self.RightTree != None):
+                return self.RightTree.searchForId(id)
         return None
 
     def searchTreeRetrieve(self, key):
