@@ -240,32 +240,3 @@ class Reservatiesysteem:
 
         buffer += "</tr>"
         return buffer
-
-
-
-    # def meldAan(self, id):  # maker Khemin, tester Niels
-    #     """
-    #     Een functie die de gebruiker aanmeldt (door zijn status op True te zetten).
-    #     :param id: Het id van de gebruiker die zich afmeldt; positieve integer
-    #     :return: None
-    #     post: De status van de gebruiker met het gegeven id is aangepast naar True.
-    #     """
-    #     self.gebruikers.tableRetrieve(id)[0].setStatus(True)
-    #
-    # def meldAf(self, id):  # maker Niels, tester Robin
-    #     """
-    #     Een functie die de gebruiker afmeldt (door zijn status op False te zetten).
-    #     :param id: Het id van de gebruiker die zich afmeldt; positieve integer
-    #     :return: None
-    #     post: De status van de gebruiker met het gegeven id is aangepast naar False.
-    #     """
-    #     pass
-    #
-    # def film_available(self, filmid):  # maker Robin, tester Khemin
-    #     """
-    #     vraagt alle vertoningen met beschikbare plaatsen op, voor de gegeven film.
-    #     :param filmid: Het id van de film waarvoor de evaluatie gemaakt moet worden. Dit is een positieve integer.
-    #     :return: True als de film nog bekeken kan worden, anders False.
-    #     post: self.vertoningen is niet van inhoud en/of lengte veranderd.
-    #     """
-    #     pass
