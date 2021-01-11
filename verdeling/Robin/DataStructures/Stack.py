@@ -1,4 +1,4 @@
-from Cinema.DataStructures.LinkedChain import LinkedChain
+from .LinkedChain import LinkedChain
 from typing import Tuple
 
 

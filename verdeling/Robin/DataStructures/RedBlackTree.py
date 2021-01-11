@@ -1,7 +1,4 @@
 from typing import TypeVar, TypedDict, Tuple, Optional, Union
-from Cinema.BuildingBlocks import _Foundation
-
-_TreeItemType = TypeVar("_TreeItemType", bound=_Foundation)
 
 
 class _BSTSave(TypedDict):
@@ -11,14 +8,14 @@ class _BSTSave(TypedDict):
 
 class RedBlackTree:
     """naar idee van https://en.wikipedia.org/wiki/Red%E2%80%93black_tree (insert en delete)"""
-    def __init__(self, root: Optional[_TreeItemType] = None):
-        self.root: Optional[_TreeItemType] = root
+    def __init__(self, root: Optional[object] = None):
+        self.root: Optional[object] = root
         self.color: bool = True  # False is black, red is True
         self.left: Optional[RedBlackTree] = None
         self.right: Optional[RedBlackTree] = None
         self.parent: Optional[RedBlackTree] = None
 
-    def insertItem(self, newItem: _TreeItemType) -> bool:
+    def insertItem(self, newItem: object) -> bool:
         """
         voegt een item toe aan de RBT
         :param newItem: object met getId() als functie, de searchKey is een getal.
@@ -30,7 +27,7 @@ class RedBlackTree:
         newNode.__insertRepairTree()
         return True
 
-    def insertRecurse(self, newItem: _TreeItemType) -> 'RedBlackTree':
+    def insertRecurse(self, newItem: object) -> 'RedBlackTree':
         """
         zoekt het juiste blad recursief en steekt het nieuwe item in dat blad
         :param newItem: item dat geïnsert moet worden
@@ -132,7 +129,7 @@ class RedBlackTree:
         child.left = self.left
         self.left = child
 
-    def retrieveItem(self, searchKey: int) -> Tuple[Optional[_TreeItemType], bool]:
+    def retrieveItem(self, searchKey: int) -> Tuple[Optional[object], bool]:
         """
         haalt het object met gegeven searchKey op uit de RBT
         :param searchKey: een getal

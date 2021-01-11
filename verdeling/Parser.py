@@ -53,9 +53,11 @@ def parse(filename: str) -> list:
                 continue
 
         if open != close:  # als dubbele quotes niet correct gesloten zijn, merge de argumenten
-            line['args'][open] += " " + line['args'][close]
-            line['args'].pop(close)
-            line['args'][open] = line['args'][open][1:-1]
+            for merge in range(open + 1, close + 1):
+                line['args'][open] += " " + line['args'][merge]  # voegt de delen samen tussen open en close
+            for merge in range(open + 1, close + 1):
+                line['args'].pop(open + 1)  # when the elements are deleted the indexes shift, so no need to increment
+            line['args'][open] = line['args'][open][1:-1]  # verwijder de dubbele quotes
             open = 0
             close = 0
 

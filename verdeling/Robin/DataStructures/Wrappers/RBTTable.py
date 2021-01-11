@@ -1,4 +1,4 @@
-from Cinema.DataStructures.RedBlackTree import RedBlackTree, _TreeItemType
+from ..RedBlackTree import RedBlackTree
 from typing import Tuple, Optional
 
 
@@ -26,7 +26,7 @@ class RedBlackTreeTable:
         """
         return self.__rbt.deleteItem(searchKey)
 
-    def tableRetrieve(self, searchKey: int) -> Tuple[Optional[_TreeItemType], bool]:
+    def tableRetrieve(self, searchKey: int) -> Tuple[Optional[object], bool]:
         """
         haalt het object met gegeven searchKey op uit de tabel
         :param searchKey: een getal
