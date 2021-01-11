@@ -163,6 +163,7 @@ class BST:
         if (prnt):
             if (self.LeftTree != None):
                 self.LeftTree.inorderTraverse(prnt)
+            prnt(self.value)
             if (self.RightTree != None):
                 self.RightTree.inorderTraverse(prnt)
             return True
@@ -280,3 +281,39 @@ class BSTTable:
 
     def save(self):
         return self.a.save()
+
+
+if __name__ == "__main__":
+    t = BST()
+    print(t.isEmpty())
+    print(t.searchTreeInsert(createTreeItem(8, 8)))
+    print(t.searchTreeInsert(createTreeItem(5, 5)))
+    print(t.isEmpty())
+    print(t.searchTreeRetrieve(5)[0])
+    print(t.searchTreeRetrieve(5)[1])
+    t.inorderTraverse(print)
+    print(t.save())
+    t.load({'root': 10, 'children': [{'root': 5}, None]})
+    t.searchTreeInsert(createTreeItem(15, 15))
+    print(t.searchTreeDelete(0))
+    print(t.save())
+    print(t.inorderTraverse())
+    print(t.inorder_succ(10))
+    print(t.searchTreeDelete(10))
+    print(t.save())
+
+    t = BSTTable()
+    print(t.tableIsEmpty())
+    print(t.tableInsert(createTreeItem(8, 8)))
+    print(t.tableInsert(createTreeItem(5, 5)))
+    print(t.tableIsEmpty())
+    print(t.tableRetrieve(5)[0])
+    print(t.tableRetrieve(5)[1])
+    t.traverseTable(print)
+    print(t.save())
+    t.load({'root': 10, 'children': [{'root': 5}, None]})
+    t.tableInsert(createTreeItem(15, 15))
+    print(t.tableDelete(0))
+    print(t.save())
+    print(t.tableDelete(10))
+    print(t.save())

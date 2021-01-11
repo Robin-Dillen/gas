@@ -30,10 +30,11 @@ else:
     from verdeling.Niels.Datastructures.BST import *
     from verdeling.Niels.Datastructures.LinkedChain import *
     from verdeling.Niels.Datastructures.Queue import *
+    from verdeling.Niels.Datastructures.TwoThreeTree import *
 
 
 class Reservatiesysteem:
-    def __init__(self, films=LinkedChainTable(), gebruikers=RedBlackTreeTable(),
+    def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
                  reservaties=Queue(), vertoningen=BSTTable(),
                  zalen=LinkedChainTable()):
 
@@ -63,9 +64,6 @@ class Reservatiesysteem:
         :param email: het e-mailadres van de nieuwe gebruiker, is een string.
         :return: Geeft True terug als het account succesvol is toegevoegd
         """
-        if self.gebruikers.tableRetrieve(id)[1]:
-            print(f"\033[1;31;49mThe id: {id}, is already in use! user not created!\033[0m")
-            return False
         gebruiker = Gebruiker(id, voornaam, achternaam, email)
         self.gebruikers.tableInsert(self.gebruikers.tableLength() + 1, gebruiker)
         return True
