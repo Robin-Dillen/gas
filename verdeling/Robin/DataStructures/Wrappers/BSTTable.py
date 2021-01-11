@@ -57,10 +57,6 @@ class BSTTable:
         """geeft de grootte van de boom terug"""
         return self.__bst.getSize()
 
-    def tableSearch(self, id):
-        """zoekt naar het object met gegeven id, geeft het object terug als het gevonden is anders None, is hetzelfde als table retrieve"""
-        return self.__bst.searchTreeRetrieve(id)[0]
-
     def save(self):
         """
         slaagt het object op in een dict in de vorm {root:root, children:[child1, child2]}

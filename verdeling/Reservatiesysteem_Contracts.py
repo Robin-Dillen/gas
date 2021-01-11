@@ -33,8 +33,8 @@ else:
 
 
 class Reservatiesysteem:
-    def __init__(self, films=BSTTable(), gebruikers=LinkedChainTable(),
-                 reservaties=Queue(), vertoningen=BSTTable(),
+    def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
+                 reservaties=Queue(), vertoningen=LinkedChainTable(),
                  zalen=LinkedChainTable()):
 
         self.films = films
@@ -75,7 +75,7 @@ class Reservatiesysteem:
         :param rating: de rating van de film, is een float tussen 0-10.
         :return: Geeft True terug als de film succesvol is toegevoegd
         """
-        if self.films.tableSearch(id) is not None:
+        if self.films.tableRetrieve(id)[1]:
             print(f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
             return False
         film = Film(id, titel, rating)
@@ -120,12 +120,12 @@ class Reservatiesysteem:
         :param aantal_vrij: het aantal vrije plaatsen in de zaal van de vertoning, is een positieve integer.
         :return: Geeft True terug als de vertoning succesvol is toegevoegd
         """
-        if not self.zalen.tableSearch(zaalnummer):
+        if not self.zalen.tableRetrieve(zaalnummer)[1]:
             raise Exception("Zaal bestaat niet!")
         vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
         self.vertoningen.tableInsert(vertoning.getId() + 1, vertoning)
-        film = self.films.tableSearch(filmid)
-        if film:
+        film, succes = self.films.tableRetrieve(filmid)
+        if succes:
             film.addVertoning(vertoning)
         return True
 

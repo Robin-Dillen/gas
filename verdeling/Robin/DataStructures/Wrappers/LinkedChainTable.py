@@ -26,7 +26,7 @@ class LinkedChainTable:
         """
         return self.__linked_chain.delete(index)
 
-    def tableRetrieve(self, index: int) -> Tuple[Optional[object], bool]:
+    def tableRetrieve(self, id: int) -> Tuple[Optional[object], bool]:
         """
         haalt het object met gegeven index op uit de tabel
         :param index: een getal
@@ -34,7 +34,7 @@ class LinkedChainTable:
         :pre geen
         :post De tabel is niet veranderd
         """
-        return self.__linked_chain.retrieve(index)
+        return self.__linked_chain.search(id)
 
     def traverseTable(self, visit) -> bool:
         """
@@ -61,14 +61,6 @@ class LinkedChainTable:
         :return: int
         """
         return self.__linked_chain.getLength()
-
-    def tableSearch(self, id: int) -> object:
-        """
-        geeft het object met id terug
-        :param id: int
-        :return: object
-        """
-        return self.__linked_chain.search(id)
 
     def save(self) -> list:
         """
