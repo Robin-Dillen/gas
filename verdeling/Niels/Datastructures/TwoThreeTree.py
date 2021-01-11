@@ -555,18 +555,23 @@ class TwoThreeTree:
 
         postconditie: /
         """
-        if (prnt):
-            if (self.LeftTree != None):
-                self.LeftTree.inorderTraverse(prnt)
-            prnt(self.value[0])
-            if (self.MiddleTree != None):
-                self.MiddleTree.inorderTraverse(prnt)
-                prnt(self.value[1])
-            if (self.RightTree != None):
-                self.RightTree.inorderTraverse(prnt)
-            return True
-        else:
-            return False
+        lst = []
+        if (self.LeftTree != None):
+            lst += self.LeftTree.inorderTraverse()
+        if (self.root is not None):
+            lst.append(self.value[0])
+        if (self.MiddleTree != None):
+            lst += self.MiddleTree.inorderTraverse()
+        if (len(self.root) == 2):
+            lst.append(self.value[1])
+        if (self.RightTree != None):
+            lst += self.RightTree.inorderTraverse()
+
+        if prnt:
+            for i in lst:
+                prnt(i)
+
+        return lst
 
     def isEmpty(self):
         """
