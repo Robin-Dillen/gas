@@ -15,7 +15,7 @@ class Reservatie:
 
         :param id: de unieke id van de reservatie, is een positieve integer.
         :param userid: de userid van de gebruiker die de reservatie aangemaakt heeft. Dit is een positieve integer.
-        :param timestamp: Het tijdstip waarop de reserveerde vertoning gespeeld wordt. Dit is een tuple met twee
+        :param timestamp: Het tijdstip waarop de gereserveerde vertoning gespeeld wordt. Dit is een tuple met twee
                             strings als elementen. De eerste string geeft het tijdstip van reservatie weer, de tweede
                                 geeft de reservatiedatum weer.
         :param vertoningid: het id van de vertoning die gereserveerd werd. Dit is een positieve integer

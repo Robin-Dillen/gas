@@ -52,7 +52,7 @@ class Execute:
     def log(self):
         print("log")
         self.r.makeLog(str(clock))
-        exit()
+        # exit()
 
     def await_(self, time: datetime.datetime):
         clock.setTime(time)  # sets clock time to desired time
