@@ -102,9 +102,9 @@ class LinkedChain:
         for _ in range(self.size):
             node = node.getNext()
             if node.getData().getId() == id:
-                return node.getData()
+                return node.getData(), True
 
-        return None
+        return None, False
 
     def save(self) -> list:
         """
