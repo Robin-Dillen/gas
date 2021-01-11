@@ -41,7 +41,7 @@ class BST:
     def searchTreeInsert(self, object):
         """
         voegt een item toe aan de boom
-        :param key: waarde van het item
+        :param object: waarde van het item (tuple)
         :return: none
         precondition: None
 
