@@ -130,19 +130,21 @@ class LinkedChain:
         else:
             return False
 
-    def search(self, index):
+    def search(self, id):
         """
-        Geeft een item terug op de gevraagde index
-        :param index: index van het gevraagde item
-        :return: (Item, True) als het de index geldig is, (false,false) als dat niet zo is
+        Geeft een item terug op de gevraagde id
+        :param id: id van het gevraagde item
+        :return: Item als het de id geldig is, none als dat niet zo is
         precondition: None
 
         postcondition: None
         """
-        if (self.getLength() >= index):
-            return self.list[index]
-        else:
+        if(self.isEmpty()):
             return None
+        for i in range(1, len(self.list)):
+            if(self.list[i].getId() == id):
+                return self.list[i]
+        return None
 
     def retrieve(self, index):
         """
@@ -159,7 +161,7 @@ class LinkedChain:
             return False, False
 
     def traverse(self,prnt):
-        for i in range(1,len(self.list)-1):
+        for i in range(1,len(self.list)):
             prnt(self.retrieve(i))
         return True
 
