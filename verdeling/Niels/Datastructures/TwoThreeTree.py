@@ -586,7 +586,7 @@ class TwoThreeTree:
                 return False
         return False
 
-    def searchForId(self, id):
+    def retrieveItem(self, id):
         if(self.LeftTree != None):
             self.LeftTree.searchForId(id)
         if(len(self.value) == 1):
@@ -600,20 +600,6 @@ class TwoThreeTree:
         if(self.RightTree != None):
             self.RightTree.searchForId(id)
         return None
-
-    def retrieveItem(self, key):
-        """
-        Zoekt een item op in de 2-3 boom
-        :return: True als het item gevonden is, false als het item niet gevonden is
-
-        preconditie: /
-
-        postconditie: /
-        """
-        if (self.__checkIfInTree(key)):
-            return [key, True]
-        else:
-            return [False, False]
 
     def save(self):
         """
@@ -656,9 +642,6 @@ class TwoThreeTreeTable:
     def tableIsEmpty(self):
         return self.a.isEmpty()
 
-    def tableSearch(self, id):
-        return self.a.searchForId(id)
-
     def tableRetrieve(self, key):
         return self.a.retrieveItem(key)
 
@@ -667,12 +650,6 @@ class TwoThreeTreeTable:
 
     def save(self):
         return self.a.save()
-
-
-
-
-
-
 
     def save(self):
         return self.a.save()

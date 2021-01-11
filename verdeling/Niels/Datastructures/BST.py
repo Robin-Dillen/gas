@@ -224,7 +224,7 @@ class BST:
         else:
             return False
 
-    def searchForId(self, id):
+    def searchTreeRetrieve(self, id):
         if(self.value != None):
             if (self.value.getId() == id):
                 return self.value
@@ -234,23 +234,6 @@ class BST:
                 return self.RightTree.searchForId(id)
         return None
 
-    def searchTreeRetrieve(self, key):
-        """
-        Kijkt na of een gegeven item zich in de boom bevindt
-        :param key: Item om na te kijken
-        :return: (key,True) als het in de boom staat, (false,false) als dat niet zo is
-        precondition: None
-
-        postcondition: None
-        """
-        if (self.root == key):
-            return self.value,True
-        elif (self.root > key and self.LeftTree != None):
-            return self.LeftTree.searchTreeRetrieve(key)
-        elif (self.root < key and self.RightTree != None):
-            return self.RightTree.searchTreeRetrieve(key)
-        else:
-            return False, False
 
     def save(self):
         """
@@ -291,9 +274,6 @@ class BSTTable:
 
     def traverseTable(self, key = None):
         return self.a.inorderTraverse(key)
-
-    def tableSearch(self, id):
-        return self.a.searchForId(id)
 
     def tableRetrieve(self, key):
         return self.a.searchTreeRetrieve(key)
