@@ -11,15 +11,15 @@ from verdeling.Reservatie_Contracts import Reservatie
 from verdeling.Vertoning_Contracts import Vertoning
 from verdeling.Zaal_Contracts import Zaal
 
-#from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
+from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue
 
-#from verdeling.Khemin.Datastructures.BST import *
-#from verdeling.Khemin.Datastructures.LinkedChain import *
-#from verdeling.Khemin.Datastructures.Queue import *
+# from verdeling.Khemin.Datastructures.BST import *
+# from verdeling.Khemin.Datastructures.LinkedChain import *
+# from verdeling.Khemin.Datastructures.Queue import *
 
-from verdeling.Niels.Datastructures.BST import *
-from verdeling.Niels.Datastructures.LinkedChain import *
-from verdeling.Niels.Datastructures.Queue import *
+#from verdeling.Niels.Datastructures.BST import *
+#from verdeling.Niels.Datastructures.LinkedChain import *
+#from verdeling.Niels.Datastructures.Queue import *
 
 
 class Reservatiesysteem:
@@ -97,7 +97,7 @@ class Reservatiesysteem:
 
         aantal_vrij = vertoning.getAantalVrij() - plaatsen  # het nieuwe aantal vrije plaatsen
         vertoning.setAantalVrij(aantal_vrij)
-        self.reservaties.enqueue(Reservatie(0, userid, timestamp, vertoningid, plaatsen))  # TODO nog een id genereren
+        self.reservaties.enqueue(Reservatie(userid, timestamp, vertoningid, plaatsen))
 
     def addVertoning(self, id, zaalnummer, slot, datum, filmid, aantal_vrij) -> bool:  # maker Niels, tester Robin
         """

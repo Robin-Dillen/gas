@@ -8,7 +8,7 @@ en een aantal plaatsen.
 
 class Reservatie:
 
-    def __init__(self, id_, userid, timestamp, vertoningid, plaatsen):
+    def __init__(self, userid, timestamp, vertoningid, plaatsen):
         """
         Initialiseert een nieuwe reservatie met de opgegeven id, userid, timestamp, vertoningid
         en plaatsen.
@@ -21,27 +21,10 @@ class Reservatie:
         :param vertoningid: het id van de vertoning die gereserveerd werd. Dit is een positieve integer
         :param plaatsen: het aantal plaatsen dat gereserveerd wordt. Dit is een positieve integer.
         """
-        self.id_ = id_
         self.userid_ = userid
         self.timestamp_ = timestamp
         self.vertoningid_ = vertoningid
         self.plaatsen_ = plaatsen
-
-    def getId(self):
-        """
-        :return: De waarde van id
-        post: De gebruiker is niet veranderd.
-        """
-        return self.id_
-
-    def setId(self, id_):
-        """
-        Een functie die de id update naar de gegeven waarde.
-        :param id: De nieuwe waarde van id; positieve integer
-        :return: None
-        post: De waarde van id is geüpdatet naar de gegeven value.
-        """
-        self.id_ = id_
 
     def getUserId(self):
         """
