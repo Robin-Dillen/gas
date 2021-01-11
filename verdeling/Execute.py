@@ -33,13 +33,13 @@ class Execute:
                 eval('self.' + line['cmd'] + '()')
                 continue
 
-            print(cmds[line['cmd']] + str(tuple(line['args'])))
+            print(f"{clock} Cinema$ ", cmds[line['cmd']] + str(tuple(line['args'])))
             eval('self.r.' + cmds[line['cmd']] + str(tuple(line['args'])))  # self.r.func(args)
 
             clock.toggle()  # zet de clock terug aan
 
     def init(self):
-        print('init')
+        print(f"{clock} Cinema$ ",'init')
         self.r = Reservatiesysteem()
 
     def start(self):
@@ -50,7 +50,7 @@ class Execute:
         clock.start()
 
     def log(self):
-        print("log")
+        print(f"{clock} Cinema$ ","log")
         self.r.makeLog(str(clock))
         # exit()
 

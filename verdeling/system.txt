@@ -19,6 +19,7 @@ gebruiker 2 Tom Hofkens tom.hofkens@uantwerpen.be
 gebruiker 3 Niels VandenBroeck niels.vandenbroeck@uantwerpen.be
 gebruiker 4 Khemin vangestelen khemin.vangestelen@uantwerpen.be
 gebruiker 5 Robin Dillen robin.dillen@uantwerpen.be
+gebruiker 5 Robin Dillen robin.dillen@uantwerpen.be
 
 # start het systeem op
 start

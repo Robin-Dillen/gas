@@ -10,6 +10,7 @@ from verdeling.Gebruiker_Contracts import Gebruiker
 from verdeling.Reservatie_Contracts import Reservatie
 from verdeling.Vertoning_Contracts import Vertoning
 from verdeling.Zaal_Contracts import Zaal
+from Clock import clock
 
 user = input("Khemin, Niels of Robin?: ")
 user = user.lower()
@@ -75,11 +76,11 @@ class Reservatiesysteem:
         :return: Geeft True terug als de film succesvol is toegevoegd
         """
         if self.films.tableSearch(id) is not None:
-            print(f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
+            print(f"{clock} Cinema$ ", f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
             return False
         film = Film(id, titel, rating)
         self.films.tableInsert(self.films.tableLength() + 1, film)
-        print(f"The movie {titel} has been created!")
+        print(f"{clock} Cinema$ ", f"The movie {titel} has been created!")
         return True
 
     def addReservatie(self, timestamp, userid, vertoningid, plaatsen) -> bool:  # maker Khemin, tester Niels
@@ -119,7 +120,7 @@ class Reservatiesysteem:
         :param aantal_vrij: het aantal vrije plaatsen in de zaal van de vertoning, is een positieve integer.
         :return: Geeft True terug als de vertoning succesvol is toegevoegd
         """
-        if not self.zalen.tableRetrieve(zaalnummer)[1]:
+        if not self.zalen.tableSearch(zaalnummer)[1]:
             raise Exception("Zaal bestaat niet!")
         vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij)
         self.vertoningen.tableInsert(vertoning.getId(), vertoning)
