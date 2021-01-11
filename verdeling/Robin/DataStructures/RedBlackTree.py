@@ -139,6 +139,9 @@ class RedBlackTree:
         :pre geen
         :post De RBT is niet veranderd
         """
+        if self.root is None:
+            return None, False
+
         if searchKey == self.root.getId():
             return self.root, True
 
@@ -305,12 +308,12 @@ class RedBlackTree:
         :post de RBT is onverandert
         """
         if not (self.left or self.right):
-            visit(self.root.getId())
+            visit(self.root)
             return
 
         if self.left:
             self.left.inorderTraverse(visit)
-        visit(self.root.getId())
+        visit(self.root)
         if self.right:
             self.right.inorderTraverse(visit)
 
