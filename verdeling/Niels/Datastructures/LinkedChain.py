@@ -31,7 +31,7 @@ class LinkedChain:
 
     def insert(self,value):
         """
-        voegt een item toe op potitie index
+        voegt een item toe op positie index
         :param value: waarde van het item
         :return: True
 
@@ -131,7 +131,7 @@ class LinkedChain:
         """
         Geeft een item terug op de gevraagde id
         :param id: id van het gevraagde item
-        :return: Item als het de id geldig is, none als dat niet zo is
+        :return: Item als de id geldig is, none als dat niet zo is
         precondition: None
 
         postcondition: None
@@ -147,7 +147,7 @@ class LinkedChain:
         """
         Geeft een item terug op de gevraagde index
         :param index: index van het gevraagde item
-        :return: Item, true als het de index geldig is, none, False als dat niet zo is
+        :return: Item, true als de index geldig is, none, False als dat niet zo is
         precondition: None
 
         postcondition: None
