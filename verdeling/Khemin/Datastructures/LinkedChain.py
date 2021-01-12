@@ -244,8 +244,8 @@ class LinkedChainTable(LinkedChain):
     def tableLength(self):
         return self.getLength()
 
-    def tableInsert(self,place,value):
-        return self.insert(place,value)
+    def tableInsert(self, value):
+        return self.insert(self.getLength() + 1, value)
 
     def tableDelete(self, key):
         return self.delete(key)

@@ -334,8 +334,8 @@ class BSTTable(BST):
     def tableLength(self):
         return len(self.inorderTraverse())
 
-    def tableInsert(self, key, item):
-        return self.searchTreeInsert(createTreeItem(key, item))
+    def tableInsert(self, item):
+        return self.searchTreeInsert(createTreeItem(item.getId(), item))
 
     def tableDelete(self, key):
         return self.searchTreeDelete(key)
