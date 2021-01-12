@@ -93,7 +93,7 @@ class LinkedChain:
 
         postcondition: None
         """
-        if (index == len(self.list) - 1):
+        if (index == self.getLength()):
             return self.list[0]
         else:
             return self.list[index + 1]
@@ -122,7 +122,7 @@ class LinkedChain:
 
         postcondition: None
         """
-        if (len(self.list) == 1):
+        if (self.getLength() == 0):
             return True
         else:
             return False
@@ -138,7 +138,7 @@ class LinkedChain:
         """
         if(self.isEmpty()):
             return None, False
-        for i in range(1, len(self.list)):
+        for i in range(1, self.getLength()+1):
             if(self.list[i].getId() == id):
                 return self.list[i], True
         return None, False
@@ -152,7 +152,7 @@ class LinkedChain:
 
         postcondition: None
         """
-        if(1<=index<=len(self.list)):
+        if(1<=index<=self.getLength()+1):
             return self.list[index], True
         return None, False
 
@@ -163,7 +163,7 @@ class LinkedChain:
         :param prnt: geeft aan dat er geprint moet worden
         :return: True als het is gelukt
         """
-        for i in range(1, len(self.list)):
+        for i in range(1, self.getLength()+1):
             prnt(self.retrieveIndex(i)[0])
         return True
 
@@ -177,7 +177,7 @@ class LinkedChain:
         postcondition: None
         """
         l = []
-        for i in range(1, len(self.list)):
+        for i in range(1, self.getLength()+1):
             l.append(self.list[i])
         return l
 

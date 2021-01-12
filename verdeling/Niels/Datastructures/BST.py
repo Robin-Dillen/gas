@@ -28,7 +28,7 @@ class BST:
         self.RightTree = None
         self.parent = None
         self.value = None
-        if (len(tree) == 2):
+        if (tree.getLength == 2):
             if (tree['children'][0] != None):
                 self.LeftTree = BST()
                 self.LeftTree.load(tree['children'][0])
@@ -170,7 +170,7 @@ class BST:
         else:
             return False
 
-    def getdepth(self, hoogte=0):
+    def getDepth(self, hoogte=0):
         """
         geeft de diepte van de boom terug
         :return: diepte van de boom
@@ -193,7 +193,7 @@ class BST:
             hoogte = self.LeftTree.getdepth(hoogte) + 1
         return hoogte
 
-    def getlength(self, lengte=0):
+    def getLength(self, lengte=0):
         """
         geeft het aantal knopen van de boom terug
         :return: aantal knopen van de boom
@@ -268,7 +268,7 @@ class BSTTable:
         return self.a.searchTreeDelete(key)
 
     def tableLength(self):
-        return self.a.getlength()
+        return self.a.getLength()
 
     def tableIsEmpty(self):
         return self.a.isEmpty()
