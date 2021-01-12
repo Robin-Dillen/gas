@@ -69,7 +69,7 @@ class Reservatiesysteem:
             print(f"\033[1;31;49mThe id: {id}, is already in use! user not created!\033[0m")
             return False
         gebruiker = Gebruiker(id, voornaam, achternaam, email)
-        self.gebruikers.tableInsert(self.gebruikers.tableLength() + 1, gebruiker)
+        self.gebruikers.tableInsert(gebruiker)
         return True
 
     def addFilm(self, id, titel, rating) -> bool:
@@ -84,7 +84,7 @@ class Reservatiesysteem:
             print(f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
             return False
         film = Film(id, titel, rating)  # Nieuwe film aanmaken
-        self.films.tableInsert(self.films.tableLength() + 1, film)  # Film toevoegen aan ADT van films
+        self.films.tableInsert(film)  # Film toevoegen aan ADT van films
         print(f"The movie {titel} has been created!")
         return True
 
@@ -128,7 +128,7 @@ class Reservatiesysteem:
         if not self.zalen.tableRetrieve(zaalnummer)[1]: # Kijkt na of de gegeven zaal met zaalnummer bestaat
             raise Exception("Zaal bestaat niet!")
         vertoning = Vertoning(id, zaalnummer, slot, datum, filmid, aantal_vrij) # maakt een nieuwe vertoning aan
-        self.vertoningen.tableInsert(self.vertoningen.tableLength() + 1, vertoning) # voegt de vertoning toe aan de ADT van vertoningen
+        self.vertoningen.tableInsert(vertoning) # voegt de vertoning toe aan de ADT van vertoningen
         film, succes = self.films.tableRetrieve(filmid) # film is 1ste element van de tuple, succes is het 2de element
         if succes:  # Kijkt na of de film is gevonden
             film.addVertoning(vertoning)    # Voegt de vertoning toe aan de film
@@ -163,7 +163,7 @@ class Reservatiesysteem:
         postconditie: geen
         """
         zaal = Zaal(id_, plaatsen)  # maakt een nieuwe zaal aan
-        self.zalen.tableInsert(self.zalen.tableLength() + 1, zaal)  # voegt de zaal toe aan de ADT van zalen
+        self.zalen.tableInsert(zaal)  # voegt de zaal toe aan de ADT van zalen
         return True
 
     def makeLog(self, time):
