@@ -36,7 +36,7 @@ else:
 
 class Reservatiesysteem:
     def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
-                 reservaties=Queue(), vertoningen=RedBlackTreeTable(),
+                 reservaties=Queue(), vertoningen=LinkedChainTable(),
                  zalen=LinkedChainTable()):
 
         self.films = films

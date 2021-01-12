@@ -674,8 +674,8 @@ class TwoThreeTreeTable:
     def load(self, key):
         return self.a.load(key)
 
-    def tableInsert(self, key,value):
-        return self.a.insertItem(createTreeItem(key, value))
+    def tableInsert(self,value):
+        return self.a.insertItem(value)
 
     def tableDelete(self, key):
         return self.a.deleteItem(key)

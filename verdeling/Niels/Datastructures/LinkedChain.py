@@ -29,7 +29,7 @@ class LinkedChain:
         """
         self.list.append(value)
 
-    def insert(self, index, value):
+    def insert(self,value):
         """
         voegt een item toe op potitie index
         :param value: waarde van het item
@@ -40,11 +40,9 @@ class LinkedChain:
 
         postcondition: None
         """
-        if (index <= self.getLength()+1):
-            self.list.insert(index, value)
-            return True
-        else:
-            return False
+        self.list.append(value)
+        return True
+
 
     def delete(self, index):
         """
@@ -192,8 +190,8 @@ class LinkedChainTable:
     def load(self, tree):
         self.a.load(tree)
 
-    def tableInsert(self, index, value):
-        return self.a.insert(index, value)
+    def tableInsert(self,value):
+        return self.a.insert(value)
 
     def tableDelete(self, value):
         return self.a.delete(value)

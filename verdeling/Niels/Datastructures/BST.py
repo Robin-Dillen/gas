@@ -261,8 +261,8 @@ class BSTTable:
     def load(self, tree):
         self.a.load(tree)
 
-    def tableInsert(self,key, value):
-        return self.a.searchTreeInsert(createTreeItem(key, value))
+    def tableInsert(self,value):
+        return self.a.searchTreeInsert(value)
 
     def tableDelete(self, key):
         return self.a.searchTreeDelete(key)
