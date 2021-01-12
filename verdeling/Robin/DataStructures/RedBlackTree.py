@@ -119,7 +119,7 @@ class RedBlackTree:
         child = self.right
         self.root, child.root = child.root, self.root
         self.right = child.right
-        child.right = child.left
+        child.right = self
         child.left = self.left
         self.left = child
 
@@ -131,7 +131,7 @@ class RedBlackTree:
         child = self.right
         self.root, child.root = child.root, self.root
         self.right = child.right
-        child.right = child.left
+        child.right = self
         child.left = self.left
         self.left = child
 

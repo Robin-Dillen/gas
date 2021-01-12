@@ -53,7 +53,7 @@ class Execute:
         clock.start()
 
     def log(self):
-        print(f"{clock} Cinema$ ","log")
+        print(f"{clock} Cinema$", "log")
         self.r.makeLog(str(clock))
         # exit()
 
