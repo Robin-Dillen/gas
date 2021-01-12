@@ -81,7 +81,7 @@ class Reservatiesysteem:
         :return: Geeft True terug als de film succesvol is toegevoegd
         """
         if self.films.tableRetrieve(id)[1]:  # Kijkt na of film-id al bestaat
-            print(f"\033[1;31;49mThe id: {id}, is already in use! The move {titel} has NOT been created!\033[0m")
+            print(f"\033[1;31;49mThe id: {id}, is already in use! The movie {titel} has NOT been created!\033[0m")
             return False
         film = Film(id, titel, rating)  # Nieuwe film aanmaken
         self.films.tableInsert(film)  # Film toevoegen aan ADT van films
