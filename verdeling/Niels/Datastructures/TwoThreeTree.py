@@ -260,10 +260,12 @@ class TwoThreeTree:
         else:
             if (self.root < self.parent.root):
                 self.parent.root[1] = self.parent.RightTree.root[0]
+                self.parent.value[1] = self.parent.RightTree.value[0]
                 self.parent.MiddleTree = self.parent.RightTree.LeftTree
                 self.parent.RightTree = self.parent.RightTree.RightTree
             elif (self.root > self.parent.root):
                 self.parent.root = [self.parent.LeftTree.root[0], self.parent.root[0]]
+                self.parent.value = [self.parent.LeftTree.value[0], self.parent.value[0]]
                 self.parent.MiddleTree = self.parent.LeftTree.RightTree
                 self.parent.RightTree = self.parent.LeftTree.Lefttree
         return
@@ -279,8 +281,11 @@ class TwoThreeTree:
         """
         inorder = self.__zoekinordersuccessor(node)
         key = inorder.root[0]
+        val = inorder.value[0]
         inorder.root[0] = self.root[node - 1]
+        inorder.value[0] = self.value[node - 1]
         self.root[node - 1] = key
+        self.value[node - 1] = val
         return inorder
 
     def deleteItem(self, key):
@@ -309,40 +314,51 @@ class TwoThreeTree:
                             # rechtse sibling 2?
                             if (len(self.parent.RightTree) == 2):
                                 self.root = [self.parent.root[0]]
+                                self.value = [self.parent.value[0]]
                                 self.parent.root = [self.parent.RightTree.root[0]]
+                                self.parent.value = [self.parent.RightTree.value[0]]
                                 self.parent.RightTree.root = [self.parent.RightTree.root[1]]
+                                self.parent.RightTree.value = [self.parent.RightTree.value[1]]
                             # linkse sibling 2?
                             elif (self.parent.parent != None):
                                 if (len(self.parent.parent) == 1):
                                     if (self.parent.root[0] > self.parent.parent.root[0]):
                                         if (len(self.parent.parent.LeftTree.RightTree) == 2):
                                             self.root = [self.parent.parent.root[0]]
+                                            self.value = [self.parent.parent.value[0]]
                                             self.parent.parent.root = [self.parent.parent.LeftTree.RightTree.root[1]]
-                                            self.parent.parent.LeftTree.RightTree.root = [
-                                                self.parent.parent.LeftTree.RightTree.root[0]]
+                                            self.parent.parent.value = [self.parent.parent.LeftTree.RightTree.value[1]]
+                                            self.parent.parent.LeftTree.RightTree.root = [self.parent.parent.LeftTree.RightTree.root[0]]
+                                            self.parent.parent.LeftTree.RightTree.value = [self.parent.parent.LeftTree.RightTree.value[0]]
                                             return True
                                 elif (len(self.parent.parent) == 2):
-                                    if (self.parent.root[0] > self.parent.parent.root[0] and self.parent.root[0] <
-                                            self.parent.parent.root[1]):
+                                    if (self.parent.root[0] > self.parent.parent.root[0] and self.parent.root[0] < self.parent.parent.root[1]):
                                         if (len(self.parent.parent.LeftTree.RightTree) == 2):
                                             self.root = [self.parent.parent.root]
-                                            self.parent.parent.root = [self.parent.parent.LeftTree.RightTree.root[1],
-                                                                       self.parent.parent.root[1]]
-                                            self.parent.parent.LeftTree.RightTree.root = [
-                                                self.parent.parent.LeftTree.RightTree.root[0]]
+                                            self.value = [self.parent.parent.value]
+                                            self.parent.parent.root = [self.parent.parent.LeftTree.RightTree.root[1],self.parent.parent.root[1]]
+                                            self.parent.parent.value = [self.parent.parent.LeftTree.RightTree.value[1],
+                                                                       self.parent.parent.value[1]]
+                                            self.parent.parent.LeftTree.RightTree.root = [self.parent.parent.LeftTree.RightTree.root[0]]
+                                            self.parent.parent.LeftTree.RightTree.value = [
+                                                self.parent.parent.LeftTree.RightTree.value[0]]
                                             return True
                                     elif (self.parent.root[0] > self.parent.parent.root[1]):
                                         if (len(self.parent.parent.MiddleTree.RightTree) == 2):
                                             self.root = [self.parent.parent.root]
-                                            self.parent.parent.root = [self.parent.parent.root[0],
-                                                                       self.parent.parent.MiddleTree.RightTree.root[1]]
-                                            self.parent.parent.MiddleTree.RightTree.root = [
-                                                self.parent.parent.MiddleTree.RightTree.root[0]]
+                                            self.value = [self.parent.parent.value]
+                                            self.parent.parent.root = [self.parent.parent.root[0],self.parent.parent.MiddleTree.RightTree.root[1]]
+                                            self.parent.parent.value = [self.parent.parent.value[0],
+                                                                       self.parent.parent.MiddleTree.RightTree.value[1]]
+                                            self.parent.parent.MiddleTree.RightTree.root = [self.parent.parent.MiddleTree.RightTree.root[0]]
+                                            self.parent.parent.MiddleTree.RightTree.value = [
+                                                self.parent.parent.MiddleTree.RightTree.value[0]]
                                             return True
                             # geen sibling met 2 items
                             else:
                                 self.parent.LeftTree = None
                                 self.parent.root = [self.parent.root[0], self.parent.RightTree.root[0]]
+                                self.parent.value = [self.parent.value[0], self.parent.RightTree.value[0]]
                                 self.parent.RightTree = None
                                 self.__makebalanced()
                                 return True
@@ -351,8 +367,11 @@ class TwoThreeTree:
                             # linkse sibling 2?
                             if (len(self.parent.LeftTree) == 2):
                                 self.root = [self.parent.root[0]]
+                                self.value = [self.parent.value[0]]
                                 self.parent.root = [self.parent.LeftTree.root[1]]
+                                self.parent.value = [self.parent.LeftTree.value[1]]
                                 self.parent.LeftTree.root = [self.parent.LeftTree.root[0]]
+                                self.parent.LeftTree.value = [self.parent.LeftTree.value[0]]
                                 return True
                             # Rechtse sibling 2?
                             elif (self.parent.parent != None):
@@ -360,32 +379,40 @@ class TwoThreeTree:
                                     if (self.parent.root[0] < self.parent.parent.root[0]):
                                         if (len(self.parent.parent.RightTree.LeftTree) == 2):
                                             self.root = [self.parent.parent.root[0]]
+                                            self.value = [self.parent.parent.value[0]]
                                             self.parent.parent.root = [self.parent.parent.RightTree.LeftTree.root[0]]
-                                            self.parent.parent.RightTree.LeftTree.root = [
-                                                self.parent.parent.RightTree.LeftTree.root[1]]
+                                            self.parent.parent.value = [self.parent.parent.RightTree.LeftTree.value[0]]
+                                            self.parent.parent.RightTree.LeftTree.root = [self.parent.parent.RightTree.LeftTree.root[1]]
+                                            self.parent.parent.RightTree.LeftTree.value = [
+                                                self.parent.parent.RightTree.LeftTree.value[1]]
                                             return True
                                 elif (len(self.parent.parent) == 2):
-                                    if (self.parent.root[0] > self.parent.parent.root[0] and self.parent.root[0] <
-                                            self.parent.parent.root[1]):
+                                    if (self.parent.root[0] > self.parent.parent.root[0] and self.parent.root[0] < self.parent.parent.root[1]):
                                         if (len(self.parent.parent.RightTree.LeftTree) == 2):
                                             self.root = [self.parent.parent.root]
-                                            self.parent.parent.root = [self.parent.parent.root[0],
-                                                                       self.parent.parent.RightTree.LeftTree.root[0]]
-                                            self.parent.parent.RightTree.LeftTree.root = [
-                                                self.parent.parent.RightTree.LeftTree.root[1]]
+                                            self.value = [self.parent.parent.value]
+                                            self.parent.parent.root = [self.parent.parent.root[0], self.parent.parent.RightTree.LeftTree.root[0]]
+                                            self.parent.parent.value = [self.parent.parent.value[0],
+                                                                       self.parent.parent.RightTree.LeftTree.value[0]]
+                                            self.parent.parent.RightTree.LeftTree.root = [self.parent.parent.RightTree.LeftTree.root[1]]
+                                            self.parent.parent.RightTree.LeftTree.value = [
+                                                self.parent.parent.RightTree.LeftTree.value[1]]
                                             return True
                                     elif (self.parent.root[0] < self.parent.parent.root[0]):
                                         if (len(self.parent.parent.MiddleTree.LeftTree) == 2):
                                             self.root = [self.parent.parent.root]
-                                            self.parent.parent.root = [self.parent.parent.MiddleTree.LeftTree.root[0],
-                                                                       self.parent.parent.root[1]]
-                                            self.parent.parent.MiddleTree.LeftTree.root = [
-                                                self.parent.parent.MiddleTree.LeftTree.root[1]]
+                                            self.value = [self.parent.parent.value]
+                                            self.parent.parent.root = [self.parent.parent.MiddleTree.LeftTree.root[0], self.parent.parent.root[1]]
+                                            self.parent.parent.value = [self.parent.parent.MiddleTree.LeftTree.value[0],
+                                                                       self.parent.parent.value[1]]
+                                            self.parent.parent.MiddleTree.LeftTree.root = [self.parent.parent.MiddleTree.LeftTree.root[1]]
+                                            self.parent.parent.MiddleTree.LeftTree.value = [self.parent.parent.MiddleTree.LeftTree.value[1]]
                                             return True
                             # geen sibling met 2 items
                             else:
                                 self.parent.RightTree = None
                                 self.parent.root.insert(1, self.parent.LeftTree.root[0])
+                                self.parent.value.insert(1, self.parent.LeftTree.value[0])
                                 self.parent.LeftTree = None
                                 self.__makebalanced()
                                 return True
@@ -396,8 +423,11 @@ class TwoThreeTree:
                             # rechtse sibling 2?
                             if (len(self.parent.MiddleTree) == 2):
                                 self.root = [self.parent.root[0]]
+                                self.value = [self.parent.value[0]]
                                 self.parent.root = [self.parent.MiddleTree.root[0], self.parent.root[1]]
+                                self.parent.value = [self.parent.MiddleTree.value[0], self.parent.value[1]]
                                 self.parent.MiddleTree.root = [self.parent.MiddleTree.root[1]]
+                                self.parent.MiddleTree.value = [self.parent.MiddleTree.value[1]]
                                 return True
                             # linkse sibling 2?
                             elif (self.parent.parent != None):
@@ -405,32 +435,42 @@ class TwoThreeTree:
                                     if (self.parent.root[0] > self.parent.parent.root[0]):
                                         if (len(self.parent.parent.LeftTree.RightTree) == 2):
                                             self.root = [self.parent.parent.root[0]]
+                                            self.value = [self.parent.parent.value[0]]
                                             self.parent.parent.root = [self.parent.parent.LeftTree.RightTree.root[1]]
-                                            self.parent.parent.LeftTree.RightTree.root = [
-                                                self.parent.parent.LeftTree.RightTree.root[0]]
+                                            self.parent.parent.value = [self.parent.parent.LeftTree.RightTree.value[1]]
+                                            self.parent.parent.LeftTree.RightTree.root = [self.parent.parent.LeftTree.RightTree.root[0]]
+                                            self.parent.parent.LeftTree.RightTree.value = [
+                                                self.parent.parent.LeftTree.RightTree.value[0]]
                                             return True
                                 elif (len(self.parent.parent) == 2):
-                                    if (self.parent.root[0] > self.parent.parent.root[0] and self.parent.root[0] <
-                                            self.parent.parent.root[1]):
+                                    if (self.parent.root[0] > self.parent.parent.root[0] and self.parent.root[0] < self.parent.parent.root[1]):
                                         if (len(self.parent.parent.LeftTree.RightTree) == 2):
                                             self.root = [self.parent.parent.root]
-                                            self.parent.parent.root = [self.parent.parent.LeftTree.RightTree.root[1],
-                                                                       self.parent.parent.root[1]]
-                                            self.parent.parent.LeftTree.RightTree.root = [
-                                                self.parent.parent.LeftTree.RightTree.root[0]]
+                                            self.value = [self.parent.parent.value]
+                                            self.parent.parent.root = [self.parent.parent.LeftTree.RightTree.root[1], self.parent.parent.root[1]]
+                                            self.parent.parent.value = [self.parent.parent.LeftTree.RightTree.value[1],
+                                                                       self.parent.parent.value[1]]
+                                            self.parent.parent.LeftTree.RightTree.root = [self.parent.parent.LeftTree.RightTree.root[0]]
+                                            self.parent.parent.LeftTree.RightTree.value = [
+                                                self.parent.parent.LeftTree.RightTree.value[0]]
                                             return True
                                     elif (self.parent.root[0] > self.parent.parent.root[1]):
                                         if (len(self.parent.parent.MiddleTree.RightTree) == 2):
                                             self.root = [self.parent.parent.root]
-                                            self.parent.parent.root = [self.parent.parent.root[0],
-                                                                       self.parent.parent.MiddleTree.RightTree.root[1]]
-                                            self.parent.parent.MiddleTree.RightTree.root = [
-                                                self.parent.parent.MiddleTree.RightTree.root[0]]
+                                            self.value = [self.parent.parent.value]
+                                            self.parent.parent.root = [self.parent.parent.root[0], self.parent.parent.MiddleTree.RightTree.root[1]]
+                                            self.parent.parent.value = [self.parent.parent.value[0],
+                                                                       self.parent.parent.MiddleTree.RightTree.value[1]]
+                                            self.parent.parent.MiddleTree.RightTree.root = [self.parent.parent.MiddleTree.RightTree.root[0]]
+                                            self.parent.parent.MiddleTree.RightTree.value = [
+                                                self.parent.parent.MiddleTree.RightTree.value[0]]
                                             return True
                             # geen sibling met 2 items
                             else:
                                 self.root = [self.parent.root[0], self.parent.MiddleTree.root[0]]
+                                self.value = [self.parent.value[0], self.parent.MiddleTree.value[0]]
                                 self.parent.root = [self.parent.root[1]]
+                                self.parent.value = [self.parent.value[1]]
                                 self.parent.MiddleTree = None
                                 return True
                         # middelste kind
@@ -438,28 +478,39 @@ class TwoThreeTree:
                             # linkse sibling 2?
                             if (len(self.parent.LeftTree.root) == 2):
                                 self.root = [self.parent.root[0]]
+                                self.value = [self.parent.value[0]]
                                 self.parent.root = [self.parent.LeftTree.root[1], self.parent.root[1]]
+                                self.parent.value = [self.parent.LeftTree.value[1], self.parent.value[1]]
                                 self.parent.LeftTree.root = [self.parent.LeftTree.root[0]]
+                                self.parent.LeftTree.value = [self.parent.LeftTree.value[0]]
                                 return True
                             # rechtse sibling 2?
                             elif (len(self.parent.RightTree.root) == 2):
                                 self.root = [self.parent.root[1]]
+                                self.value = [self.parent.value[1]]
                                 self.parent.root = [self.parent.root[0], self.parent.RightTree.root[0]]
+                                self.parent.value = [self.parent.value[0], self.parent.RightTree.value[0]]
                                 self.parent.RightTree.root = [self.parent.RightTree.root[1]]
+                                self.parent.RightTree.value = [self.parent.RightTree.value[1]]
                                 return True
                             # geen sibling met 2 items
                             else:
                                 self.parent.MiddleTree = None
                                 self.parent.LeftTree.root = [self.parent.LeftTree.root[0], self.parent.root[0]]
+                                self.parent.LeftTree.value = [self.parent.LeftTree.value[0], self.parent.value[0]]
                                 self.parent.root = [self.parent.root[1]]
+                                self.parent.value = [self.parent.value[1]]
                                 return True
                         # Rechtsekind
                         elif (self.root[0] > self.parent.root[1]):
                             # linkse sibling 2?
                             if (len(self.parent.MiddleTree.root) == 2):
                                 self.root = [self.parent.root[1]]
+                                self.value = [self.parent.value[1]]
                                 self.parent.root = [self.parent.root[0], self.parent.MiddleTree.root[1]]
+                                self.parent.value = [self.parent.value[0], self.parent.MiddleTree.value[1]]
                                 self.parent.MiddleTree.root = [self.parent.MiddleTree.root[0]]
+                                self.parent.MiddleTree.value = [self.parent.MiddleTree.value[0]]
                                 return True
                             # rechtse sibling 2?
                             elif (self.parent.parent != None):
@@ -467,32 +518,38 @@ class TwoThreeTree:
                                     if (self.parent.root[0] < self.parent.parent.root[0]):
                                         if (len(self.parent.parent.RightTree.LeftTree) == 2):
                                             self.root = [self.parent.parent.root[0]]
+                                            self.value = [self.parent.parent.value[0]]
                                             self.parent.parent.root = [self.parent.parent.RightTree.LeftTree.root[0]]
-                                            self.parent.parent.RightTree.LeftTree.root = [
-                                                self.parent.parent.RightTree.LeftTree.root[1]]
+                                            self.parent.parent.value = [self.parent.parent.RightTree.LeftTree.value[0]]
+                                            self.parent.parent.RightTree.LeftTree.root = [self.parent.parent.RightTree.LeftTree.root[1]]
+                                            self.parent.parent.RightTree.LeftTree.value = [self.parent.parent.RightTree.LeftTree.value[1]]
                                             return True
                                 elif (len(self.parent.parent) == 2):
                                     if (self.parent.root[0] > self.parent.parent.root[0] and self.parent.root[0] <
                                             self.parent.parent.root[1]):
                                         if (len(self.parent.parent.RightTree.LeftTree) == 2):
                                             self.root = [self.parent.parent.root]
-                                            self.parent.parent.root = [self.parent.parent.root[0],
-                                                                       self.parent.parent.RightTree.LeftTree.root[0]]
-                                            self.parent.parent.RightTree.LeftTree.root = [
-                                                self.parent.parent.RightTree.LeftTree.root[1]]
+                                            self.value = [self.parent.parent.value]
+                                            self.parent.parent.root = [self.parent.parent.root[0],self.parent.parent.RightTree.LeftTree.root[0]]
+                                            self.parent.parent.value = [self.parent.parent.value[0],self.parent.parent.RightTree.LeftTree.value[0]]
+                                            self.parent.parent.RightTree.LeftTree.root = [self.parent.parent.RightTree.LeftTree.root[1]]
+                                            self.parent.parent.RightTree.LeftTree.value = [self.parent.parent.RightTree.LeftTree.value[1]]
                                             return True
                                     elif (self.parent.root[0] < self.parent.parent.root[0]):
                                         if (len(self.parent.parent.MiddleTree.LeftTree) == 2):
                                             self.root = [self.parent.parent.root]
-                                            self.parent.parent.root = [self.parent.parent.MiddleTree.LeftTree.root[0],
-                                                                       self.parent.parent.root[1]]
-                                            self.parent.parent.MiddleTree.LeftTree.root = [
-                                                self.parent.parent.MiddleTree.LeftTree.root[1]]
+                                            self.value = [self.parent.parent.value]
+                                            self.parent.parent.root = [self.parent.parent.MiddleTree.LeftTree.root[0],self.parent.parent.root[1]]
+                                            self.parent.parent.value = [self.parent.parent.MiddleTree.LeftTree.value[0],self.parent.parent.value[1]]
+                                            self.parent.parent.MiddleTree.LeftTree.root = [self.parent.parent.MiddleTree.LeftTree.root[1]]
+                                            self.parent.parent.MiddleTree.LeftTree.value = [self.parent.parent.MiddleTree.LeftTree.value[1]]
                                             return True
                             # geen sibling met 2 items
                             else:
                                 self.root = [self.parent.MiddleTree.root[0], self.parent.root[1]]
+                                self.value = [self.parent.MiddleTree.value[0], self.parent.value[1]]
                                 self.parent.root = [self.parent.root[0]]
+                                self.parent.value = [self.parent.value[0]]
                                 self.parent.MiddleTree = None
                                 return True
                 # kinderen
@@ -510,6 +567,7 @@ class TwoThreeTree:
             if (key == self.root[0]):
                 if (self.LeftTree == None):
                     self.root = [self.root[1]]
+                    self.value = [self.value[1]]
                     return True
                 else:
                     inorder = self.__zetinblad(1)
@@ -517,6 +575,7 @@ class TwoThreeTree:
             elif (key == self.root[1]):
                 if (self.LeftTree == None):
                     self.root = [self.root[0]]
+                    self.value = [self.value[0]]
                     return True
                 else:
                     inorder = self.__zetinblad(2)
