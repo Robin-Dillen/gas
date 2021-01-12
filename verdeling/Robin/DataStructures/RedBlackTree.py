@@ -97,15 +97,19 @@ class RedBlackTree:
             self.parent.__rotateRight()
             self.right.__insertCase3Step2()
 
+        else:
+            self.color = True
+            self.__insertCase3Step2()
+
     def __insertCase3Step2(self) -> None:
         """rotaties en herkleuringen"""
+        self.parent.color = False
+        self.grandparent.color = True
+
         if self == self.parent.left:
             self.grandparent.__rotateRight()
         else:
             self.grandparent.__rotateLeft()
-
-        self.parent.color = False
-        self.grandparent.color = True
 
     def __rotateLeft(self) -> None:
         """
@@ -328,6 +332,8 @@ class RedBlackTree:
         return self.size
 
     def save(self) -> _BSTSave:
+        if self.root is None:
+            return {}
         save = {'root': self.root.getId(), 'color': 'red' if self.color else 'black'}
         if bool(self.left or self.right):
             save['children'] = [self.left.save() if self.left else None, self.right.save() if self.right else None]

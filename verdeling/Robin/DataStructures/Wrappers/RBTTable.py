@@ -15,6 +15,7 @@ class RedBlackTreeTable:
         :pre newItem, of een item met hetzelfde SearchKey, zit nog niet in de tabel
         :post newItem zit in de tabel, de grootte van de tabel is met 1 verhoogt.
         """
+        print(self.__rbt.save())
         return self.__rbt.insertItem(newItem)
 
     def tableDelete(self, searchKey: int) -> bool:
@@ -25,6 +26,7 @@ class RedBlackTreeTable:
         :pre geen
         :post het item met searchKey zit niet meer in de tabel, de grootte van de tabel is met 1 vermindert.
         """
+        print(self.__rbt.save())
         return self.__rbt.deleteItem(searchKey)
 
     def tableRetrieve(self, searchKey: int) -> Tuple[Optional[object], bool]:
@@ -35,6 +37,7 @@ class RedBlackTreeTable:
         :pre geen
         :post De tabel is niet veranderd
         """
+        print(self.__rbt.save())
         return self.__rbt.retrieveItem(searchKey)
 
     def traverseTable(self, visit: any) -> None:
@@ -44,6 +47,7 @@ class RedBlackTreeTable:
         :pre geen
         :post de tabel is onverandert
         """
+        print(self.__rbt.save())
         return self.__rbt.inorderTraverse(visit)
 
     def tableIsEmpty(self):

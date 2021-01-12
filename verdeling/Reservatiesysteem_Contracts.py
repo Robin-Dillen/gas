@@ -36,7 +36,7 @@ else:
 
 class Reservatiesysteem:
     def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
-                 reservaties=Queue(), vertoningen=BSTTable(),
+                 reservaties=Queue(), vertoningen=RedBlackTreeTable(),
                  zalen=LinkedChainTable()):
 
         self.films = films
@@ -65,8 +65,11 @@ class Reservatiesysteem:
         :param email: het e-mailadres van de nieuwe gebruiker, is een string.
         :return: Geeft True terug als het account succesvol is toegevoegd
         """
-        gebruiker = Gebruiker(id, voornaam, achternaam, email)  # Nieuwe gebruiker aanmaken
-        self.gebruikers.tableInsert(self.gebruikers.tableLength() + 1, gebruiker)  # Toevoegen aan ADT van gebruikers
+        if self.gebruikers.tableRetrieve(id)[1]:
+            print(f"\033[1;31;49mThe id: {id}, is already in use! user not created!\033[0m")
+            return False
+        gebruiker = Gebruiker(id, voornaam, achternaam, email)
+        self.gebruikers.tableInsert(self.gebruikers.tableLength() + 1, gebruiker)
         return True
 
     def addFilm(self, id, titel, rating) -> bool:
@@ -106,7 +109,6 @@ class Reservatiesysteem:
         vertoning, succes = self.retrieveVertoningen(vertoningid)  # vertoning is 1ste element van de tuple, succes is het 2de element
         vertoning: Vertoning
         if not succes or vertoning.getAantalVrij() <= plaatsen:  # checkt of er de vertoning is geretrieved en of er genoeg plaatsen beschikbaar zijn
-
             return False
         aantal_vrij = vertoning.getAantalVrij() - plaatsen  # het nieuwe aantal vrije plaatsen
         vertoning.setAantalVrij(aantal_vrij)
