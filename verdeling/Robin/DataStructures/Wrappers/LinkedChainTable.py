@@ -6,7 +6,7 @@ class LinkedChainTable:
     def __init__(self):
         self.__linked_chain = LinkedChain()  # private
 
-    def tableInsert(self, index: int, newItem):
+    def tableInsert(self, newItem):
         """
         voegt een object toe aan de tabel
         :param newItem: object met getSearchKey() als functie, de searchKey is een getal.
@@ -14,7 +14,7 @@ class LinkedChainTable:
         :pre newItem, of een item met hetzelfde SearchKey, zit nog niet in de tabel
         :post newItem zit in de tabel, de grootte van de tabel is met 1 verhoogt.
         """
-        return self.__linked_chain.insert(index, newItem)
+        return self.__linked_chain.insert(self.__linked_chain.getLength() + 1, newItem)
 
     def tableDelete(self, index):
         """

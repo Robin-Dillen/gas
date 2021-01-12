@@ -6,10 +6,9 @@ class BSTTable:
     def __init__(self):
         self.__bst = BST()  # private
 
-    def tableInsert(self, searchKey: int, newItem) -> bool:
+    def tableInsert(self, newItem) -> bool:
         """
         voegt een object toe aan de tabel
-        :param searchKey: toegevoegt om consistent te blijven met de andere tabel implementaties
         :param newItem: object met getSearchKey() als functie, de searchKey is een getal.
         :return: Succes
         :pre newItem, of een item met hetzelfde SearchKey, zit nog niet in de tabel
