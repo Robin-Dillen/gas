@@ -13,7 +13,7 @@ vertoning 9 1 1 2020-10-10 3 200
 vertoning 10 1 2 2020-10-10 3 200
 vertoning 11 1 3 2020-10-10 3 200
 
-vertoning 2 2 1 2020-10-11 5 20
+vertoning 2 2 1 2020-10-10 5 20
 vertoning 3 2 3 2020-10-11 5 20
 vertoning 4 2 4 2020-10-12 5 20
 
@@ -33,6 +33,8 @@ start
 2020-10-05 11:30 reserveer 2 9 8
 # user 2 bestelt 2 ticketten voor vertoning 10
 2020-10-05 11:30 reserveer 2 10 2
+# user 4 bestelt 20 ticketten voor vertoning 2
+2020-10-07 12:00 reserveer 4 2 20
 # user 3 bestelt 2 ticketten voor vertoning 3
 2020-10-07 12:00 reserveer 3 3 2
 # user 4 bestelt 5 ticketten voor vertoning 3
@@ -42,7 +44,9 @@ start
 # user 5 bestelt 3 ticketten voor vertoning 4
 2020-10-07 12:00 reserveer 5 4 3
 # er komen 8 mensen vertoning 9 bekijken 
-2020-10-10 13:45 ticket 9 8 
+2020-10-10 13:45 ticket 9 8
+# er komen 20 mensen vertoning 2 bekijken
+2020-10-10 13:45 ticket 2 20
 # er komen 2 mensen vertoning 9 bekijken 
 2020-10-10 14:35 ticket 9 2
 # er komen 2 mensen vertoning 10 bekijken
