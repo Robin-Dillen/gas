@@ -17,7 +17,7 @@ vertoning 2 2 1 2020-10-10 5 20
 vertoning 3 2 3 2020-10-11 5 20
 vertoning 4 2 4 2020-10-12 5 20
 
-vertoning 5 1 4 2020-10-12 5 200
+#vertoning 5 1 4 2020-10-12 5 200
 
 gebruiker 1 John Doe john@doe.com
 gebruiker 2 Tom Hofkens tom.hofkens@uantwerpen.be

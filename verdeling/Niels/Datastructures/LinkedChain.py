@@ -33,8 +33,7 @@ class LinkedChain:
         """
         voegt een item toe op potitie index
         :param value: waarde van het item
-        :param index: plaats waar het item moet worden toegevoegd
-        :return: none
+        :return: True
 
         precondition: None
 
@@ -48,13 +47,13 @@ class LinkedChain:
         """
         verwijdert een item uit de ketting
         :param index: plaats waar het item moet worden verwijderd
-        :return: none
+        :return: True als succes
 
         precondition: de gegeven index/value moet bestaan in de ketting
 
         postcondition: lengte van de ketting zal verkleinen met 1
         """
-        if (index > 0):
+        if (index > 0 and index < self.getLength()):
             self.list.pop(index)
             return True
         else:
