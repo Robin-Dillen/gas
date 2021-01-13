@@ -229,8 +229,14 @@ class Reservatiesysteem:
             if not succes:  # kijkt na of zaal bestaat
                 raise Exception("Zaal niet gevonden!")
 
-            if vertoning[1].isStarted() or vertoning[1].getAantalVrij() == zaal.getPlaatsen():  # als de film gestart is
+            if vertoning[1].isStarted():  # als de film gestart is
                 buffer += f"<td>F:{vertoning[1].getAantalMensenBinnen()}</td>"  # voeg "F: aantal mensen in zaal" toe aan buffer
+
+            elif vertoning[1].getAantalVrij()==zaal.getPlaatsen() and datetime.datetime.combine(vertoning[1].getDatum(),vertoning[1].getSlot()) <= clock.getTime():
+                buffer += f"<td>F:{vertoning[1].getAantalMensenBinnen()}</td>"  # voeg "F: aantal mensen in zaal" toe aan buffer
+
+            elif vertoning[1].getAantalVrij() == zaal.getPlaatsen() and datetime.datetime.combine(vertoning[1].getDatum(), vertoning[1].getSlot()) > clock.getTime():
+                buffer += f"<td>G:{zaal.getPlaatsen() - vertoning[1].getAantalVrij()}</td>"  # voeg "G: aantal verkochte tickets" toe aan buffer
 
             elif vertoning[1].isWaiting():  # als er gewacht moet worden op personen
                 buffer += f"<td>W:{zaal.getPlaatsen() - (vertoning[1].getAantalMensenBinnen() + vertoning[1].getAantalVrij())}</td>"   # voeg "W: aantal mensen waarop wachten" toe aan buffer
