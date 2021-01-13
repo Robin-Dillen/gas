@@ -25,6 +25,7 @@ elif user.lower() == "khemin":
     from verdeling.Khemin.Datastructures.BST import *
     from verdeling.Khemin.Datastructures.LinkedChain import *
     from verdeling.Khemin.Datastructures.Queue import *
+    from verdeling.Khemin.Datastructures.Hashmap import *
 
 else:
     user = "Niels"

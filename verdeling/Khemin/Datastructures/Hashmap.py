@@ -1,4 +1,4 @@
-from LinkedChain import *
+from verdeling.Khemin.Datastructures.LinkedChain import *
 
 
 def createTableItem(key,val):
@@ -75,11 +75,14 @@ class Hashmap:
         :param prt: Optionele parameter die weergeeft of de traverse geprint moet worden.
         :return: Een lijst die de elementen van de Hashmap bevat (integers voor "lin" en "quad" en LinkedChain voor "sep".
         """
-        if prt == print:
-            print(self.items)
-        return self.items
+        lst = []
+        for e in self.items:
+            if(e is not None):
+                prt(e[1])
+                lst.append(e[1])
+        return lst
 
-    def tableInsert(self, item):
+    def insert(self, item):
         """
         Voegt het gegeven item toe in de Hashmap.
         :param item: Het item dat toegevoegd wordt in de Hashmap.
@@ -120,7 +123,7 @@ class Hashmap:
             self.items[index].tableInsert(1, item)
             return True
 
-    def tableRetrieve(self, searchkey):
+    def retrieve(self, searchkey):
         """
         Haalt het item met gegeven searchkey op uit de Hashmap.
         :param searchkey: De zoeksleutel van het item dat opgehaald wordt.
@@ -128,6 +131,8 @@ class Hashmap:
         """
         if self.type == "lin":
             index = self.hash(searchkey)
+            if self.items[index] is None:
+                return None, False
             if self.items[index][0] == searchkey:
                 return self.items[index][1], True
             else:
@@ -140,6 +145,8 @@ class Hashmap:
 
         if self.type == "quad":
             index = self.hash(searchkey)
+            if self.items[index] is None:
+                return None, False
             if self.items[index][0] == searchkey:
                 return self.items[index][1], True
             else:
@@ -154,6 +161,8 @@ class Hashmap:
 
         if self.type == "sep":
             index = self.hash(searchkey)
+            if self.items[index] is None:
+                return None, False
             if self.items[index].tableIsEmpty():
                 return None, False
             else:
@@ -162,7 +171,7 @@ class Hashmap:
                         return self.items[index].tableRetrieve(i)[1], True
                 return None, False
 
-    def tableDelete(self, searchkey):
+    def delete(self, searchkey):
         """
         Verwijdert het item met gegeven searchkey uit de Hashmap.
 
@@ -298,13 +307,13 @@ class HashmapTable(Hashmap):
         return self.getLength()
 
     def tableInsert(self, item):
-        return self.tableInsert(item)
+        return self.insert(createTableItem(item.getId(), item))
 
     def tableDelete(self, searchkey):
-        return self.tableDelete(searchkey)
+        return self.delete(searchkey)
 
     def tableRetrieve(self, searchkey):
-        return self.tableRetrieve(searchkey)
+        return self.retrieve(searchkey)
 
     def traverseTable(self, prt):
         return self.traverse(prt)
