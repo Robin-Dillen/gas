@@ -2,7 +2,8 @@
 Een film wordt gedefineerd door een unieke id (zoeksleutel).
 Verder heeft een film nog een titel en een rating."""
 
-from verdeling.Vertoning_Contracts import Vertoning
+from Vertoning_Contracts import Vertoning
+
 
 class Film:
     def __init__(self, id_, titel, rating):

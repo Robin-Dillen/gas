@@ -5,12 +5,12 @@ Reservatie, Vertoning, Zaal) samen te brengen in een groter geheel.
 """
 import datetime
 
-from verdeling.Film_Contracts import Film
-from verdeling.Gebruiker_Contracts import Gebruiker
-from verdeling.Reservatie_Contracts import Reservatie
-from verdeling.Vertoning_Contracts import Vertoning
-from verdeling.Zaal_Contracts import Zaal
-from verdeling.Clock import clock
+from Film_Contracts import Film
+from Gebruiker_Contracts import Gebruiker
+from Reservatie_Contracts import Reservatie
+from Vertoning_Contracts import Vertoning
+from Zaal_Contracts import Zaal
+from Clock import clock
 
 # Keuze ADT's
 user = input("Khemin, Niels of Robin?: ")
@@ -18,25 +18,25 @@ user = user.lower()
 
 if user.lower() == "robin":
     user = "Robin"
-    from verdeling.Robin.DataStructures import BSTTable, LinkedChainTable, Queue, RedBlackTreeTable
+    from Robin.DataStructures import BSTTable, LinkedChainTable, Queue, RedBlackTreeTable
 
 elif user.lower() == "khemin":
     user = "Khemin"
-    from verdeling.Khemin.Datastructures.BST import *
-    from verdeling.Khemin.Datastructures.LinkedChain import *
-    from verdeling.Khemin.Datastructures.Queue import *
-    from verdeling.Khemin.Datastructures.Hashmap import *
+    from Khemin.Datastructures.BST import *
+    from Khemin.Datastructures.LinkedChain import *
+    from Khemin.Datastructures.Queue import *
+    from Khemin.Datastructures.Hashmap import *
 
 else:
     user = "Niels"
-    from verdeling.Niels.Datastructures.BST import *
-    from verdeling.Niels.Datastructures.LinkedChain import *
-    from verdeling.Niels.Datastructures.Queue import *
-    from verdeling.Niels.Datastructures.TwoThreeTree import *
+    from Niels.Datastructures.BST import *
+    from Niels.Datastructures.LinkedChain import *
+    from Niels.Datastructures.Queue import *
+    from Niels.Datastructures.TwoThreeTree import *
 
 
 class Reservatiesysteem:
-    def __init__(self, films=LinkedChainTable(), gebruikers=LinkedChainTable(),
+    def __init__(self, films=RedBlackTreeTable(), gebruikers=LinkedChainTable(),
                  reservaties=Queue(), vertoningen=BSTTable(),
                  zalen=LinkedChainTable()):
 
@@ -192,6 +192,7 @@ class Reservatiesysteem:
 			<thead>
 				<td>Datum</td>
 				<td>Film</td>
+				<td>11:00</td>
 				<td>14:30</td>
 				<td>17:00</td>
 				<td>20:00</td>
@@ -213,7 +214,7 @@ class Reservatiesysteem:
             f.write(EOF)    # schrijft EOF (einde file) in het output bestand
 
     def __generateTable(self, titel, day):
-        slots = [datetime.time(14, 30), datetime.time(17, 0), datetime.time(20, 0), datetime.time(22, 30)]  # standaard slots
+        slots = [datetime.time(11, 0), datetime.time(14, 30), datetime.time(17, 0), datetime.time(20, 0), datetime.time(22, 30)]  # standaard slots
         slot_pos = 0    # index slot_pos
         buffer = f"""
                     <tr>
@@ -246,7 +247,7 @@ class Reservatiesysteem:
 
             slot_pos += 1   # ga naar volgende slot
 
-        for _ in range(slot_pos, 4):    # voeg aan volgende slots <td></td> toe
+        for _ in range(slot_pos, 5):    # voeg aan volgende slots <td></td> toe
             buffer += f"<td></td>"
 
         buffer += "</tr>"
