@@ -1,8 +1,9 @@
-from verdeling.Clock import clock
-from verdeling.Parser import parse
+from Clock import clock
+from Parser import parse
 import datetime
 from time import sleep
-from verdeling.Reservatiesysteem_Contracts import Reservatiesysteem
+from Reservatiesysteem_Contracts import Reservatiesysteem
+import os
 
 # vertaling van parser naar functie
 cmds = {
@@ -61,4 +62,4 @@ class Execute:
         clock.setTime(time)  # sets clock time to desired time
 
 
-e = Execute('system.txt')
+e = Execute('../system.txt')
